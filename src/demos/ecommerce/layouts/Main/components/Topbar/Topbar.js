@@ -60,14 +60,15 @@ const Topbar = ({ handleMobileMenuClick, pages = [] }) => {
         ))}
         <Box marginLeft={3}>
           <Button
-            variant="contained"
-            color="primary"
+            style={{ color: 'white' }}
+            bgcolor="black"
+            color="black"
             component="a"
             target="blank"
             href="https://mui.com/store/items/the-front-landing-page/"
             size="large"
           >
-            Buy now
+            Apply now!
           </Button>
         </Box>
       </Box>

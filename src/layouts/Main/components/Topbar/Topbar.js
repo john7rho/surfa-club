@@ -37,8 +37,8 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
           component={'img'}
           src={
             mode === 'light' && !colorInvert
-              ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-              : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+              ? 'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
+              : 'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
           }
           height={1}
           width={1}
@@ -95,14 +95,13 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
         </Box>
         <Box marginLeft={4}>
           <Button
-            variant="contained"
-            color="primary"
+            bgcolor="maroon"
             component="a"
             target="blank"
             href="https://mui.com/store/items/the-front-landing-page/"
             size="large"
           >
-            Buy now
+            Apply now
           </Button>
         </Box>
       </Box>
