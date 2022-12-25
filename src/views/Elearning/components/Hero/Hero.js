@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 
@@ -19,7 +18,7 @@ const Hero = () => {
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
       <Box marginBottom={2}>
         <Typography
-          color={'primary'}
+          color={'maroon'}
           component={'span'}
           variant="h3"
           fontWeight={700}
@@ -30,22 +29,21 @@ const Hero = () => {
             )} 0%)`,
           }}
         >
-          Learn new skills,
+          Adventure & Venture.
         </Typography>
         <Typography variant="h3" color="text.primary" sx={{ fontWeight: 700 }}>
-          gain more experience
+          Couchsurf with us. 
         </Typography>
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
-          Our mission is to spread education that is easy accessible and
-          everyone can learn.
+          We connect college builders and founders across campuses.
         </Typography>
       </Box>
       <Box display="flex" flexDirection={'column'} justifyContent={'center'}>
         <Box marginBottom={2}>
           <Typography variant="body1" component="p">
-            Join over 5000 subscribers for our newsletter
+            Join a growing community of builders and explorers
           </Typography>
         </Box>
         <Box
@@ -63,25 +61,24 @@ const Hero = () => {
             flexDirection={{ xs: 'column', sm: 'row' }}
             alignItems={{ xs: 'stretched', sm: 'flex-start' }}
           >
-            <Box
-              flex={'1 1 auto'}
-              component={TextField}
-              label="Enter your email"
-              variant="outlined"
-              color="primary"
-              fullWidth
-              height={54}
-            />
+            
             <Box
               component={Button}
               variant="contained"
               color="primary"
               size="large"
-              height={54}
+              bgcolor="maroon"
+              height={60}
+              width={{ xl: 500 }}
               marginTop={{ xs: 2, sm: 0 }}
-              marginLeft={{ sm: 2 }}
+              
             >
-              Subscribe
+              <Typography
+                variant="h6"
+                fontWeight={700}
+              >
+                Sign up!
+              </Typography>
             </Box>
           </Box>
         </Box>
@@ -93,18 +90,16 @@ const Hero = () => {
           color="text.primary"
           sx={{ textTransform: 'uppercase' }}
         >
-          Trusted by industry leading companies
+          Meet students from colleges across the country
         </Typography>
         <Box display="flex" flexWrap="wrap" justifyContent={'flex-start'}>
           {[
-            'https://assets.maccarianagency.com/svg/logos/airbnb-original.svg',
-            'https://assets.maccarianagency.com/svg/logos/amazon-original.svg',
-            'https://assets.maccarianagency.com/svg/logos/fitbit-original.svg',
-            'https://assets.maccarianagency.com/svg/logos/netflix-original.svg',
-            'https://assets.maccarianagency.com/svg/logos/google-original.svg',
-            'https://assets.maccarianagency.com/svg/logos/paypal-original.svg',
+            'https://logos-world.net/wp-content/uploads/2021/01/Harvard-Logo.png',
+            'https://logos-world.net/wp-content/uploads/2021/10/Stanford-Emblem.png',
+            'https://logos-world.net/wp-content/uploads/2022/02/University-of-Texas-at-Austin-Logo.png',
+            'https://logos-world.net/wp-content/uploads/2022/01/Cornell-University-Logo.png'
           ].map((item, i) => (
-            <Box maxWidth={90} marginTop={2} marginRight={4} key={i}>
+            <Box maxWidth={120} marginTop={2} marginRight={4} key={i}>
               <Box
                 component="img"
                 height={1}
@@ -138,7 +133,7 @@ const Hero = () => {
         <Box
           component={'img'}
           loading="lazy"
-          src={'https://assets.maccarianagency.com/backgrounds/img2.jpg'}
+          src={'https://drive.google.com/uc?export=view&id=1qn3TYlOCPd3uD_FEhdcQBq_yllrfs3Wv'}
           height={{ xs: 'auto', md: 1 }}
           maxHeight={{ xs: 300, md: 1 }}
           width={1}

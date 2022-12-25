@@ -67,7 +67,7 @@ const Reviews = () => {
             marginTop: theme.spacing(1),
           }}
         >
-          Rated 5 out of 5 stars by our customers!
+          See what others are saying
         </Typography>
         <Typography
           variant="h6"
@@ -75,10 +75,6 @@ const Reviews = () => {
           color={'text.secondary'}
           data-aos={'fade-up'}
         >
-          Companies from across the globe have had fantastic experiences using
-          theFront.
-          <br />
-          Here’s what they have to say.
         </Typography>
         <Box marginTop={2} display={'flex'} justifyContent={'center'}>
           <Button
