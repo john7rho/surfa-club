@@ -13,7 +13,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
   const {
     landings: landingPages,
     secondary: secondaryPages,
-    company: companyPages,
+    //company: companyPages,
     account: accountPages,
     portfolio: portfolioPages,
     blog: blogPages,
@@ -47,20 +47,20 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
           <NavItem
-            title={'Landings'}
+            title={'Home'}
             id={'landing-pages'}
             items={landingPages}
             colorInvert={colorInvert}
           />
         </Box>
-        <Box marginLeft={4}>
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Company'}
             id={'company-pages'}
             items={companyPages}
             colorInvert={colorInvert}
           />
-        </Box>
+        </Box> */}
         <Box marginLeft={4}>
           <NavItem
             title={'Account'}
