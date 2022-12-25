@@ -1,17 +1,15 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
 import {
-  Categories,
   Courses,
   Hero,
-  PromoNumbers,
   Reviews,
-  Subscription,
+  Subscription
 } from './components';
+import Benefits from './components/Benefits/Benefits.js';
 
 const Elearning = () => {
   const theme = useTheme();
@@ -19,9 +17,11 @@ const Elearning = () => {
   return (
     <Main>
       <Hero />
-      <Container>
-        <PromoNumbers />
-      </Container>
+      <Box>
+        <Container>
+          <Benefits />
+        </Container>
+      </Box>
       <Box
         position={'relative'}
         sx={{
@@ -29,10 +29,10 @@ const Elearning = () => {
         }}
       >
         <Container>
-          <Categories />
-          <Container>
+          {/* <Categories /> */}
+          {/* <Container>
             <Divider />
-          </Container>
+          </Container> */}
           <Courses />
         </Container>
         <Box

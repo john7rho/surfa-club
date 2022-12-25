@@ -96,7 +96,7 @@ const Spaces = () => {
           color={'secondary'}
           align={'center'}
         >
-          Popular courses
+          The Surfa Circle
         </Typography>
         <Typography
           variant="h4"
@@ -107,7 +107,7 @@ const Spaces = () => {
             fontWeight: 700,
           }}
         >
-          Browse our popular courses
+          
         </Typography>
         <Typography
           variant="h6"
@@ -115,7 +115,7 @@ const Spaces = () => {
           color={'text.secondary'}
           data-aos={'fade-up'}
         >
-          Here are our popular course you might want to learn from your tutor.
+          Crash at their place, or host your own surfers
         </Typography>
         <Box
           display="flex"
@@ -148,7 +148,7 @@ const Spaces = () => {
               </Box>
             }
           >
-            View all
+            Find a host
           </Button>
           <Box
             component={Button}
@@ -159,7 +159,7 @@ const Spaces = () => {
             marginLeft={{ sm: 2 }}
             fullWidth={isMd ? false : true}
           >
-            Explore more
+            Become a host
           </Box>
         </Box>
       </Box>

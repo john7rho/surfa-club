@@ -34,7 +34,7 @@ const Subscription = () => {
                 gutterBottom
                 sx={{ fontWeight: 700 }}
               >
-                Subscribe to our newsletter
+                Join the wave
               </Typography>
               <Typography
                 variant="h6"
@@ -42,8 +42,7 @@ const Subscription = () => {
                 color={'text.secondary'}
                 data-aos={'fade-up'}
               >
-                Don't lose a chance to be among the firsts to know about our
-                upcoming news and updates.
+                Stay up to date with the latest news and updates.
               </Typography>
             </Box>
             <Box

@@ -9,7 +9,6 @@ import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 
 import Container from 'components/Container';
-import TopNav from 'components/TopNav';
 
 import { Topbar, MobileMenu, Footer } from './components';
 
@@ -66,7 +65,6 @@ const Main = ({ children }) => {
               Main Demo
             </Link>
             <Box flexGrow={1} />
-            <TopNav />
           </Box>
         </Container>
       </Box>
