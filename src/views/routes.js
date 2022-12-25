@@ -7,11 +7,6 @@ import {
   HireUs as HireUsView,
   Faq as FaqView,
   Agency as AgencyView,
-  CareerListing as CareerListingView,
-  CareerListingMinimal as CareerListingMinimalView,
-  CareerOpening as CareerOpeningView,
-  ContactPage as ContactPageView,
-  Coworking as CoworkingView,
   Elearning as ElearningView,
   Enterprise as EnterpriseView,
   Service as ServiceView,
@@ -19,13 +14,10 @@ import {
   DesktopApp as DesktopAppView,
   Expo as ExpoView,
   Startup as StartupView,
-  DesignCompany as DesignCompanyView,
   MobileApp as MobileAppView,
   JobListing as JobListingView,
-  Rental as RentalView,
   CloudHosting as CloudHostingView,
   Logistics as LogisticsView,
-  Ecommerce as EcommerceView,
   Pricing as PricingView,
   About as AboutView,
   HelpCenter as HelpCenterView,
@@ -34,13 +26,7 @@ import {
   PortfolioMasonry as PortfolioMasonryView,
   PortfolioGrid as PortfolioGridView,
   CompanyTerms as CompanyTermsView,
-  ContactPageSidebarMap as ContactPageSidebarMapView,
-  ContactPageCover as ContactPageCoverView,
   AboutSideCover as AboutSideCoverView,
-  BlogSearch as BlogSearchView,
-  BlogNewsroom as BlogNewsroomView,
-  BlogArticle as BlogArticleView,
-  BlogReachView as BlogReachViewView,
   PasswordResetCover as PasswordResetCoverView,
   PasswordResetSimple as PasswordResetSimpleView,
   SigninSimple as SigninSimpleView,
@@ -77,26 +63,6 @@ const routes = [
     renderer: (params = {}) => <FaqView {...params} />,
   },
   {
-    path: '/career-listing',
-    renderer: (params = {}) => <CareerListingView {...params} />,
-  },
-  {
-    path: '/career-listing-minimal',
-    renderer: (params = {}) => <CareerListingMinimalView {...params} />,
-  },
-  {
-    path: '/career-opening',
-    renderer: (params = {}) => <CareerOpeningView {...params} />,
-  },
-  {
-    path: '/contact-page',
-    renderer: (params = {}) => <ContactPageView {...params} />,
-  },
-  {
-    path: '/coworking',
-    renderer: (params = {}) => <CoworkingView {...params} />,
-  },
-  {
     path: '/e-learning',
     renderer: (params = {}) => <ElearningView {...params} />,
   },
@@ -129,10 +95,6 @@ const routes = [
     renderer: (params = {}) => <StartupView {...params} />,
   },
   {
-    path: '/design-company',
-    renderer: (params = {}) => <DesignCompanyView {...params} />,
-  },
-  {
     path: '/mobile-app',
     renderer: (params = {}) => <MobileAppView {...params} />,
   },
@@ -141,20 +103,12 @@ const routes = [
     renderer: (params = {}) => <JobListingView {...params} />,
   },
   {
-    path: '/rental',
-    renderer: (params = {}) => <RentalView {...params} />,
-  },
-  {
     path: '/cloud-hosting',
     renderer: (params = {}) => <CloudHostingView {...params} />,
   },
   {
     path: '/logistics',
     renderer: (params = {}) => <LogisticsView {...params} />,
-  },
-  {
-    path: '/e-commerce',
-    renderer: (params = {}) => <EcommerceView {...params} />,
   },
   {
     path: '/help-center',
@@ -181,14 +135,6 @@ const routes = [
     renderer: (params = {}) => <CompanyTermsView {...params} />,
   },
   {
-    path: '/contact-sidebar-map',
-    renderer: (params = {}) => <ContactPageSidebarMapView {...params} />,
-  },
-  {
-    path: '/contact-page-cover',
-    renderer: (params = {}) => <ContactPageCoverView {...params} />,
-  },
-  {
     path: '/about',
     renderer: (params = {}) => <AboutView {...params} />,
   },
@@ -199,22 +145,6 @@ const routes = [
   {
     path: '/pricing',
     renderer: (params = {}) => <PricingView {...params} />,
-  },
-  {
-    path: '/blog-search',
-    renderer: (params = {}) => <BlogSearchView {...params} />,
-  },
-  {
-    path: '/blog-newsroom',
-    renderer: (params = {}) => <BlogNewsroomView {...params} />,
-  },
-  {
-    path: '/blog-article',
-    renderer: (params = {}) => <BlogArticleView {...params} />,
-  },
-  {
-    path: '/blog-reach-view',
-    renderer: (params = {}) => <BlogReachViewView {...params} />,
   },
   {
     path: '/password-reset-cover',
