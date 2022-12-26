@@ -7,12 +7,12 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
 });
 
-export const fileUpload = async (file, name) => {
+export const fileUpload = async (file) => {
   s3.putObject(
     {
       Body: file,
       Bucket: 'surfaclub',
-      Key: name,
+      Key: file.name,
     },
     (err, data) => {
       if (err) {
