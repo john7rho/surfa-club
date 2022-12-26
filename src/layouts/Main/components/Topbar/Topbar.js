@@ -4,19 +4,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { NavItem } from './components';
 
-const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
+const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
   const theme = useTheme();
-  const {
-    landings: landingPages,
-    //secondary: secondaryPages,
-    //company: companyPages,
-    //account: accountPages,
-    //portfolio: portfolioPages,
-    //blog: blogPages,
-  } = pages;
 
   return (
     <Box
@@ -43,53 +34,21 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
+          <NavItem title={'Home'} colorInvert={colorInvert} />
+        </Box>
+
+        <Box marginLeft={4}>
           <NavItem
-            title={'Home'}
-            id={'landing-pages'}
-            items={landingPages}
+            title={'Sign In'}
             colorInvert={colorInvert}
+            route="/signin-simple"
           />
         </Box>
-        {/* <Box marginLeft={4}>
-          <NavItem
-            title={'Company'}
-            id={'company-pages'}
-            items={companyPages}
-            colorInvert={colorInvert}
-          />
-        </Box> */}
-        {/* <Box marginLeft={4}>
-          <NavItem
-            title={'Account'}
-            id={'account-pages'}
-            items={accountPages}
-            colorInvert={colorInvert}
-          />
-        </Box> */}
-        {/* <Box marginLeft={4}>
-          <NavItem
-            title={'Pages'}
-            id={'secondary-pages'}
-            items={secondaryPages}
-            colorInvert={colorInvert}
-          />
-        </Box> */}
-        {/* <Box marginLeft={4}>
-          <NavItem
-            title={'Blog'}
-            id={'blog-pages'}
-            items={blogPages}
-            colorInvert={colorInvert}
-          />
-        </Box> */}
-        {/* <Box marginLeft={4}>
-          <NavItem
-            title={'Portfolio'}
-            id={'portfolio-pages'}
-            items={portfolioPages}
-            colorInvert={colorInvert}
-          />
-        </Box> */}
+
+        <Box marginLeft={4}>
+          <NavItem title={'FAQ'} colorInvert={colorInvert} route="/faq" />
+        </Box>
+
         <Box marginLeft={4}>
           <Button
             bgcolor="maroon"
