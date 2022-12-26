@@ -1,12 +1,12 @@
 import { responsiveFontSizes } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import shadows from './shadows';
-import { light, dark } from './palette';
+import { light } from './palette';
 
 const getTheme = (mode, themeToggler) =>
   responsiveFontSizes(
     createTheme({
-      palette: mode === 'light' ? light : dark,
+      palette: light,
       shadows: shadows(mode),
       typography: {
         fontFamily: '"Inter", sans-serif',
@@ -27,6 +27,12 @@ const getTheme = (mode, themeToggler) =>
               borderRadius: 5,
               paddingTop: 10,
               paddingBottom: 10,
+              color: 'white',
+              backgroundColor: 'maroon',
+              '&:hover': {
+                backgroundColor: 'black',
+                transition: '0.2s',
+              },
             },
             containedSecondary: mode === 'light' ? { color: 'white' } : {},
           },

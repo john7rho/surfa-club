@@ -98,7 +98,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; theFront. 2021, Maccarian. All rights reserved
+          &copy; ListenIn Inc. 2022. All rights reserved
         </Typography>
         <Typography
           align={'center'}

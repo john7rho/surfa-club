@@ -31,15 +31,15 @@ const Footer = () => {
               component={'img'}
               src={
                 mode === 'light'
-                  ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-                  : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+                  ? 'https://drive.google.com/uc?export=view&id=1VdsJkcJIS-W_6efrGWLAj7lsYx3NPX16'
+                  : 'https://drive.google.com/uc?export=view&id=1VdsJkcJIS-W_6efrGWLAj7lsYx3NPX16'
               }
               height={1}
               width={1}
             />
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
-            <Box marginTop={1} marginRight={2}>
+            {/* <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
@@ -49,16 +49,16 @@ const Footer = () => {
               >
                 Home
               </Link>
-            </Box>
+            </Box> */}
             <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
-                href="/docs/introduction"
+                href="/docs/introduction" // TODO: Update this link, make ToS page
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                Documentation
+                Terms of Service
               </Link>
             </Box>
             <Box marginTop={1}>
@@ -67,10 +67,10 @@ const Footer = () => {
                 color="primary"
                 component="a"
                 target="blank"
-                href="https://mui.com/store/items/the-front-landing-page/"
+                href="https://mui.com/store/items/the-front-landing-page/" // TODO: Update this link
                 size="small"
               >
-                Purchase now
+                Apply now
               </Button>
             </Box>
           </Box>
@@ -83,7 +83,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; theFront. 2021, Maccarian. All rights reserved
+          &copy; ListenIn Inc. 2022. All rights reserved
         </Typography>
         <Typography
           align={'center'}
@@ -91,10 +91,7 @@ const Footer = () => {
           color="text.secondary"
           component={'p'}
         >
-          When you visit or interact with our sites, services or tools, we or
-          our authorised service providers may use cookies for storing
-          information to help provide you with a better, faster and safer
-          experience and for marketing purposes.
+          Community is king.
         </Typography>
       </Grid>
     </Grid>

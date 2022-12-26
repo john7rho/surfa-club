@@ -1,124 +1,124 @@
 const pages = {
   landings: [
-    {
-      title: 'Mobile App',
-      href: '/mobile-app',
-    },
-    {
-      title: 'Desktop App',
-      href: '/desktop-app',
-    },
-    {
-      title: 'Startup',
-      href: '/startup',
-    },
-    {
-      title: 'Expo',
-      href: '/expo',
-    },
-    {
-      title: 'Marketing',
-      href: '/',
-    },
-    {
-      title: 'Service',
-      href: '/service',
-    },
-    {
-      title: 'Enterprise',
-      href: '/enterprise',
-    },
-    {
-      title: 'Cloud Hosting',
-      href: '/cloud-hosting',
-    },
-    {
-      title: 'Design Company',
-      href: '/design-company',
-    },
-    {
-      title: 'Web Basic',
-      href: '/web-basic',
-    },
+    // {
+    //   title: 'Mobile App',
+    //   href: '/mobile-app',
+    // },
+    // {
+    //   title: 'Desktop App',
+    //   href: '/desktop-app',
+    // },
+    // {
+    //   title: 'Startup',
+    //   href: '/startup',
+    // },
+    // {
+    //   title: 'Expo',
+    //   href: '/expo',
+    // },
+    // {
+    //   title: 'Marketing',
+    //   href: '/',
+    // },
+    // {
+    //   title: 'Service',
+    //   href: '/service',
+    // },
+    // {
+    //   title: 'Enterprise',
+    //   href: '/enterprise',
+    // },
+    // {
+    //   title: 'Cloud Hosting',
+    //   href: '/cloud-hosting',
+    // },
+    // {
+    //   title: 'Design Company',
+    //   href: '/design-company',
+    // },
+    // {
+    //   title: 'Web Basic',
+    //   href: '/web-basic',
+    // },
+    // {
+    //   title: 'Overview',
+    //   href: '/home',
+    // },
+    // {
+    //   title: 'Agency',
+    //   href: '/agency',
+    // },
     {
       title: 'Overview',
-      href: '/home',
+      href: '/overview',
     },
-    {
-      title: 'Agency',
-      href: '/agency',
-    },
-    {
-      title: 'E-Learning',
-      href: '/e-learning',
-    },
-    {
-      title: 'Coworking',
-      href: '/coworking',
-    },
-    {
-      title: 'Rental',
-      href: '/rental',
-    },
-    {
-      title: 'Job Listing',
-      href: '/job-listing',
-    },
-    {
-      title: 'Logistics',
-      href: '/logistics',
-    },
-    {
-      title: 'E-commerce',
-      href: '/e-commerce',
-    },
+    // {
+    //   title: 'Coworking',
+    //   href: '/coworking',
+    // },
+    // {
+    //   title: 'Rental',
+    //   href: '/rental',
+    // },
+    // {
+    //   title: 'Job Listing',
+    //   href: '/job-listing',
+    // },
+    // {
+    //   title: 'Logistics',
+    //   href: '/logistics',
+    // },
+    // {
+    //   title: 'E-commerce',
+    //   href: '/e-commerce',
+    // },
   ],
-  company: [
-    {
-      title: 'Career Lising',
-      href: '/career-listing',
-    },
-    {
-      title: 'Job Opening',
-      href: '/career-opening',
-    },
-    {
-      title: 'Customer Stories',
-      href: '/customers',
-    },
-    {
-      title: 'Hire Us',
-      href: '/hire-us',
-    },
-    {
-      title: 'About: Startup',
-      href: '/about-side-cover',
-    },
-    {
-      title: 'About',
-      href: '/about',
-    },
-    {
-      title: 'Pricing',
-      href: '/pricing',
-    },
-    {
-      title: 'Terms',
-      href: '/company-terms',
-    },
-    {
-      title: 'Contact: Map',
-      href: '/contact-sidebar-map',
-    },
-    {
-      title: 'Contact: Minimal',
-      href: '/contact-page-cover',
-    },
-    {
-      title: 'Contact: Startup',
-      href: '/contact-page',
-    },
-  ],
+  // company: [
+  //   {
+  //     title: 'Career Listing',
+  //     href: '/career-listing',
+  //   },
+  //   {
+  //     title: 'Job Opening',
+  //     href: '/career-opening',
+  //   },
+  //   {
+  //     title: 'Customer Stories',
+  //     href: '/customers',
+  //   },
+  //   {
+  //     title: 'Hire Us',
+  //     href: '/hire-us',
+  //   },
+  //   {
+  //     title: 'About: Startup',
+  //     href: '/about-side-cover',
+  //   },
+  //   {
+  //     title: 'About',
+  //     href: '/about',
+  //   },
+  //   {
+  //     title: 'Pricing',
+  //     href: '/pricing',
+  //   },
+  //   {
+  //     title: 'Terms',
+  //     href: '/company-terms',
+  //   },
+  //   {
+  //     title: 'Contact: Map',
+  //     href: '/contact-sidebar-map',
+  //   },
+  //   {
+  //     title: 'Contact: Minimal',
+  //     href: '/contact-page-cover',
+  //   },
+  //   {
+  //     title: 'Contact: Startup',
+  //     href: '/contact-page',
+  //   },
+  // ],
   account: [
     {
       title: 'General Settings',

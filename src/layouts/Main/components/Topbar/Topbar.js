@@ -9,14 +9,13 @@ import { NavItem } from './components';
 
 const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
   const {
     landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
+    //secondary: secondaryPages,
+    //company: companyPages,
+    //account: accountPages,
+    //portfolio: portfolioPages,
+    //blog: blogPages,
   } = pages;
 
   return (
@@ -36,9 +35,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
         <Box
           component={'img'}
           src={
-            mode === 'light' && !colorInvert
-              ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-              : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+            'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
           }
           height={1}
           width={1}
@@ -47,62 +44,61 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
           <NavItem
-            title={'Landings'}
+            title={'Home'}
             id={'landing-pages'}
             items={landingPages}
             colorInvert={colorInvert}
           />
         </Box>
-        <Box marginLeft={4}>
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Company'}
             id={'company-pages'}
             items={companyPages}
             colorInvert={colorInvert}
           />
-        </Box>
-        <Box marginLeft={4}>
+        </Box> */}
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Account'}
             id={'account-pages'}
             items={accountPages}
             colorInvert={colorInvert}
           />
-        </Box>
-        <Box marginLeft={4}>
+        </Box> */}
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Pages'}
             id={'secondary-pages'}
             items={secondaryPages}
             colorInvert={colorInvert}
           />
-        </Box>
-        <Box marginLeft={4}>
+        </Box> */}
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Blog'}
             id={'blog-pages'}
             items={blogPages}
             colorInvert={colorInvert}
           />
-        </Box>
-        <Box marginLeft={4}>
+        </Box> */}
+        {/* <Box marginLeft={4}>
           <NavItem
             title={'Portfolio'}
             id={'portfolio-pages'}
             items={portfolioPages}
             colorInvert={colorInvert}
           />
-        </Box>
+        </Box> */}
         <Box marginLeft={4}>
           <Button
-            variant="contained"
-            color="primary"
+            bgcolor="maroon"
             component="a"
             target="blank"
             href="https://mui.com/store/items/the-front-landing-page/"
             size="large"
           >
-            Buy now
+            Apply now
           </Button>
         </Box>
       </Box>
