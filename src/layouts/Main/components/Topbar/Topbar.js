@@ -54,7 +54,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             bgcolor="maroon"
             component="a"
             target="blank"
-            href="https://mui.com/store/items/the-front-landing-page/"
+            href="https://airtable.com/shrCDEmF6M6gDh7sk"
             size="large"
           >
             Apply now

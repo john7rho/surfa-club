@@ -62,29 +62,14 @@ const Content = () => {
           title={'Basics'}
           items={[
             {
-              title: 'Can I purchase a gift certificate?',
+              title: 'Is joining Surfa free?',
               subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                'Yes! Surfa is free to join. Once accepted into the community, you can create an account and start using Surfa right away.',
             },
             {
-              title: 'What is your return policy?',
+              title: 'Who is eligible to join Surfa?',
               subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Do you sell gift cards?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Can I change plans later on?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Is this a subscription service?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                'Anyone who is 18 years or older and has a valid college email address is eligible to join Surfa.',
             },
           ]}
         />
@@ -94,61 +79,26 @@ const Content = () => {
           title={'Account & settings'}
           items={[
             {
-              title: 'Can I purchase a gift certificate?',
+              title: 'How does contacting a host work?',
               subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                'Send a message to the host through the platform. The host will receive your message and can respond to you through the platform.',
             },
             {
-              title: 'What is your return policy?',
+              title: 'Do I have unlimited stays?',
               subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Do you sell gift cards?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Can I change plans later on?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Is this a subscription service?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
+                'Yes! You can stay as many times as you want with a host as long as you have sufficient credits in your account. Surfa operates based on a credit system in which credits are deducted from your account when you stay with a host and are added to your account when you host a guest (1/night).',
+            }
           ]}
         />
       </Box>
       <Box>
         <FaqGroupItem
-          title={'Security'}
+          title={'Security and Safety'}
           items={[
             {
-              title: 'Can I purchase a gift certificate?',
+              title: 'What steps do you take to protect hosts and guests?',
               subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'What is your return policy?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Do you sell gift cards?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Can I change plans later on?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-            },
-            {
-              title: 'Is this a subscription service?',
-              subtitle:
-                'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                'Surfa performs a background check on each host and guest. We also provide a secure platform for communication and payments.',
             },
           ]}
         />

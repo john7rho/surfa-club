@@ -71,6 +71,7 @@ const Hero = () => {
               height={60}
               width={{ xl: 500 }}
               marginTop={{ xs: 2, sm: 0 }}
+              href="/signup-simple"
               
             >
               <Typography

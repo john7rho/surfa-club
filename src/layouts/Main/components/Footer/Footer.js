@@ -6,6 +6,8 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
+
+
 const Footer = () => {
   const theme = useTheme();
   const { mode } = theme.palette;
@@ -52,9 +54,9 @@ const Footer = () => {
             </Box> */}
             <Box marginTop={1} marginRight={2}>
               <Link
-                underline="none"
                 component="a"
-                href="/docs/introduction" // TODO: Update this link, make ToS page
+                href="/company-terms"
+                //href="/docs/introduction" // TODO: Update this link, make ToS page
                 color="text.primary"
                 variant={'subtitle2'}
               >
@@ -67,7 +69,7 @@ const Footer = () => {
                 color="primary"
                 component="a"
                 target="blank"
-                href="https://mui.com/store/items/the-front-landing-page/" // TODO: Update this link
+                href="https://airtable.com/shrCDEmF6M6gDh7sk" // TODO: Update this link
                 size="small"
               >
                 Apply now
