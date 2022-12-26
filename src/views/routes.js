@@ -62,7 +62,7 @@ const routes = [
     renderer: (params = {}) => <FaqView {...params} />,
   },
   {
-    path: '/e-learning',
+    path: '/overview',
     renderer: (params = {}) => <ElearningView {...params} />,
   },
   {
