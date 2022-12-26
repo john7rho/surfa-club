@@ -28,6 +28,7 @@ const Form = () => {
   };
 
   const onSubmit = (values) => {
+    console.log(values);
     return values;
   };
 
