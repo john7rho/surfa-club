@@ -1,4 +1,6 @@
+// import axios from 'axios';
 const AWS = require('aws-sdk');
+
 const s3 = new AWS.S3({
   accessKeyId: process.env.REACT_APP_S3_ACCESS_KEY,
   secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
@@ -53,19 +55,53 @@ export const fileUpload = async (file) => {
  * @param {string} school
  * @param {string} imageUrl
  */
-export const register = async ({ username, password, school, imageUrl }) => {
+export const register = async ({
+  username,
+  password,
+  firstName,
+  lastName,
+  image,
+}) => {
   const endpoint =
     'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/register';
+  const searchParams = new URLSearchParams();
+  searchParams.set('username', username);
+  searchParams.set('firstName', firstName);
+  searchParams.set('lastName', lastName);
+  searchParams.set('password', password);
+  searchParams.set('image', image);
+
+  const success = await fetch(`${endpoint}?${searchParams}`)
+    .then((res) => res.status != 404)
+    .catch(() => false);
+  return success;
+};
+
+export const validate = async ({ username, password }) => {
+  const endpoint =
+    'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/validate';
 
   const searchParams = new URLSearchParams();
   searchParams.set('username', username);
   searchParams.set('password', password);
-  searchParams.set('school', school);
-  searchParams.set('image', imageUrl);
 
-  fetch(`${endpoint}?${searchParams}`)
-    .then(() => console.log('do something when registration succeeds'))
-    .catch(() => console.log('registration failed '));
+  const valid = await fetch(`${endpoint}?${searchParams}`)
+    .then((res) => res.status != 404)
+    .catch(() => false);
+
+  return valid;
+};
+
+export const getUser = async ({ username }) => {
+  const endpoint =
+    'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/user';
+  const searchParams = new URLSearchParams();
+  searchParams.set('username', username);
+  const user = await fetch(`${endpoint}?${searchParams}`)
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch(() => null);
+  return user;
 };
 
 export const store_email = async (email) => {
