@@ -8,6 +8,7 @@ import { Hero, Main as MainSection, Partners, Contact } from './components';
 
 const PortfolioGrid = () => {
   const theme = useTheme();
+
   return (
     <Main>
       <Container>
@@ -17,7 +18,7 @@ const PortfolioGrid = () => {
         <Partners />
       </Container>
       <Container>
-        <MainSection />
+        <MainSection />{' '}
       </Container>
       <Box
         position={'relative'}
