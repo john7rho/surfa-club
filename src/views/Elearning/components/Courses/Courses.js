@@ -106,9 +106,7 @@ const Spaces = () => {
           sx={{
             fontWeight: 700,
           }}
-        >
-          
-        </Typography>
+        ></Typography>
         <Typography
           variant="h6"
           align={'center'}
@@ -148,6 +146,11 @@ const Spaces = () => {
                 />
               </Box>
             }
+            style={{
+              background:
+                'linear-gradient(to right, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+              opacity: 0.9,
+            }}
           >
             Find a host
           </Button>

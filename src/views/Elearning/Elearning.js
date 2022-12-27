@@ -3,12 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import {
-  Courses,
-  Hero,
-  Reviews,
-  Subscription
-} from './components';
+import { Courses, Hero, Reviews, Subscription } from './components';
 import Benefits from './components/Benefits/Benefits.js';
 import WithCountUpNumbersAndCoverImage from './components/WithCountUpNumbersAndCoverImage';
 

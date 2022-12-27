@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,8 +16,15 @@ const Subscription = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-
   const [email, setEmail] = useState('');
+  const [buttonText, setButtonText] = useState('Subscribe');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setButtonText('Subscribe');
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [buttonText]);
 
   return (
     <Box>
@@ -66,7 +73,10 @@ const Subscription = () => {
                 />
               </FormControl>
               <Box
-                onClick={() => store_email(email)}
+                onClick={() => {
+                  store_email(email);
+                  setButtonText('Subscribed!');
+                }}
                 component={Button}
                 variant="contained"
                 color="primary"
@@ -93,7 +103,7 @@ const Subscription = () => {
                   </svg>
                 }
               >
-                Subscribe
+                {buttonText}
               </Box>
             </Box>
           </Box>

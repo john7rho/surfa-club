@@ -56,6 +56,12 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             target="blank"
             href="https://airtable.com/shrCDEmF6M6gDh7sk"
             size="large"
+            style={{
+              background:
+                'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+              opacity: 0.9,
+              fontWeight: 'bold',
+            }}
           >
             Apply now
           </Button>

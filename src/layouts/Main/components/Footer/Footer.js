@@ -6,8 +6,6 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-
-
 const Footer = () => {
   const theme = useTheme();
   const { mode } = theme.palette;
@@ -71,6 +69,11 @@ const Footer = () => {
                 target="blank"
                 href="https://airtable.com/shrCDEmF6M6gDh7sk" // TODO: Update this link
                 size="small"
+                style={{
+                  background:
+                    'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+                  opacity: 0.9,
+                }}
               >
                 Apply now
               </Button>
@@ -85,7 +88,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; ListenIn Inc. 2022. All rights reserved
+          &copy; Surfa Club. 2022. All rights reserved | Adventure & Venture
         </Typography>
         <Typography
           align={'center'}

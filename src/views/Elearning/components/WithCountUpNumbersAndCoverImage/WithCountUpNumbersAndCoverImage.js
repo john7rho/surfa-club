@@ -63,10 +63,14 @@ const WithCountUpNumbersAndCoverImage = () => {
           <Box marginTop={4}>
             <Button
               variant="contained"
-              color="primary"
               size="large"
               href="https://airtable.com/shrCDEmF6M6gDh7sk"
               target="blank"
+              style={{
+                background:
+                  'linear-gradient(to right, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+                opacity: 0.9,
+              }}
             >
               Apply to join!
             </Button>

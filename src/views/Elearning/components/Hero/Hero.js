@@ -4,9 +4,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 import Container from 'components/Container';
+import Typed from 'react-typed';
 
 const Hero = () => {
   const theme = useTheme();
@@ -18,22 +19,57 @@ const Hero = () => {
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
       <Box marginBottom={2}>
         <Typography
-          color={'maroon'}
+          color={'grey.800'}
           component={'span'}
           variant="h3"
           fontWeight={700}
           sx={{
-            background: `linear-gradient(180deg, transparent 82%, ${alpha(
-              theme.palette.secondary.main,
-              0.3,
-            )} 0%)`,
+            backgroundColor: 'primary',
+            backgroundSize: '100%',
+            backgroundRepeat: 'repeat',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontSize: 20,
+            backgroundImage:
+              'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,0,0,1) 100%)',
           }}
         >
-          Adventure & Venture.
-        </Typography>
-        <Typography variant="h3" color="text.primary" sx={{ fontWeight: 700 }}>
           Couchsurf with us.
         </Typography>
+        {/* <Typography color="text.primary" sx={{ fontWeight: 700 }}>
+          Today, I'm a{' '}
+          <Typed
+            strings={[' Stanford', ' UC Berkeley', ' Harvard', ' MIT']}
+            typeSpeed={50}
+            backSpeed={100}
+            loop
+          ></Typed>
+          {''}
+          student.
+        </Typography> */}
+        <div
+          style={{
+            fontSize: '24px',
+          }}
+        >
+          This weekend, I'm a{' '}
+          <div
+            style={{
+              display: 'inline',
+              fontWeight: 'bold',
+            }}
+          >
+            <Typed
+              strings={[' Stanford', ' UC Berkeley', ' Harvard', ' MIT']}
+              typeSpeed={75}
+              backSpeed={100}
+              loop
+            ></Typed>
+          </div>
+          {''}
+          student.
+        </div>
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
@@ -41,11 +77,11 @@ const Hero = () => {
         </Typography>
       </Box>
       <Box display="flex" flexDirection={'column'} justifyContent={'center'}>
-        <Box marginBottom={2}>
+        {/* <Box marginBottom={2}>
           <Typography variant="body1" component="p">
             Join a growing community of builders and explorers
           </Typography>
-        </Box>
+        </Box> */}
         <Box
           component={'form'}
           noValidate
@@ -71,6 +107,11 @@ const Hero = () => {
               width={{ xl: 500 }}
               marginTop={{ xs: 2, sm: 0 }}
               href="/signup-simple"
+              style={{
+                background:
+                  'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+                opacity: 0.9,
+              }}
             >
               <Typography variant="h6" fontWeight={700}>
                 Sign up!
@@ -86,7 +127,7 @@ const Hero = () => {
           color="text.primary"
           sx={{ textTransform: 'uppercase' }}
         >
-          Meet students from colleges across the country
+          Join a growing community of builders and explorers at
         </Typography>
         <Box display="flex" flexWrap="wrap" justifyContent={'flex-start'}>
           {[
