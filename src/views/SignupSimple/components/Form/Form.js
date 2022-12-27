@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { register } from '../../../../utils/Utils.js';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -34,6 +36,9 @@ const validationSchema = yup.object({
 });
 
 const Form = () => {
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -41,8 +46,24 @@ const Form = () => {
     password: '',
   };
 
-  const onSubmit = (values) => {
-    return values;
+  const onSubmit = async (values) => {
+    const { firstName, lastName, email, password } = values;
+    const body = {
+      username: email,
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+      image: 'placeholderurl',
+    };
+
+    const success = await register(body);
+
+    if (success === true) {
+      setError(false);
+      navigate('/portfolio-grid');
+    } else {
+      setError(true);
+    }
   };
 
   const formik = useFormik({
@@ -168,6 +189,16 @@ const Form = () => {
                 Sign up
               </Button>
             </Box>
+            {error ? (
+              <Typography
+                variant={'subtitle2'}
+                sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}
+              >
+                Something went wrong with your registration
+              </Typography>
+            ) : (
+              ''
+            )}
           </Grid>
           <Grid
             item
