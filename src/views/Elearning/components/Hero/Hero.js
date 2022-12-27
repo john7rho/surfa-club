@@ -134,7 +134,7 @@ const Hero = () => {
         <Box
           component={'img'}
           loading="lazy"
-          src={'https://drive.google.com/uc?export=view&id=1qn3TYlOCPd3uD_FEhdcQBq_yllrfs3Wv'}
+          src={'https://drive.google.com/uc?export=view&id=1U9Onaz_LY0zG95IdsKBoVDpOQaDNNUyM'}
           height={{ xs: 'auto', md: 1 }}
           maxHeight={{ xs: 300, md: 1 }}
           width={1}
