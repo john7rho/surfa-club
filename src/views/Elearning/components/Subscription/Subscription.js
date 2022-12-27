@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,12 +9,15 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { store_email } from '../../../../utils/Utils.js';
 
 const Subscription = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
+  const [email, setEmail] = useState('');
 
   return (
     <Box>
@@ -57,9 +60,13 @@ const Subscription = () => {
                 variant="outlined"
                 sx={{ maxWidth: { xs: 1, sm: 400 }, width: 1 }}
               >
-                <OutlinedInput placeholder="Enter your email" />
+                <OutlinedInput
+                  placeholder="Enter your email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </FormControl>
               <Box
+                onClick={() => store_email(email)}
                 component={Button}
                 variant="contained"
                 color="primary"

@@ -28,7 +28,7 @@ const mock = [
     title: 'Resources',
     subtitle:
       'Access to mentors and funding.',
-    icon: 'https://cdn-icons-png.flaticon.com/512/5764/5764072.png',
+    icon: 'https://drive.google.com/uc?export=view&id=14ucxNJ4XtkZNG-zKqIs7wczZBtC5uhv6',
   },
 ];
 

@@ -6,20 +6,19 @@ import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 import Container from 'components/Container';
 
 const mock = [
   {
     title: 100,
-    subtitle:
-      '100 + students (and growing) in the network.',
+    subtitle: '100 + students (and growing) in the network.',
     suffix: '+',
   },
   {
     title: 4,
-    subtitle:
-      '4 schools across the country (and counting)',
+    subtitle: '4 schools across the country (and counting)',
     suffix: '+',
   },
   {
@@ -44,7 +43,9 @@ const WithCountUpNumbersAndCoverImage = () => {
               Apply to be a Partner
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
-              Become a focal point of a growing community of changemakers at your school. Get access to our network of partners, mentors, and investors.
+              Become a focal point of a growing community of changemakers at
+              your school. Get access to our network of partners, mentors, and
+              investors.
             </Typography>
           </Box>
           <Grid container spacing={2}>
@@ -59,6 +60,17 @@ const WithCountUpNumbersAndCoverImage = () => {
               </Grid>
             ))}
           </Grid>
+          <Box marginTop={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              href="https://airtable.com/shrCDEmF6M6gDh7sk"
+              target="blank"
+            >
+              Apply to join!
+            </Button>
+          </Box>
         </Grid>
         <Grid
           item
@@ -71,13 +83,20 @@ const WithCountUpNumbersAndCoverImage = () => {
             display: { xs: 'none', md: 'flex' },
           }}
         >
-          <Box component={Card} boxShadow={4} height={1} width={1}>
+          <Box
+            component={Card}
+            boxShadow={4}
+            height={1}
+            width={1}
+            borderRadius="20px"
+          >
             <Box
               component={CardMedia}
               height={1}
               width={1}
-              minHeight={300}
+              minHeight={500}
               image="https://drive.google.com/uc?export=view&id=1MWFgXj9XhvU8K8yn59JDEjUZqfa9ugUb"
+              borderRadius="16px"
             />
           </Box>
         </Grid>

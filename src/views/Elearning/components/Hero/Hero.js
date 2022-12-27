@@ -32,7 +32,7 @@ const Hero = () => {
           Adventure & Venture.
         </Typography>
         <Typography variant="h3" color="text.primary" sx={{ fontWeight: 700 }}>
-          Couchsurf with us. 
+          Couchsurf with us.
         </Typography>
       </Box>
       <Box marginBottom={3}>
@@ -61,7 +61,6 @@ const Hero = () => {
             flexDirection={{ xs: 'column', sm: 'row' }}
             alignItems={{ xs: 'stretched', sm: 'flex-start' }}
           >
-            
             <Box
               component={Button}
               variant="contained"
@@ -72,12 +71,8 @@ const Hero = () => {
               width={{ xl: 500 }}
               marginTop={{ xs: 2, sm: 0 }}
               href="/signup-simple"
-              
             >
-              <Typography
-                variant="h6"
-                fontWeight={700}
-              >
+              <Typography variant="h6" fontWeight={700}>
                 Sign up!
               </Typography>
             </Box>
@@ -98,7 +93,9 @@ const Hero = () => {
             'https://logos-world.net/wp-content/uploads/2021/01/Harvard-Logo.png',
             'https://logos-world.net/wp-content/uploads/2021/10/Stanford-Emblem.png',
             'https://logos-world.net/wp-content/uploads/2022/02/University-of-Texas-at-Austin-Logo.png',
-            'https://logos-world.net/wp-content/uploads/2022/01/Cornell-University-Logo.png'
+            'https://logos-world.net/wp-content/uploads/2022/01/Cornell-University-Logo.png',
+            'https://logos-world.net/wp-content/uploads/2021/09/MIT-Massachusetts-Institute-of-Technology-Logo.png',
+            'https://logos-world.net/wp-content/uploads/2022/02/UC-Berkeley-Symbol.png',
           ].map((item, i) => (
             <Box maxWidth={120} marginTop={2} marginRight={4} key={i}>
               <Box
@@ -134,7 +131,9 @@ const Hero = () => {
         <Box
           component={'img'}
           loading="lazy"
-          src={'https://drive.google.com/uc?export=view&id=1U9Onaz_LY0zG95IdsKBoVDpOQaDNNUyM'}
+          src={
+            'https://drive.google.com/uc?export=view&id=1U9Onaz_LY0zG95IdsKBoVDpOQaDNNUyM'
+          }
           height={{ xs: 'auto', md: 1 }}
           maxHeight={{ xs: 300, md: 1 }}
           width={1}

@@ -32,9 +32,7 @@ const ContactCard = () => {
           If you have any questions or concerns about the privacy policy please
           contact us.
         </Typography>
-        <Typography variant={'subtitle2'}>
-          admin@listenin.one
-        </Typography>
+        <Typography variant={'subtitle2'}>admin@listenin.one</Typography>
       </Box>
     </Box>
   );
