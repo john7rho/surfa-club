@@ -57,6 +57,7 @@
     "react-visibility-sensor": "^5.1.1",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^3.0.2",
+    "wscat": "^5.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
