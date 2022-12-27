@@ -129,6 +129,7 @@ const Spaces = () => {
             color="primary"
             size="large"
             fullWidth={isMd ? false : true}
+            href="/signin-simple"
             endIcon={
               <Box
                 component={'svg'}
@@ -150,7 +151,7 @@ const Spaces = () => {
           >
             Find a host
           </Button>
-          <Box
+          {/* <Box
             component={Button}
             variant="outlined"
             color="primary"
@@ -160,7 +161,7 @@ const Spaces = () => {
             fullWidth={isMd ? false : true}
           >
             Become a host
-          </Box>
+          </Box> */}
         </Box>
       </Box>
       <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'}>

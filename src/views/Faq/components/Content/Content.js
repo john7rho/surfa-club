@@ -98,7 +98,7 @@ const Content = () => {
             {
               title: 'What steps do you take to protect hosts and guests?',
               subtitle:
-                'Surfa performs a background check on each host and guest. We also provide a secure platform for communication and payments.',
+                'Surfa performs a background check on each host and guest. We also provide a secure platform for payments (in case you want to leave a tip).',
             },
           ]}
         />

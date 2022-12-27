@@ -10,6 +10,7 @@ import {
   Subscription
 } from './components';
 import Benefits from './components/Benefits/Benefits.js';
+import WithCountUpNumbersAndCoverImage from './components/WithCountUpNumbersAndCoverImage';
 
 const Elearning = () => {
   const theme = useTheme();
@@ -20,6 +21,11 @@ const Elearning = () => {
       <Box>
         <Container>
           <Benefits />
+        </Container>
+      </Box>
+      <Box>
+        <Container>
+          <WithCountUpNumbersAndCoverImage />
         </Container>
       </Box>
       <Box

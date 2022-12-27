@@ -112,7 +112,7 @@ const Form = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your email
+              Enter your college email (e.g., tigerwoods@college.edu)
             </Typography>
             <TextField
               label="Email *"
@@ -127,7 +127,7 @@ const Form = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your password
+              Enter your password (we strongly encourage you to use a strong, unique password!)
             </Typography>
             <TextField
               label="Password *"

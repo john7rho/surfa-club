@@ -10,19 +10,19 @@ const mock = [
     title: 'Friends',
     subtitle:
       'Get plugged into new networks.',
-    icon: 'https://cdn-icons-png.flaticon.com/512/3098/3098416.png',
+    icon: 'https://drive.google.com/uc?export=view&id=14c8kpMIH83HS0L4elRx893nd4RmykwaJ',
   },
   {
     title: 'Adventures',
     subtitle:
       'Explore other colleges and cities.',
-    icon: 'https://i.pinimg.com/736x/97/b6/52/97b6529fc223a727165330eb4a57326c.jpg',
+    icon: 'https://drive.google.com/uc?export=view&id=1N1c6ydD5WwEcIVyowKXRPP6HhBGhWFot',
   },
   {
     title: 'Events',
     subtitle:
       'Join hackathons and fireside chats.',
-    icon: 'https://www.pngkey.com/png/detail/171-1711744_pin-campfire-clipart-png-anime-camp-fire-png.png',
+    icon: 'https://drive.google.com/uc?export=view&id=1gjK4CTAdNGGrayuGmzOKWSf8EDLIjRTr',
   },
   {
     title: 'Resources',
@@ -54,6 +54,7 @@ const Benefits = () => {
           Let's bridge this gap.
         </Typography>
       </Box>
+
       <Grid container spacing={12}>
         {mock.map((item, i) => (
           <Grid item xs={12} md={3} key={i}>
