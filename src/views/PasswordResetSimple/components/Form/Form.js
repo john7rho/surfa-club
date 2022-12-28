@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup
@@ -22,6 +23,8 @@ const Form = () => {
     email: '',
   };
 
+  // const [valid, setValid] = useState(false);
+
   const onSubmit = (values) => {
     return values;
   };
@@ -31,6 +34,8 @@ const Form = () => {
     validationSchema: validationSchema,
     onSubmit,
   });
+
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -54,10 +59,16 @@ const Form = () => {
           Forgot your password?
         </Typography>
         <Typography color="text.secondary">
-          Enter your email address below and we'll get you back on track.
+          Enter your email address below and we'll get you back on track. For
+          any help, please contact help@surfaclub.com!
+          {/* TIP: this is the main one that we are using */}
         </Typography>
       </Box>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={() => {
+          navigate('/reset-password-confirm');
+        }}
+      >
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
@@ -96,8 +107,9 @@ const Form = () => {
                 </Button>
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>
-                Send reset link
+                Send reset link!
               </Button>
+              {/* TIP: This is the main one */}
             </Box>
           </Grid>
         </Grid>

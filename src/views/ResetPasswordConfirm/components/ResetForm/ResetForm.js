@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -8,22 +8,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import { register } from '../../../../utils/Utils.js';
-import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  firstName: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your first name'),
-  lastName: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your last name'),
   email: yup
     .string()
     .trim()
@@ -31,39 +17,25 @@ const validationSchema = yup.object({
     .required('Email is required.'),
   password: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .required('Please enter a valid password')
+    .min(8, 'Password must be at least 8 characters long!'),
 });
 
 const Form = () => {
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
-
   const initialValues = {
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
+    newPassword: '',
   };
 
   const onSubmit = async (values) => {
-    const { firstName, lastName, email, password } = values;
-    const body = {
-      username: email,
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
-      image: 'placeholderurl',
-    };
-
-    const success = await register(body);
-
-    if (success === true) {
-      setError(false);
-      navigate('/portfolio-grid');
-    } else {
-      setError(true);
-    }
+    // const { email, password, newPassword } = values;
+    // const body = {
+    //   username: email,
+    //   password: password,
+    //   newPassword: newPassword,
+    // };
+    return values;
   };
 
   const formik = useFormik({
@@ -83,7 +55,7 @@ const Form = () => {
           gutterBottom
           color={'text.secondary'}
         >
-          Signup
+          Reset your password
         </Typography>
         <Typography
           variant="h4"
@@ -91,76 +63,64 @@ const Form = () => {
             fontWeight: 700,
           }}
         >
-          Create an account
+          Input the temporary password sent to your email.
         </Typography>
         <Typography color="text.secondary">
-          Fill out the form to get started.
+          Fill out the form below to reset your password.
         </Typography>
       </Box>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your first name
-            </Typography>
-            <TextField
-              label="First name *"
-              variant="outlined"
-              name={'firstName'}
-              fullWidth
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.firstName && Boolean(formik.errors.firstName)
-              }
-              helperText={formik.touched.firstName && formik.errors.firstName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your last name
-            </Typography>
-            <TextField
-              label="Last name *"
-              variant="outlined"
-              name={'lastName'}
-              fullWidth
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-              helperText={formik.touched.lastName && formik.errors.lastName}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your college email (e.g., tigerwoods@college.edu)
+              Enter your username (college email)
             </Typography>
             <TextField
               label="Email *"
               variant="outlined"
               name={'email'}
+              type={'email'}
               fullWidth
               value={formik.values.email}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              // error={formik.touched.email && Boolean(formik.errors.email)}
+              // helperText={formik.touched.email && formik.errors.email}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your password (we strongly encourage you to use a strong,
-              unique password!)
+              Enter the temporary password sent to your email
             </Typography>
             <TextField
-              label="Password *"
+              label="Old Password *"
               variant="outlined"
               name={'password'}
               type={'password'}
               fullWidth
               value={formik.values.password}
               onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
+              // error={formik.touched.password && Boolean(formik.errors.password)}
+              // helperText={formik.touched.password && formik.errors.password}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              Enter a new password (8 passwords)
+            </Typography>
+            <TextField
+              label="New Password *"
+              variant="outlined"
+              name={'newPassword'}
+              type={'password'}
+              fullWidth
+              value={formik.values.newPassword}
+              onChange={formik.handleChange}
+              // error={
+              //   formik.touched.newPassword && Boolean(formik.errors.newPassword)
+              // }
+              helperText={
+                formik.touched.newPassword && formik.errors.newPassword
+              }
             />
           </Grid>
           <Grid item container xs={12}>
@@ -190,7 +150,7 @@ const Form = () => {
                 Sign up
               </Button>
             </Box>
-            {error ? (
+            {/* {error ? (
               <Typography
                 variant={'subtitle2'}
                 sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}
@@ -199,7 +159,7 @@ const Form = () => {
               </Typography>
             ) : (
               ''
-            )}
+            )} */}
           </Grid>
           <Grid
             item

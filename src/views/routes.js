@@ -40,6 +40,8 @@ import {
   NotFoundCover as NotFoundCoverView,
 } from 'views';
 
+import ResetPasswordConfirm from './ResetPasswordConfirm';
+
 const routes = [
   {
     path: '/',
@@ -152,6 +154,10 @@ const routes = [
   {
     path: '/password-reset-simple',
     renderer: (params = {}) => <PasswordResetSimpleView {...params} />,
+  },
+  {
+    path: '/reset-password-confirm',
+    renderer: (params = {}) => <ResetPasswordConfirm {...params} />,
   },
   {
     path: '/signin-simple',

@@ -88,7 +88,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; Surfa Club. 2022. All rights reserved | Adventure & Venture
+          &copy; Surfa Club. 2022. All rights reserved
         </Typography>
         <Typography
           align={'center'}
@@ -96,7 +96,7 @@ const Footer = () => {
           color="text.secondary"
           component={'p'}
         >
-          Community is king.
+          Adventure & Venture.
         </Typography>
       </Grid>
     </Grid>

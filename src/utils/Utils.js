@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // import axios from 'axios';
 const AWS = require('aws-sdk');
 
@@ -114,4 +116,20 @@ export const store_email = async (email) => {
   fetch(`${endpoint}?${searchParams}`)
     .then(() => console.log('successfully stored email'))
     .catch(() => console.log('registration failed '));
+};
+
+export const send_email = async (email) => {
+  const endpoint =
+    'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/email'; // change this to send email
+
+  const searchParams = new URLSearchParams();
+  searchParams.set('sender', 'help@surfaclub.com');
+  searchParams.set('recipient', email);
+
+  const success = await axios
+    .post(`${endpoint}?${searchParams}`)
+    .then((res) => res.status != 404)
+    .catch(() => false);
+
+  return success;
 };
