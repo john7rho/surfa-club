@@ -107,7 +107,7 @@ export const getUser = async ({ username }) => {
   return user;
 };
 
-export const storeEmail = async (email) => {
+export const store_email = async (email) => {
   const endpoint =
     'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/email';
 
