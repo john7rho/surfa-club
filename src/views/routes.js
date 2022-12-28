@@ -38,6 +38,7 @@ import {
   AccountSecurity as AccountSecurityView,
   NotFound as NotFoundView,
   NotFoundCover as NotFoundCoverView,
+  Messages as MessageView
 } from 'views';
 
 import ResetPasswordConfirm from './ResetPasswordConfirm';
@@ -190,6 +191,10 @@ const routes = [
   {
     path: '/account-security',
     renderer: (params = {}) => <AccountSecurityView {...params} />,
+  },
+  {
+    path: '/messages',
+    renderer: (params = {}) => <MessageView {...params} />,
   },
   {
     path: '/not-found',

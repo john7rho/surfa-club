@@ -18,10 +18,10 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
+    indent: 'off',
+    'linebreak-style': ['warn', 'unix'],
+    quotes: ['warn', 'single'],
+    semi: ['warn', 'always'],
     'comma-dangle': ['error', 'only-multiline'],
   },
 };

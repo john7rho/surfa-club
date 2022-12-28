@@ -36,3 +36,4 @@ export { default as AccountNotifications } from './Account/Notifications';
 export { default as AccountSecurity } from './Account/Security';
 export { default as NotFound } from './NotFound';
 export { default as NotFoundCover } from './NotFoundCover';
+export { default as Messages } from './Messages';
