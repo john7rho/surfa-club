@@ -61,7 +61,16 @@ const Hero = () => {
             }}
           >
             <Typed
-              strings={[' Stanford', ' UC Berkeley', ' Harvard', ' MIT']}
+              strings={[
+                ' Stanford',
+                ' UC Berkeley',
+                ' Harvard',
+                ' MIT',
+                ' UCLA',
+                ' Yale',
+                ' Cornell',
+                ' Columbia',
+              ]}
               typeSpeed={75}
               backSpeed={100}
               loop
@@ -73,7 +82,7 @@ const Hero = () => {
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
-          We connect college builders and founders across campuses.
+          Find a place to crash for conferences, hackathons, events, and more.
         </Typography>
       </Box>
       <Box display="flex" flexDirection={'column'} justifyContent={'center'}>
@@ -127,7 +136,7 @@ const Hero = () => {
           color="text.primary"
           sx={{ textTransform: 'uppercase' }}
         >
-          Join a growing community of builders and explorers at
+          Join a growing community of students at
         </Typography>
         <Box display="flex" flexWrap="wrap" justifyContent={'flex-start'}>
           {[
