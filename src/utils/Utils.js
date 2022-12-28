@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // import axios from 'axios';
 const AWS = require('aws-sdk');
 
@@ -71,7 +73,8 @@ export const register = async ({
   searchParams.set('password', password);
   searchParams.set('image', image);
 
-  const success = await fetch(`${endpoint}?${searchParams}`)
+  const success = await axios
+    .post(`${endpoint}?${searchParams}`)
     .then((res) => res.status != 404)
     .catch(() => false);
   return success;
@@ -104,7 +107,7 @@ export const getUser = async ({ username }) => {
   return user;
 };
 
-export const store_email = async (email) => {
+export const storeEmail = async (email) => {
   const endpoint =
     'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/email';
 
@@ -114,4 +117,14 @@ export const store_email = async (email) => {
   fetch(`${endpoint}?${searchParams}`)
     .then(() => console.log('successfully stored email'))
     .catch(() => console.log('registration failed '));
+};
+
+export const sendMsg = (socket, message, receiver) => {
+  const payload = JSON.stringify({
+    action: 'sendmessage',
+    message: message,
+    receiver: receiver,
+  });
+
+  socket.send(payload);
 };
