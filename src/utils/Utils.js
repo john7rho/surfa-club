@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import axios from 'axios';
-
 // import axios from 'axios';
 const AWS = require('aws-sdk');
 
@@ -128,7 +126,8 @@ export const store_email = async (email) => {
  * sends email to specified email
  */
 export const send_email = async (email) => {
-  const endpoint = 'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/email'; // change this to send email
+  const endpoint =
+    'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/email'; // change this to send email
 
   const searchParams = new URLSearchParams();
   searchParams.set('sender', 'help@surfaclub.com');
@@ -140,9 +139,8 @@ export const send_email = async (email) => {
     .catch(() => false);
 
   return success;
-/**
- * creates websocket object from wss url
- */
+};
+
 export const createSocket = (wss) => {
   const socket = new WebSocket(wss);
 
