@@ -18,6 +18,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-unused-vars': 'off',
     indent: 'off',
     'linebreak-style': ['warn', 'unix'],
     quotes: ['warn', 'single'],
