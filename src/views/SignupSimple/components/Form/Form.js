@@ -10,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { register } from '../../../../utils/Utils.js';
 import { useNavigate } from 'react-router-dom';
+import { S3 } from 'aws-sdk';
+
+// import UploadAWS from '../UploadAWS/UploadAWS.js';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -38,6 +41,7 @@ const validationSchema = yup.object({
 const Form = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const [file, setFile] = useState(null);
 
   const initialValues = {
     firstName: '',
@@ -53,7 +57,9 @@ const Form = () => {
       firstName: firstName,
       lastName: lastName,
       password: password,
-      image: 'placeholderurl',
+      image:
+        'https://surfaprofilepicture.s3.amazonaws.com/' +
+        file?.name.replace(' ', '_'),
     };
 
     const success = await register(body);
@@ -71,6 +77,45 @@ const Form = () => {
     validationSchema: validationSchema,
     onSubmit,
   });
+
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!file) {
+      setError('Please select a file');
+      return;
+    }
+
+    const fileName = file.name.replace(' ', '_');
+    const fileType = file.type;
+
+    const s3 = new S3({
+      accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
+      secretAccessKey: 'IAp+KDt2rOmAL3Woz6lNKeB9sPsPz/gX0Hp8GpsB',
+      region: 'us-east-1',
+      //   TODO: hide these later
+    });
+
+    const params = {
+      Bucket: 'surfaprofilepicture',
+      Key: fileName,
+      ContentType: fileType,
+      ACL: 'public-read',
+      Body: file,
+    };
+
+    s3.upload(params, (err, data) => {
+      if (err) {
+        console.log(err);
+        setError(err.message);
+      } else {
+        console.log(data);
+      }
+    });
+  };
 
   return (
     <Box>
@@ -163,6 +208,71 @@ const Form = () => {
               helperText={formik.touched.password && formik.errors.password}
             />
           </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              Instagram link (optional)
+            </Typography>
+            <TextField
+              label="Instagram Link *"
+              variant="outlined"
+              name={'instagram'}
+              type={'instagram'}
+              fullWidth
+              value={formik.values.instagram}
+              onChange={formik.handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              Twitter link (optional)
+            </Typography>
+            <TextField
+              label="Twitter Link *"
+              variant="outlined"
+              name={'twitter'}
+              type={'twitter'}
+              fullWidth
+              value={formik.values.twitter}
+              onChange={formik.handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              LinkedIn link (optional)
+            </Typography>
+            <TextField
+              label="LinkedIn link *"
+              variant="outlined"
+              name={'linkedin'}
+              type={'linkedin'}
+              fullWidth
+              value={formik.values.linkedin}
+              onChange={formik.handleChange}
+            />
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginTop: 2, marginBottom: 2 }}
+            >
+              Upload a profile picture
+            </Typography>
+            {/* <UploadAWS label={formik.values.image}></UploadAWS> */}
+            <div label={file?.name}>
+              <Button variant="contained" component="label">
+                Pick Photo
+                <input
+                  accept="image/*"
+                  type="file"
+                  hidden
+                  onChange={handleChange}
+                />
+                {error ? <p>{error}</p> : null}
+              </Button>
+              {/* <Typography>{file?.name}</Typography> */}
+              {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
+              <Button onClick={handleSubmit}>Click to Upload</Button>
+            </div>
+          </Grid>
+
           <Grid item container xs={12}>
             <Box
               display="flex"
