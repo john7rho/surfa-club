@@ -129,7 +129,7 @@ const routes = [
   },
   {
     path: '/portfolio-grid',
-    renderer: (params = {}) => <PortfolioGridView {...params} />,
+    renderer: (params = {}) => <JobListingView {...params} />,
   },
   {
     path: '/company-terms',
