@@ -56,6 +56,9 @@ export const register = async ({
   password,
   firstName,
   lastName,
+  instagram,
+  twitter,
+  linkedin,
   image,
 }) => {
   const endpoint =
@@ -65,6 +68,9 @@ export const register = async ({
   searchParams.set('firstName', firstName);
   searchParams.set('lastName', lastName);
   searchParams.set('password', password);
+  searchParams.set('instagram', instagram);
+  searchParams.set('twitter', twitter);
+  searchParams.set('linkedin', linkedin);
   searchParams.set('image', image);
 
   const success = await axios
