@@ -47,6 +47,18 @@ const mock = [
     instagram: 'https://www.instagram.com/shreyj1729/',
     twitter: 'https://twitter.com/ShreyJ1729',
   },
+  {
+    imageUrl:
+      'https://shreyjoshi.com/resources/me.png',
+    title: 'Harvard University',
+    name: 'Shrey Joshi',
+    type: 'Full time',
+    location: 'Harvard University',
+    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
+    linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
+    instagram: 'https://www.instagram.com/shreyj1729/',
+    twitter: 'https://twitter.com/ShreyJ1729',
+  },
 ];
 const Jobs = () => {
   const theme = useTheme();
@@ -66,7 +78,7 @@ const Jobs = () => {
       </Box>
       <Grid container spacing={4}>
         {mock.map((item, i) => (
-          <Grid item xs={12} sm={6} md={4} key={i}>
+          <Grid item xs={12} sm={4} md={3} key={i}>
             <Box
               display={'block'}
               width={1}
@@ -192,16 +204,19 @@ const Jobs = () => {
                   <Stack direction="row" spacing={2}>
                     <a href={item.linkedin} target="_blank">
                       <SocialIcon
+                      style={{ height: 40, width: 40 }}
                       url={item.linkedin}
                       />
                     </a>
                     <a href={item.twitter} target="_blank">
                       <SocialIcon
+                      style={{ height: 40, width: 40 }}
                       url={item.twitter}
                       />
                     </a>
                     <a href={item.instagram} target="_blank">
                       <SocialIcon
+                      style={{ height: 40, width: 40 }}
                       url={item.instagram}
                       />
                     </a>

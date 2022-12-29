@@ -63,7 +63,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
               fontWeight: 'bold',
             }}
           >
-            Apply now
+            Be a Partner
           </Button>
         </Box>
       </Box>
