@@ -48,15 +48,29 @@ const Form = () => {
     lastName: '',
     email: '',
     password: '',
+    instagram: '',
+    twitter: '',
+    linkedin: '',
   };
 
   const onSubmit = async (values) => {
-    const { firstName, lastName, email, password } = values;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      instagram,
+      twitter,
+      linkedin,
+    } = values;
     const body = {
       username: email,
       firstName: firstName,
       lastName: lastName,
       password: password,
+      instagram: instagram,
+      twitter: twitter,
+      linkedin: linkedin,
       image:
         'https://surfaprofilepicture.s3.amazonaws.com/' +
         file?.name.replace(' ', '_'),
@@ -213,7 +227,7 @@ const Form = () => {
               Instagram link (optional)
             </Typography>
             <TextField
-              label="Instagram Link *"
+              label="Instagram Link"
               variant="outlined"
               name={'instagram'}
               type={'instagram'}
@@ -227,7 +241,7 @@ const Form = () => {
               Twitter link (optional)
             </Typography>
             <TextField
-              label="Twitter Link *"
+              label="Twitter Link"
               variant="outlined"
               name={'twitter'}
               type={'twitter'}
@@ -241,7 +255,7 @@ const Form = () => {
               LinkedIn link (optional)
             </Typography>
             <TextField
-              label="LinkedIn link *"
+              label="LinkedIn link"
               variant="outlined"
               name={'linkedin'}
               type={'linkedin'}
