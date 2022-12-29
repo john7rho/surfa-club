@@ -1,31 +1,31 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
+// import Box from '@mui/material/Box';
+// import Divider from '@mui/material/Divider';
 
 import Main from 'layouts/Main';
 import Container from 'components/Container';
 import {
-  AboutTop,
-  Advantages,
-  Customers,
-  Features,
-  Hero,
+//   AboutTop,
+//   Advantages,
+//   Customers,
+//   Features,
+  // Hero,
   Jobs,
-  Newsletter,
-  Partners,
-  Process,
-  PromoNumbers,
-  Questions,
-  TrustedCompanies,
+//   Newsletter,
+//   Partners,
+//   Process,
+//   PromoNumbers,
+//   Questions,
+//   TrustedCompanies,
 } from './components';
 
 const JobListing = () => {
   return (
     <Main>
-      <Container>
+      {/* <Container>
         <Hero />
-      </Container>
-      <Container>
+      </Container> */}
+      {/* <Container>
         <Partners />
       </Container>
       <Box bgcolor={'alternate.main'}>
@@ -40,11 +40,11 @@ const JobListing = () => {
         <Container>
           <AboutTop />
         </Container>
-      </Box>
+      </Box> */}
       <Container>
         <Jobs />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      {/* <Box bgcolor={'alternate.main'}>
         <Container>
           <PromoNumbers />
         </Container>
@@ -68,7 +68,7 @@ const JobListing = () => {
       </Container>
       <Container paddingTop={'0 !important'}>
         <Newsletter />
-      </Container>
+      </Container> */}
     </Main>
   );
 };

@@ -8,6 +8,7 @@ import Main from 'layouts/Main';
 import Container from 'components/Container';
 import { Form } from './components';
 
+
 const SignupSimple = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -36,6 +37,7 @@ const SignupSimple = () => {
             >
               <Form />
             </Grid>
+
             {isMd ? (
               <Grid item container justifyContent={'center'} xs={12} md={6}>
                 <Box height={1} width={1} maxWidth={500}>
