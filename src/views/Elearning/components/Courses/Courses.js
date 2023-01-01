@@ -13,60 +13,84 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { colors } from '@mui/material';
 
-const mock = [
-  {
-    price: '$59 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
-    title: 'UX & web design',
-    tutor: 'Joshua Karamaki',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$69 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
-    title: 'Software engineering',
-    tutor: 'Jhon Smith',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$49 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
-    title: 'Graphic design for beginners',
-    tutor: 'Nicol Adams',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-  {
-    price: '$59 / month',
-    media: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
-    title: 'Marketing VS Sales',
-    tutor: 'Joshua Karamaki',
-    users: [
-      'https://assets.maccarianagency.com/avatars/img1.jpg',
-      'https://assets.maccarianagency.com/avatars/img2.jpg',
-      'https://assets.maccarianagency.com/avatars/img3.jpg',
-      'https://assets.maccarianagency.com/avatars/img4.jpg',
-      'https://assets.maccarianagency.com/avatars/img5.jpg',
-    ],
-  },
-];
+import AWS from 'aws-sdk';
+
+AWS.config.update({
+  accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
+  secretAccessKey: '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',
+  region: 'us-east-1',
+});
+
+const dynamoDb = new AWS.DynamoDB();
+
+let mock = [];
+
+dynamoDb.scan({ TableName: 'users' }, (err, data) => {
+  if (err) {
+    console.error(err);
+    console.log('unable to scan table. Error JSON');
+  } else {
+    mock = data.Items;
+    // You can now use the 'items' variable to access the table data
+    console.log(mock);
+    console.log('successfully scanned table.');
+  }
+});
+
+// const mock = [
+//   {
+//     school: '$59 / month',
+//     image: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
+//     firstName: 'UX & web design',
+//     bio: 'Joshua Karamaki',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     school: '$69 / month',
+//     image: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
+//     firstName: 'Software engineering',
+//     bio: 'Jhon Smith',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     school: '$49 / month',
+//     image: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
+//     firstName: 'Graphic design for beginners',
+//     bio: 'Nicol Adams',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+//   {
+//     school: '$59 / month',
+//     image: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
+//     firstName: 'Marketing VS Sales',
+//     bio: 'Joshua Karamaki',
+//     users: [
+//       'https://assets.maccarianagency.com/avatars/img1.jpg',
+//       'https://assets.maccarianagency.com/avatars/img2.jpg',
+//       'https://assets.maccarianagency.com/avatars/img3.jpg',
+//       'https://assets.maccarianagency.com/avatars/img4.jpg',
+//       'https://assets.maccarianagency.com/avatars/img5.jpg',
+//     ],
+//   },
+// ];
 
 const Spaces = () => {
   const theme = useTheme();
@@ -192,8 +216,8 @@ const Spaces = () => {
                   sx={{ backgroundImage: 'none' }}
                 >
                   <CardMedia
-                    title={item.title}
-                    image={item.media}
+                    title={item.firstName.S}
+                    image={item.image.S}
                     sx={{
                       position: 'relative',
                       height: { xs: 240, sm: 340, md: 280 },
@@ -216,10 +240,10 @@ const Spaces = () => {
                         zIndex: 1,
                       }}
                     >
-                      <polygon
+                      {/* <polygon
                         fill={theme.palette.background.paper}
                         points="0,273 1921,273 1921,0 "
-                      />
+                      /> */}
                     </Box>
                     <Box
                       display={'flex'}
@@ -237,10 +261,10 @@ const Spaces = () => {
                         borderRadius={2}
                       >
                         <Typography sx={{ fontWeight: 600 }}>
-                          {item.price}
+                          {item.school.S}
                         </Typography>
                       </Box>
-                      <Button
+                      {/* <Button
                         variant={'contained'}
                         color="primary"
                         size="large"
@@ -264,7 +288,7 @@ const Spaces = () => {
                         }
                       >
                         Save
-                      </Button>
+                      </Button> */}
                     </Box>
                   </CardMedia>
                   <CardContent>
@@ -274,7 +298,7 @@ const Spaces = () => {
                       align={'left'}
                       sx={{ fontWeight: 700 }}
                     >
-                      {item.title}
+                      {item.firstName.S}
                     </Typography>
                     <Box display={'flex'} alignItems={'center'} marginY={2}>
                       <Box
@@ -297,7 +321,7 @@ const Spaces = () => {
                         />
                       </Box>
                       <Typography variant={'subtitle1'} color="text.secondary">
-                        {item.tutor}
+                        {item.bio.S}
                       </Typography>
                     </Box>
                     <Box
@@ -305,11 +329,11 @@ const Spaces = () => {
                       display={'flex'}
                       justifyContent={'space-between'}
                     >
-                      <AvatarGroup max={4}>
+                      {/* <AvatarGroup max={4}>
                         {item.users.map((u) => (
                           <Avatar key={u} src={u} />
                         ))}
-                      </AvatarGroup>
+                      </AvatarGroup> */}
                       <Box display={'flex'} alignItems={'center'}>
                         <Box
                           component={'svg'}
@@ -328,9 +352,9 @@ const Spaces = () => {
                     </Box>
                   </CardContent>
                   <Box flexGrow={1} />
-                  <CardActions sx={{ justifyContent: 'flex-end' }}>
+                  {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
                     <Button>Learn more</Button>
-                  </CardActions>
+                  </CardActions> */}
                 </Box>
               </Box>
             </Box>

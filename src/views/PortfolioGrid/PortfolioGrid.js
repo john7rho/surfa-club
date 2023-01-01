@@ -5,26 +5,26 @@ import React from 'react';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
 import {
-//   AboutTop,
-//   Advantages,
-//   Customers,
-//   Features,
-  // Hero,
+  //   AboutTop,
+  //   Advantages,
+  //   Customers,
+  //   Features,
+  Hero,
   Jobs,
-//   Newsletter,
-//   Partners,
-//   Process,
-//   PromoNumbers,
-//   Questions,
-//   TrustedCompanies,
+  //   Newsletter,
+  //   Partners,
+  //   Process,
+  //   PromoNumbers,
+  //   Questions,
+  //   TrustedCompanies,
 } from './components';
 
 const PortfolioGrid = () => {
   return (
     <Main>
-      {/* <Container>
+      <Container>
         <Hero />
-      </Container> */}
+      </Container>
       {/* <Container>
         <Partners />
       </Container>

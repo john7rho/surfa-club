@@ -10,56 +10,78 @@ import CardContent from '@mui/material/CardContent';
 import { SocialIcon } from 'react-social-icons';
 import { Stack } from '@mui/system';
 
-const mock = [
-  {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
-    title: 'Harvard University',
-    name: 'Shrey Joshi',
-    type: 'Full time',
-    location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
-    linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
-    instagram: 'https://www.instagram.com/shreyj1729/',
-    twitter: 'https://twitter.com/ShreyJ1729',
-  },
-  {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
-    title: 'Harvard University',
-    name: 'Shrey Joshi',
-    type: 'Full time',
-    location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
-    linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
-    instagram: 'https://www.instagram.com/shreyj1729/',
-    twitter: 'https://twitter.com/ShreyJ1729',
-  },
-  {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
-    title: 'Harvard University',
-    name: 'Shrey Joshi',
-    type: 'Full time',
-    location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
-    linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
-    instagram: 'https://www.instagram.com/shreyj1729/',
-    twitter: 'https://twitter.com/ShreyJ1729',
-  },
-  {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
-    title: 'Harvard University',
-    name: 'Shrey Joshi',
-    type: 'Full time',
-    location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
-    linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
-    instagram: 'https://www.instagram.com/shreyj1729/',
-    twitter: 'https://twitter.com/ShreyJ1729',
-  },
-];
+import AWS from 'aws-sdk';
+
+AWS.config.update({
+  accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
+  secretAccessKey: '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',
+  region: 'us-east-1',
+});
+
+const dynamoDb = new AWS.DynamoDB();
+
+let mock = [];
+
+// Call the scan method to retrieve all items from the table
+dynamoDb.scan({ TableName: 'users' }, (err, data) => {
+  if (err) {
+    console.error(err);
+    console.log('unable to scan table. Error JSON');
+  } else {
+    mock = data.Items;
+    // You can now use the 'items' variable to access the table data
+    console.log(mock);
+    console.log('successfully scanned table.');
+  }
+});
+
+// const mock = [
+//   {
+//     imageUrl: 'https://shreyjoshi.com/resources/me.png',
+//     title: 'Harvard University',
+//     name: 'Shrey Joshi',
+//     type: 'Full time',
+//     location: 'Harvard University',
+//     bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
+//     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
+//     instagram: 'https://www.instagram.com/shreyj1729/',
+//     twitter: 'https://twitter.com/ShreyJ1729',
+//   },
+//   {
+//     imageUrl: 'https://shreyjoshi.com/resources/me.png',
+//     title: 'Harvard University',
+//     name: 'Shrey Joshi',
+//     type: 'Full time',
+//     location: 'Harvard University',
+//     bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
+//     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
+//     instagram: 'https://www.instagram.com/shreyj1729/',
+//     twitter: 'https://twitter.com/ShreyJ1729',
+//   },
+//   {
+//     imageUrl: 'https://shreyjoshi.com/resources/me.png',
+//     title: 'Harvard University',
+//     name: 'Shrey Joshi',
+//     type: 'Full time',
+//     location: 'Harvard University',
+//     bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
+//     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
+//     instagram: 'https://www.instagram.com/shreyj1729/',
+//     twitter: 'https://twitter.com/ShreyJ1729',
+//   },
+//   {
+//     imageUrl: 'https://shreyjoshi.com/resources/me.png',
+//     title: 'Harvard University',
+//     name: 'Shrey Joshi',
+//     type: 'Full time',
+//     location: 'Harvard University',
+//     bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
+//     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
+//     instagram: 'https://www.instagram.com/shreyj1729/',
+//     twitter: 'https://twitter.com/ShreyJ1729',
+//   },
+// ];
+
 const Jobs = () => {
   const theme = useTheme();
 
@@ -71,14 +93,14 @@ const Jobs = () => {
         </Typography>
         <Box>
           <Typography variant={'h6'} color={'text.secondary'}>
-            We get thousands of job postings weekly, but only accept the
-            openings at the top companies.{' '}
+            Here are a list of hosts. Filter by school and reach out to them via
+            email, Instagram, Twitter, or LinkedIn!{' '}
           </Typography>
         </Box>
       </Box>
       <Grid container spacing={4}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} sm={4} md={3} key={i}>
+        {mock.map((item) => (
+          <Grid item xs={12} sm={4} md={3} key={item.firstName.S}>
             <Box
               display={'block'}
               width={1}
@@ -132,18 +154,20 @@ const Jobs = () => {
                   </Box> */}
                   <Box
                     component="img"
+                    marginBottom={2}
                     sx={{
                       width: '50%',
-                      borderRadius: '50%'
+                      height: '50%',
+                      borderRadius: '5%',
                     }}
-                    src={item.imageUrl}
+                    src={item.image.S}
                   />
                   <Typography
                     variant={'h6'}
                     gutterBottom
                     sx={{ fontWeight: 500 }}
                   >
-                    {item.name}
+                    {item.firstName.S} {item.lastName.S}
                   </Typography>
                   <Box display={'flex'} alignItems={'center'}>
                     <Box
@@ -170,14 +194,14 @@ const Jobs = () => {
                       />
                     </Box>
                     <Typography variant={'subtitle1'} color="text.secondary">
-                      {item.location}
+                      {item.school.S}
                     </Typography>
                   </Box>
                   <Box marginTop={2}>
-                  <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.bio}
+                    <Typography variant={'subtitle2'} color="text.secondary">
+                      {item.bio.S}
                     </Typography>
-                    </Box>
+                  </Box>
                   {/* <Box display={'flex'} alignItems={'center'}>
                     <Box
                       component={'svg'}
@@ -202,22 +226,25 @@ const Jobs = () => {
                   {/* </Box> */}
                   <br />
                   <Stack direction="row" spacing={2}>
-                    <a href={item.linkedin} target="_blank">
+                    <Button target="_blank" href={'mailto:' + item.username.S}>
+                      Email
+                    </Button>
+                    <a href={item.linkedin.S} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.linkedin}
+                        style={{ height: 40, width: 40 }}
+                        url={item.linkedin.S}
                       />
                     </a>
-                    <a href={item.twitter} target="_blank">
+                    <a href={item.twitter.S} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.twitter}
+                        style={{ height: 40, width: 40 }}
+                        url={item.twitter.S}
                       />
                     </a>
-                    <a href={item.instagram} target="_blank">
+                    <a href={item.instagram.S} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.instagram}
+                        style={{ height: 40, width: 40 }}
+                        url={item.instagram.S}
                       />
                     </a>
                   </Stack>
@@ -226,7 +253,7 @@ const Jobs = () => {
             </Box>
           </Grid>
         ))}
-        <Grid item container justifyContent={'center'} xs={12}>
+        {/* <Grid item container justifyContent={'center'} xs={12}>
           <Button
             variant={'contained'}
             size={'large'}
@@ -251,7 +278,7 @@ const Jobs = () => {
           >
             View all
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -9,57 +10,57 @@ import CardContent from '@mui/material/CardContent';
 // import { LinkedIn, Instagram, Twitter} from '@mui/icons-material';
 import { SocialIcon } from 'react-social-icons';
 import { Stack } from '@mui/system';
+import AWS from 'aws-sdk';
+
+// DONT USE THIS ONE!!
 
 const mock = [
   {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
+    imageUrl: 'https://shreyjoshi.com/resources/me.png',
     title: 'Harvard University',
     name: 'Shrey Joshi',
     type: 'Full time',
     location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
+    bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
     instagram: 'https://www.instagram.com/shreyj1729/',
     twitter: 'https://twitter.com/ShreyJ1729',
   },
   {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
+    imageUrl: 'https://shreyjoshi.com/resources/me.png',
     title: 'Harvard University',
     name: 'Shrey Joshi',
     type: 'Full time',
     location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
+    bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
     instagram: 'https://www.instagram.com/shreyj1729/',
     twitter: 'https://twitter.com/ShreyJ1729',
   },
   {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
+    imageUrl: 'https://shreyjoshi.com/resources/me.png',
     title: 'Harvard University',
     name: 'Shrey Joshi',
     type: 'Full time',
     location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
+    bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
     instagram: 'https://www.instagram.com/shreyj1729/',
     twitter: 'https://twitter.com/ShreyJ1729',
   },
   {
-    imageUrl:
-      'https://shreyjoshi.com/resources/me.png',
+    imageUrl: 'https://shreyjoshi.com/resources/me.png',
     title: 'Harvard University',
     name: 'Shrey Joshi',
     type: 'Full time',
     location: 'Harvard University',
-    bio: 'Hey y\'all! Excited to host people for any hackathons or conferences and meet new people.',
+    bio: "Hey y'all! Excited to host people for any hackathons or conferences and meet new people.",
     linkedin: 'https://www.linkedin.com/in/sjoshi1729/',
     instagram: 'https://www.instagram.com/shreyj1729/',
     twitter: 'https://twitter.com/ShreyJ1729',
   },
 ];
+
 const Jobs = () => {
   const theme = useTheme();
 
@@ -134,7 +135,7 @@ const Jobs = () => {
                     component="img"
                     sx={{
                       width: '50%',
-                      borderRadius: '50%'
+                      borderRadius: '50%',
                     }}
                     src={item.imageUrl}
                   />
@@ -174,10 +175,10 @@ const Jobs = () => {
                     </Typography>
                   </Box>
                   <Box marginTop={2}>
-                  <Typography variant={'subtitle2'} color="text.secondary">
+                    <Typography variant={'subtitle2'} color="text.secondary">
                       {item.bio}
                     </Typography>
-                    </Box>
+                  </Box>
                   {/* <Box display={'flex'} alignItems={'center'}>
                     <Box
                       component={'svg'}
@@ -204,20 +205,20 @@ const Jobs = () => {
                   <Stack direction="row" spacing={2}>
                     <a href={item.linkedin} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.linkedin}
+                        style={{ height: 40, width: 40 }}
+                        url={item.linkedin}
                       />
                     </a>
                     <a href={item.twitter} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.twitter}
+                        style={{ height: 40, width: 40 }}
+                        url={item.twitter}
                       />
                     </a>
                     <a href={item.instagram} target="_blank">
                       <SocialIcon
-                      style={{ height: 40, width: 40 }}
-                      url={item.instagram}
+                        style={{ height: 40, width: 40 }}
+                        url={item.instagram}
                       />
                     </a>
                   </Stack>

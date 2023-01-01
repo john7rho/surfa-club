@@ -14,6 +14,9 @@ import { S3 } from 'aws-sdk';
 
 // import UploadAWS from '../UploadAWS/UploadAWS.js';
 
+const re =
+  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
+
 const validationSchema = yup.object({
   firstName: yup
     .string()
@@ -36,10 +39,13 @@ const validationSchema = yup.object({
     .string()
     .required('Please specify your password')
     .min(8, 'The password should have at minimum length of 8'),
+  // instagram: yup.string().matches(re, 'Please enter a valid URL'),
+  // twitter: yup.string().matches(re, 'Please enter a valid URL'),
+  // linkedin: yup.string().matches(re, 'Please enter a valid URL'),
 });
 
 const Form = () => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('No photo uploaded');
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
@@ -94,6 +100,7 @@ const Form = () => {
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
+    // handleSubmit(e);
   };
 
   const handleSubmit = (e) => {
@@ -129,6 +136,8 @@ const Form = () => {
         console.log(data);
       }
     });
+
+    setError('Uploaded!');
   };
 
   return (
@@ -279,11 +288,18 @@ const Form = () => {
                   hidden
                   onChange={handleChange}
                 />
-                {error ? <p>{error}</p> : null}
               </Button>
               {/* <Typography>{file?.name}</Typography> */}
               {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
-              <Button onClick={handleSubmit}>Click to Upload</Button>
+              <Button
+                onClick={handleSubmit}
+                style={{ marginLeft: '4px', backgroundColor: 'black' }}
+              >
+                Click to upload
+              </Button>
+              <Typography variant={'body2'}>
+                {error ? <p style={{ color: 'blue' }}>{error}</p> : null}
+              </Typography>
             </div>
           </Grid>
 
