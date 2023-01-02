@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
 
-// TIP: this is the main one to edit
+import NavItem from './components/NavItem';
+
 const SidebarNav = ({ pages }) => {
   const theme = useTheme();
   const { mode } = theme.palette;
+
+  const {
+    landings: landingPages,
+    secondary: secondaryPages,
+    company: companyPages,
+    account: accountPages,
+    portfolio: portfolioPages,
+    blog: blogPages,
+  } = pages;
 
   return (
     <Box>
@@ -23,7 +32,9 @@ const SidebarNav = ({ pages }) => {
           <Box
             component={'img'}
             src={
-              'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
+              mode === 'light'
+                ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
+                : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
             }
             height={1}
             width={1}
@@ -32,24 +43,9 @@ const SidebarNav = ({ pages }) => {
       </Box>
       <Box paddingX={2} paddingY={2}>
         <Box>
-          <Link style={{ color: 'maroon', textDecoration: 'none' }} href="/">
-            Home
-          </Link>
+          <NavItem title={'Landings'} items={landingPages} />
         </Box>
         <Box>
-          <Link
-            style={{ color: 'maroon', textDecoration: 'none' }}
-            href="/signin-simple"
-          >
-            Sign In
-          </Link>
-        </Box>
-        <Box>
-          <Link style={{ color: 'maroon', textDecoration: 'none' }} href="/faq">
-            FAQ
-          </Link>
-        </Box>
-        {/* <Box>
           <NavItem title={'Company'} items={companyPages} />
         </Box>
         <Box>
@@ -63,19 +59,19 @@ const SidebarNav = ({ pages }) => {
         </Box>
         <Box>
           <NavItem title={'Portfolio'} items={portfolioPages} />
-        </Box> */}
+        </Box>
         <Box marginTop={2}>
           <Button
             size={'large'}
             variant="outlined"
             fullWidth
             component="a"
-            href="https://airtable.com/shrCDEmF6M6gDh7sk"
+            href="/docs/introduction"
           >
-            Apply to be a Partner
+            Documentation
           </Button>
         </Box>
-        {/* <Box marginTop={1}>
+        <Box marginTop={1}>
           <Button
             size={'large'}
             variant="contained"
@@ -85,9 +81,9 @@ const SidebarNav = ({ pages }) => {
             target="blank"
             href="https://mui.com/store/items/the-front-landing-page/"
           >
-            Purchase now
+            Purchase now!
           </Button>
-        </Box> */}
+        </Box>
       </Box>
     </Box>
   );

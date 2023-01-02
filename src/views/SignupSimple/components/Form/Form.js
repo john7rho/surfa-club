@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -48,6 +48,18 @@ const Form = () => {
   const [error, setError] = useState('No photo uploaded');
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  // const [username, setUsername] = useState('');
+
+  // useEffect(() => {
+  //   const storedUsername = localStorage.getItem('username');
+  //   if (storedUsername) {
+  //     setUsername(storedUsername);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem('username', username);
+  // }, [username]);
 
   const initialValues = {
     firstName: '',
@@ -86,6 +98,7 @@ const Form = () => {
 
     if (success === true) {
       setError(false);
+      localStorage.setItem('username', email);
       navigate('/portfolio-grid');
     } else {
       setError(true);
@@ -330,7 +343,7 @@ const Form = () => {
                 Sign up
               </Button>
             </Box>
-            {error ? (
+            {error != 'No photo uploaded' ? (
               <Typography
                 variant={'subtitle2'}
                 sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}

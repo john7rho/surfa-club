@@ -17,13 +17,13 @@ const mock = [
     suffix: '+',
   },
   {
-    title: 4,
-    subtitle: '4 schools across the country (and counting)',
+    title: 6,
+    subtitle: '6 schools across the country (and counting)',
     suffix: '+',
   },
   {
     title: 1,
-    subtitle: '1 community of wide-eyed dreamers',
+    subtitle: '1 community of wide-eyed surfers',
     suffix: '%',
   },
 ];

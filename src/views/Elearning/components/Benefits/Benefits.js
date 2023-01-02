@@ -37,7 +37,7 @@ const Benefits = () => {
           align={'center'}
           sx={{ fontWeight: 700, color: 'common.blue' }}
         >
-          Young founders are few and far between.
+          Find a host in under 5 minutes.
         </Typography>
         <Typography
           variant={'h6'}
@@ -46,7 +46,7 @@ const Benefits = () => {
           align={'center'}
           sx={{ color: 'common.blue' }}
         >
-          Let's bridge this gap.
+          Surfa's pay-it-forward system makes traveling easy.
         </Typography>
       </Box>
 

@@ -50,7 +50,7 @@ const Form = () => {
         credits: user.credis,
       };
       setUser(curr_user);
-
+      localStorage.setItem('username', user.username);
       navigate('/portfolio-grid');
     } else {
       setAuth(false);
