@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 // import shadows from '@mui/material/styles/shadows';
 import * as yup from 'yup';
 import AWS from 'aws-sdk';
+import { getUser } from '../../../../utils/Utils.js';
 
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
@@ -29,22 +30,22 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-const dynamoDb = new AWS.DynamoDB();
+// const dynamoDb = new AWS.DynamoDB();
 
-let mock = [];
+// let mock = [];
 
 // Call the scan method to retrieve all items from the table
-dynamoDb.scan({ TableName: 'users' }, (err, data) => {
-  if (err) {
-    console.error(err);
-    console.log('unable to scan table. Error JSON');
-  } else {
-    mock = data.Items;
-    // You can now use the 'items' variable to access the table data
-    console.log(mock);
-    console.log('successfully scanned table for hero.js.');
-  }
-});
+// dynamoDb.scan({ TableName: 'users' }, (err, data) => {
+//   if (err) {
+//     console.error(err);
+//     console.log('unable to scan table. Error JSON');
+//   } else {
+//     mock = data.Items;
+//     // You can now use the 'items' variable to access the table data
+//     console.log(mock);
+//     console.log('successfully scanned table for hero.js.');
+//   }
+// });
 
 // const [value, setValue] = useState('');
 
@@ -58,6 +59,26 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
 // Set up the parameters for the query
 
 const Hero = () => {
+  // const [value, setValue] = useState('');
+  const email = localStorage.getItem('username');
+  // console.log(email);
+  // console.log(getUser(localStorage.getItem('username')));
+
+  const returnUser = async () => {
+    const user = await getUser({ username: email });
+    console.log(user);
+  };
+
+  returnUser();
+
+  // useEffect(() => {
+  //   const storedValue = localStorage.getItem('username');
+  //   if (storedValue) {
+  //     setValue(storedValue);
+  //   }
+  //   console.log(value);
+  // }, []);
+
   return (
     <Box>
       <Box marginBottom={4} style={{ boxShadow: 12, border: '1px grey' }}>
