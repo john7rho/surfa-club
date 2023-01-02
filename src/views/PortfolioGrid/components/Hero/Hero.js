@@ -60,13 +60,17 @@ AWS.config.update({
 
 const Hero = () => {
   // const [value, setValue] = useState('');
+  const [user, setUser] = useState('');
+
   const email = localStorage.getItem('username');
   // console.log(email);
   // console.log(getUser(localStorage.getItem('username')));
 
   const returnUser = async () => {
-    const user = await getUser({ username: email });
-    console.log(user);
+    let temp = await getUser({ username: email });
+    console.log(temp);
+    console.log(temp.image);
+    setUser(temp);
   };
 
   returnUser();
@@ -100,7 +104,7 @@ const Hero = () => {
             <Typography variant="body1" marginBottom={1}>
               Your Profile
             </Typography>
-            <Avatar marginBottom={2}></Avatar>
+            <Avatar marginBottom={2} src={user.image}></Avatar>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body1" marginBottom={1}>
