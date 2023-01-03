@@ -113,6 +113,12 @@ export const getUser = async ({ username }) => {
   return user;
 };
 
+export const updateProfile = async ({ username }) => {
+  const endpoint =
+    'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/user';
+  const searchParams = new URLSearchParams();
+};
+
 /**
  * stores email in email table
  */

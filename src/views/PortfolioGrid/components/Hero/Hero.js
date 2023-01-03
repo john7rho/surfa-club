@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { fileUpload } from '../../../../utils/Utils.js';
 
 // import shadows from '@mui/material/styles/shadows';
 import * as yup from 'yup';
@@ -36,6 +37,17 @@ AWS.config.update({
 
 const Hero = () => {
   const { user } = useContext(UserContext);
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+  };
+
+  const handleFileUpload = () => {
+    console.log('uploading file');
+    fileUpload(file);
+  };
 
   return (
     <div>
@@ -167,8 +179,14 @@ const Hero = () => {
                       height: '20px',
                       marginLeft: '2px',
                     }}
+                    onClick={handleFileUpload}
                   >
-                    <input hidden accept="image/*" type="file" />
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      onChange={(event) => handleFileChange(event)}
+                    />
                     <PhotoCamera />
                   </IconButton>
                 </Grid>
