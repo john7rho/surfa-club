@@ -5,6 +5,9 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
 // import shadows from '@mui/material/styles/shadows';
 import * as yup from 'yup';
 import AWS from 'aws-sdk';
@@ -68,8 +71,8 @@ const Hero = () => {
 
   const returnUser = async () => {
     let temp = await getUser({ username: email });
-    console.log(temp);
-    console.log(temp.image);
+    //console.log(temp);
+    //console.log(temp.image);
     setUser(temp);
   };
 
@@ -84,70 +87,192 @@ const Hero = () => {
   // }, []);
 
   return (
-    <Box>
-      <Box marginBottom={4} style={{ boxShadow: 12, border: '1px grey' }}>
-        <Typography
-          variant="h3"
-          color="text.primary"
-          align={'center'}
-          sx={{
-            fontWeight: 700,
-          }}
-        >
-          Welcome to the Surfa Circle
+    <div>
+      <Typography
+        variant="h3"
+        color="text.primary"
+        align={'center'}
+        marginBottom={4}
+      >
+        Welcome to the Surfa Circle
+      </Typography>
+      <Typography
+        marginTop={2}
+        marginBottom={2}
+        variant="h4"
+        sx={{ fontWeight: 'bold' }}
+      >
+        Account Details
+      </Typography>
+      {user.verified ? (
+        <Typography variant="body2" marginBottom={2}>
+          Welcome to the Surfa Circle! Hit the Save Changes button to submit any
+          updates to your profile.{' '}
         </Typography>
-        <Typography marginTop={2} variant="h5">
-          Account Details
+      ) : (
+        <Typography variant="body2" marginBottom={2}>
+          Please verify your account to access the full features of the Surfa
+          Circle. Upload a photo of your student ID and hit the Save Changes
+          button to be verified.
         </Typography>
-        <Grid container spacing={2} xs={12} marginTop={2}>
-          <Grid item xs={4}>
-            <Typography variant="body1" marginBottom={1}>
-              Your Profile
-            </Typography>
-            <Avatar marginBottom={2} src={user.image}></Avatar>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1" marginBottom={1}>
-              Verified Status
-            </Typography>
-            <Avatar marginBottom={2}></Avatar>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1" marginBottom={1}>
-              Hosting Status (Available/Unavailable)
-            </Typography>
-            <Avatar marginBottom={2}></Avatar>
-          </Grid>
-          <Grid item xs={4}>
-            <TextField fullWidth label="Change Instagram URL"></TextField>
-          </Grid>
-          <Grid item xs={4}>
-            <TextField fullWidth label="Change Twitter URL"></TextField>
-          </Grid>
-          <Grid item xs={4}>
-            <TextField fullWidth label="Change LinkedIn URL"></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth label="Change bio"></TextField>
-          </Grid>
-          <Grid item xs={4}>
-            <Button fullWidth justifyContent="flex-right">
-              Change Profile Picture
-            </Button>
-          </Grid>
-          <Grid item justifyContent="flex-right" xs={4} style={{ flex: 1 }}>
-            <Button fullWidth justifyContent="flex-right">
-              Toggle Availability
-            </Button>
-          </Grid>
-          <Grid item justifyContent="flex-right" xs={4} style={{ flex: 1 }}>
-            <Button fullWidth justifyContent="flex-right">
-              Save Changes
-            </Button>
-          </Grid>
+      )}
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Typography
+            variant="h6"
+            marginBottom={2}
+            sx={{ color: 'grey' }}
+          ></Typography>
+          <Avatar
+            marginTop={8}
+            marginBottom={2}
+            src={user.image}
+            sx={{ width: '300px', height: '300px' }}
+          ></Avatar>
         </Grid>
-      </Box>
-    </Box>
+        <Grid item xs={8}>
+          <Box>
+            <Box marginBottom={4} style={{ boxShadow: 12, border: '1px grey' }}>
+              <Grid container spacing={2} xs={12} marginTop={2}>
+                <Grid item xs={4}>
+                  <Typography
+                    variant="body1"
+                    marginBottom={1}
+                    sx={{ fontWeight: 'bold', float: 'left' }}
+                  >
+                    Verified Status
+                    {user.verified ? (
+                      <Avatar
+                        marginBottom={2}
+                        marginLeft={2}
+                        src="https://www.freeiconspng.com/thumbs/checkmark-png/checkmark-png-5.png"
+                        sx={{
+                          width: '20px',
+                          height: '20px',
+                          marginLeft: '2px',
+                          float: 'right',
+                        }}
+                      ></Avatar>
+                    ) : (
+                      <Avatar
+                        marginBottom={2}
+                        src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                        sx={{
+                          width: '20px',
+                          height: '20px',
+                          marginLeft: '2px',
+                          float: 'right',
+                        }}
+                      ></Avatar>
+                    )}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography
+                    variant="body1"
+                    marginBottom={1}
+                    sx={{ fontWeight: 'bold', color: 'grey', float: 'left' }}
+                  >
+                    Hosting Status{' '}
+                  </Typography>
+                  {user.hosting ? (
+                    <Avatar
+                      marginBottom={2}
+                      src="https://www.freeiconspng.com/thumbs/checkmark-png/checkmark-png-5.png"
+                      sx={{
+                        width: '20px',
+                        height: '20px',
+                      }}
+                    ></Avatar>
+                  ) : (
+                    <Avatar
+                      marginBottom={2}
+                      src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                      sx={{
+                        width: '20px',
+                        height: '20px',
+                        marginLeft: '2px',
+                      }}
+                    ></Avatar>
+                  )}
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography
+                    variant="body1"
+                    marginBottom={1}
+                    sx={{ fontWeight: 'bold', color: 'grey', float: 'left' }}
+                  >
+                    Student ID
+                  </Typography>
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                    style={{
+                      color: 'grey',
+                      backgroundColor: 'white',
+                      width: '20px',
+                      height: '20px',
+                      marginLeft: '2px',
+                    }}
+                  >
+                    <input hidden accept="image/*" type="file" />
+                    <PhotoCamera />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField fullWidth label="Change Instagram URL"></TextField>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField fullWidth label="Change Twitter URL"></TextField>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField fullWidth label="Change LinkedIn URL"></TextField>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Change bio"></TextField>
+                </Grid>
+                <Grid item xs={4}>
+                  <Button
+                    fullWidth
+                    justifyContent="flex-right"
+                    variant="outlined"
+                    style={{ color: 'grey', backgroundColor: 'white' }}
+                  >
+                    Change Profile Picture
+                  </Button>
+                </Grid>
+                <Grid
+                  item
+                  justifyContent="flex-right"
+                  xs={4}
+                  style={{ flex: 1 }}
+                >
+                  <Button
+                    fullWidth
+                    justifyContent="flex-right"
+                    variant="outlined"
+                    style={{ color: 'grey', backgroundColor: 'white' }}
+                  >
+                    Toggle Availability
+                  </Button>
+                </Grid>
+                <Grid
+                  item
+                  justifyContent="flex-right"
+                  xs={4}
+                  style={{ flex: 1 }}
+                >
+                  <Button fullWidth justifyContent="flex-right">
+                    Save Changes
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

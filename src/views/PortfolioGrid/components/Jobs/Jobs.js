@@ -10,7 +10,6 @@ import CardContent from '@mui/material/CardContent';
 import { SocialIcon } from 'react-social-icons';
 import { Stack } from '@mui/system';
 import Avatar from '@mui/material/Avatar';
-
 import AWS from 'aws-sdk';
 
 AWS.config.update({

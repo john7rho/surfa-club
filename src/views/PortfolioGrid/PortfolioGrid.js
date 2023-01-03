@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import Box from '@mui/material/Box';
 // import Divider from '@mui/material/Divider';
 
@@ -18,8 +18,24 @@ import {
   //   Questions,
   //   TrustedCompanies,
 } from './components';
+import { UserCardGrid } from 'blocks/userCards';
+import { getUser } from '../../utils/Utils.js';
 
 const PortfolioGrid = () => {
+  const [user, setUser] = useState('');
+
+  const email = localStorage.getItem('username');
+  // console.log(email);
+  // console.log(getUser(localStorage.getItem('username')));
+
+  const returnUser = async () => {
+    let temp = await getUser({ username: email });
+    //console.log(temp);
+    //console.log(temp.image);
+    setUser(temp);
+  };
+
+  returnUser();
   return (
     <Main>
       <Container>
@@ -41,9 +57,7 @@ const PortfolioGrid = () => {
           <AboutTop />
         </Container>
       </Box> */}
-      <Container>
-        <Jobs />
-      </Container>
+      <Container>{user.verified ? <Jobs /> : null}</Container>
       {/* <Box bgcolor={'alternate.main'}>
         <Container>
           <PromoNumbers />
