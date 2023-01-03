@@ -10,23 +10,26 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 // import shadows from '@mui/material/styles/shadows';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import AWS from 'aws-sdk';
+// import { useFormik } from 'formik';
+
 // import { getUser } from '../../../../utils/Utils.js';
 
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
-const validationSchema = yup.object({
-  bio: yup
-    .string()
-    .trim()
-    .min(10, 'Please enter a valid bio')
-    .max(250, 'Please enter a valid bio'),
-  instagram: yup.string().matches(re, 'Please enter a valid URL'),
-  twitter: yup.string().matches(re, 'Please enter a valid URL'),
-  linkedin: yup.string().matches(re, 'Please enter a valid URL'),
-});
+// ONLY USE WITH FORMIK, REMOVED FOR NOW BC VALIDATIONS DONT CONSIDER EMPTY STRINGS
+// const validationSchema = yup.object({
+//   bio: yup
+//     .string()
+//     .trim()
+//     .min(10, 'Please enter a valid bio')
+//     .max(250, 'Please enter a valid bio'),
+//   instagram: yup.string().matches(re, 'Please enter a valid URL'),
+//   twitter: yup.string().matches(re, 'Please enter a valid URL'),
+//   linkedin: yup.string().matches(re, 'Please enter a valid URL'),
+// });
 
 AWS.config.update({
   accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
@@ -40,17 +43,24 @@ const Hero = () => {
   // console.log(user.school);
   const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
-  const params = {
-    TableName: 'users',
-    Key: {
-      username: { S: user.username },
-      school: { S: user.school },
-    },
-    UpdateExpression: 'SET linkedin = :val1',
-    ExpressionAttributeValues: {
-      ':val1': { S: 'www.linkedin.com' },
-    },
-  };
+  const [instagram, setInstagram] = useState(null);
+  const [twitter, setTwitter] = useState(null);
+  const [linkedin, setLinkedin] = useState(null);
+  const [bio, setBio] = useState(null);
+  const [image, setImage] = useState(null);
+  const [hosting, setHosting] = useState(false);
+
+  // const params = {
+  //   TableName: 'users',
+  //   Key: {
+  //     username: { S: user.username },
+  //     school: { S: user.school },
+  //   },
+  //   UpdateExpression: 'SET linkedin = :val1',
+  //   ExpressionAttributeValues: {
+  //     ':val1': { S: 'www.linkedin.com' },
+  //   },
+  // };
 
   // ddb.updateItem(params, function (err, data) {
   //   if (err) {
@@ -60,15 +70,48 @@ const Hero = () => {
   //   }
   // });
 
-  const initialValues = {
-    instagram: '',
-    twitter: '',
-    linkedin: '',
-    bio: '',
+  // const initialValues = {
+  //   instagram: null,
+  //   // twitter: null,
+  //   // linkedin: null,
+  //   // bio: null,
+  //   // image: null,
+  //   // hosting: false,
+  // };
+
+  const handleChange = (event) => {
+    setInstagram(event.target.value);
+    console.log(instagram);
   };
 
-  const onSubmit = () => {
-    console.log('submit');
+  const handleSubmit = (event) => {
+    // event.preventDefault();
+    // const keys = Object.keys(initialValues);
+    // for (let i = 0; i < keys.length; i++) {
+    //   console.log(keys[i]);
+    // }
+
+    if (instagram) {
+      const params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET instagram = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: instagram },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+        }
+      });
+    }
   };
 
   return (
@@ -209,7 +252,12 @@ const Hero = () => {
                   </IconButton>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change Instagram URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change Instagram URL"
+                    value={instagram}
+                    onChange={handleChange}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
                   <TextField fullWidth label="Change Twitter URL"></TextField>
@@ -251,7 +299,11 @@ const Hero = () => {
                   xs={4}
                   style={{ flex: 1 }}
                 >
-                  <Button fullWidth justifyContent="flex-right">
+                  <Button
+                    fullWidth
+                    justifyContent="flex-right"
+                    onClick={handleSubmit}
+                  >
                     Save Changes
                   </Button>
                 </Grid>
