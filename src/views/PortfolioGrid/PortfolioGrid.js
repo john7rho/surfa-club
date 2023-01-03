@@ -1,41 +1,22 @@
-import React, { useState, useEffect } from 'react';
-// import Box from '@mui/material/Box';
-// import Divider from '@mui/material/Divider';
-
+import React, { useContext, useEffect } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import {
-  //   AboutTop,
-  //   Advantages,
-  //   Customers,
-  //   Features,
-  Hero,
-  Jobs,
-  //   Newsletter,
-  //   Partners,
-  //   Process,
-  //   PromoNumbers,
-  //   Questions,
-  //   TrustedCompanies,
-} from './components';
-import { UserCardGrid } from 'blocks/userCards';
+import { Hero, Jobs } from './components';
 import { getUser } from '../../utils/Utils.js';
 
 const PortfolioGrid = () => {
-  const [user, setUser] = useState('');
-
   const email = localStorage.getItem('username');
-  // console.log(email);
-  // console.log(getUser(localStorage.getItem('username')));
+  const { user, setUser } = useContext(UserContext);
 
-  const returnUser = async () => {
-    let temp = await getUser({ username: email });
-    //console.log(temp);
-    //console.log(temp.image);
-    setUser(temp);
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      let currUser = await getUser({ username: email });
+      setUser(currUser);
+    };
+    fetchUser;
+  }, []);
 
-  returnUser();
   return (
     <Main>
       <Container>
