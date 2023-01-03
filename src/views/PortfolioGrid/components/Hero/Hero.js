@@ -51,6 +51,9 @@ const Hero = () => {
   const [image, setImage] = useState(null);
   const [hosting, setHosting] = useState(null); // this is just a flag, find a better way to do this
 
+  const handleFileChange = (event) => {};
+  const handleFileUpload = () => {};
+
   const handleChangeInstagram = (event) => {
     setInstagram(event.target.value);
   };
