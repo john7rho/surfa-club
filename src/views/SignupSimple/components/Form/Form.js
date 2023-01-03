@@ -143,10 +143,10 @@ const Form = () => {
 
     s3.upload(params, (err, data) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
         setError(err.message);
       } else {
-        console.log(data);
+        // console.log(data);
       }
     });
 

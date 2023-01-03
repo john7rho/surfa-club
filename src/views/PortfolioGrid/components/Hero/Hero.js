@@ -9,25 +9,29 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { fileUpload } from '../../../../utils/Utils.js';
+import Switch from '@mui/material/Switch';
 
 // import shadows from '@mui/material/styles/shadows';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import AWS from 'aws-sdk';
-import { getUser } from '../../../../utils/Utils.js';
+// import { useFormik } from 'formik';
+
+// import { getUser } from '../../../../utils/Utils.js';
 
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
-const validationSchema = yup.object({
-  bio: yup
-    .string()
-    .trim()
-    .min(10, 'Please enter a valid bio')
-    .max(250, 'Please enter a valid bio'),
-  instagram: yup.string().matches(re, 'Please enter a valid URL'),
-  twitter: yup.string().matches(re, 'Please enter a valid URL'),
-  linkedin: yup.string().matches(re, 'Please enter a valid URL'),
-});
+// ONLY USE WITH FORMIK, REMOVED FOR NOW BC VALIDATIONS DONT CONSIDER EMPTY STRINGS
+// const validationSchema = yup.object({
+//   bio: yup
+//     .string()
+//     .trim()
+//     .min(10, 'Please enter a valid bio')
+//     .max(250, 'Please enter a valid bio'),
+//   instagram: yup.string().matches(re, 'Please enter a valid URL'),
+//   twitter: yup.string().matches(re, 'Please enter a valid URL'),
+//   linkedin: yup.string().matches(re, 'Please enter a valid URL'),
+// });
 
 AWS.config.update({
   accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
@@ -37,16 +41,181 @@ AWS.config.update({
 
 const Hero = () => {
   const { user } = useContext(UserContext);
-  const [file, setFile] = useState(null);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-    console.log(event.target.files[0]);
+  const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+
+  const [instagram, setInstagram] = useState(null);
+  const [twitter, setTwitter] = useState(null);
+  const [linkedin, setLinkedin] = useState(null);
+  const [bio, setBio] = useState(null);
+  const [image, setImage] = useState(null);
+  const [hosting, setHosting] = useState(null); // this is just a flag, find a better way to do this
+
+  const handleChangeInstagram = (event) => {
+    setInstagram(event.target.value);
   };
 
-  const handleFileUpload = () => {
-    console.log('uploading file');
-    fileUpload(file);
+  const handleChangeTwitter = (event) => {
+    setTwitter(event.target.value);
+  };
+
+  const handleChangeLinkedin = (event) => {
+    setLinkedin(event.target.value);
+  };
+
+  const handleChangeBio = (event) => {
+    setBio(event.target.value);
+  };
+
+  const handleChangeHosting = async () => {
+    if (hosting == null) {
+      const params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET hosting = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { BOOL: !user.hosting },
+        },
+      };
+
+      await ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+          setHosting(!user.hosting);
+          // console.log('truth ' + !user.hosting);
+          // console.log('flag ' + hosting);
+        }
+      });
+    } else {
+      const params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET hosting = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { BOOL: !hosting },
+        },
+      };
+
+      await ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+          setHosting(!hosting);
+          // console.log('truth ' + user.hosting);
+          // console.log('flag ' + hosting);
+        }
+      });
+    }
+  };
+
+  const handleSubmit = (event) => {
+    // event.preventDefault();
+    let params = [];
+
+    // instagram
+    if (instagram) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET instagram = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: instagram },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+        }
+      });
+    }
+
+    // twitter
+    if (twitter) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET twitter = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: twitter },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+        }
+      });
+    }
+
+    // linkedin
+    if (linkedin) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET linkedin = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: linkedin },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+        }
+      });
+    }
+
+    // bio
+    if (bio) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET bio = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: bio },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          // console.log('Error', err);
+        } else {
+          // console.log('Success', data);
+        }
+      });
+    }
+
+    // image
+
+    // hosting
   };
 
   return (
@@ -57,7 +226,7 @@ const Hero = () => {
         align={'center'}
         marginBottom={4}
       >
-        Welcome to the Surfa Circle
+        Welcome to the Surfa Circle (Beta)
       </Typography>
       <Typography
         marginTop={2}
@@ -68,12 +237,25 @@ const Hero = () => {
         Account Details
       </Typography>
       {user.verified ? (
-        <Typography variant="body2" marginBottom={2}>
-          Welcome to the Surfa Circle! Hit the Save Changes button to submit any
-          updates to your profile.{' '}
-        </Typography>
+        <>
+          <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
+            Welcome to the Surfa Circle! Please note some features are still in
+            development and may have bugs (email us at help@surfaclub.com if you
+            spot anything). Hit the Save Changes button to submit any updates to
+            your profile.{' '}
+          </Typography>
+          <Typography
+            variant="body1"
+            color={'text.secondary'}
+            marginBottom={2}
+            fontWeight={'bold'}
+          >
+            For link updates, please input the full URL with the HTTPS in the
+            beginning.{' '}
+          </Typography>
+        </>
       ) : (
-        <Typography variant="body2" marginBottom={2}>
+        <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
           Please verify your account to access the full features of the Surfa
           Circle. Upload a photo of your student ID and hit the Save Changes
           button to be verified.
@@ -119,7 +301,7 @@ const Hero = () => {
                     ) : (
                       <Avatar
                         marginBottom={2}
-                        src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
                         sx={{
                           width: '20px',
                           height: '20px',
@@ -138,7 +320,7 @@ const Hero = () => {
                   >
                     Hosting Status{' '}
                   </Typography>
-                  {user.hosting ? (
+                  {hosting == true ? (
                     <Avatar
                       marginLeft={2}
                       marginBottom={2}
@@ -148,17 +330,41 @@ const Hero = () => {
                         height: '20px',
                       }}
                     ></Avatar>
-                  ) : (
+                  ) : hosting == false ? (
                     <Avatar
                       marginBottom={2}
-                      src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
                       sx={{
                         width: '20px',
                         height: '20px',
                         marginLeft: '2px',
                       }}
                     ></Avatar>
-                  )}
+                  ) : hosting == null ? (
+                    <>
+                      {user.hosting == true ? (
+                        <Avatar
+                          marginLeft={2}
+                          marginBottom={2}
+                          src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png"
+                          sx={{
+                            width: '20px',
+                            height: '20px',
+                          }}
+                        ></Avatar>
+                      ) : (
+                        <Avatar
+                          marginBottom={2}
+                          src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
+                          sx={{
+                            width: '20px',
+                            height: '20px',
+                            marginLeft: '2px',
+                          }}
+                        ></Avatar>
+                      )}
+                    </>
+                  ) : null}
                 </Grid>
                 <Grid item xs={4}>
                   <Typography
@@ -191,16 +397,36 @@ const Hero = () => {
                   </IconButton>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change Instagram URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change Instagram URL"
+                    value={instagram}
+                    onChange={handleChangeInstagram}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change Twitter URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change Twitter URL"
+                    value={twitter}
+                    onChange={handleChangeTwitter}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change LinkedIn URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change LinkedIn URL"
+                    value={linkedin}
+                    onChange={handleChangeLinkedin}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField fullWidth label="Change bio"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change bio"
+                    value={bio}
+                    onChange={handleChangeBio}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
                   <Button
@@ -223,8 +449,9 @@ const Hero = () => {
                     justifyContent="flex-right"
                     variant="outlined"
                     style={{ color: 'grey', backgroundColor: 'white' }}
+                    onClick={handleChangeHosting}
                   >
-                    Toggle Availability
+                    Toggle Hosting
                   </Button>
                 </Grid>
                 <Grid
@@ -233,7 +460,11 @@ const Hero = () => {
                   xs={4}
                   style={{ flex: 1 }}
                 >
-                  <Button fullWidth justifyContent="flex-right">
+                  <Button
+                    fullWidth
+                    justifyContent="flex-right"
+                    onClick={handleSubmit}
+                  >
                     Save Changes
                   </Button>
                 </Grid>
