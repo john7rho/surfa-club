@@ -54,9 +54,9 @@ const Elearning = () => {
           ></path>
         </Box>
       </Box>
-      <Container>
+      {/* <Container> // re-add this when ppl reply
         <Reviews />
-      </Container>
+      </Container> */}
       <Box
         sx={{
           background: 'transparent',

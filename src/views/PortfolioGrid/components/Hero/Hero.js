@@ -12,7 +12,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 // import shadows from '@mui/material/styles/shadows';
 import * as yup from 'yup';
 import AWS from 'aws-sdk';
-import { getUser } from '../../../../utils/Utils.js';
+// import { getUser } from '../../../../utils/Utils.js';
 
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
@@ -36,6 +36,40 @@ AWS.config.update({
 
 const Hero = () => {
   const { user } = useContext(UserContext);
+  // console.log(user.username);
+  // console.log(user.school);
+  const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+
+  const params = {
+    TableName: 'users',
+    Key: {
+      username: { S: user.username },
+      school: { S: user.school },
+    },
+    UpdateExpression: 'SET linkedin = :val1',
+    ExpressionAttributeValues: {
+      ':val1': { S: 'www.linkedin.com' },
+    },
+  };
+
+  // ddb.updateItem(params, function (err, data) {
+  //   if (err) {
+  //     console.log('Error', err);
+  //   } else {
+  //     console.log('Success', data);
+  //   }
+  // });
+
+  const initialValues = {
+    instagram: '',
+    twitter: '',
+    linkedin: '',
+    bio: '',
+  };
+
+  const onSubmit = () => {
+    console.log('submit');
+  };
 
   return (
     <div>
@@ -45,7 +79,7 @@ const Hero = () => {
         align={'center'}
         marginBottom={4}
       >
-        Welcome to the Surfa Circle
+        Welcome to the Surfa Circle (Beta)
       </Typography>
       <Typography
         marginTop={2}
@@ -57,8 +91,10 @@ const Hero = () => {
       </Typography>
       {user.verified ? (
         <Typography variant="body2" marginBottom={2}>
-          Welcome to the Surfa Circle! Hit the Save Changes button to submit any
-          updates to your profile.{' '}
+          Welcome to the Surfa Circle! Please note some features are still in
+          development and may have bugs (email us at help@surfaclub.com if you
+          spot anything). Hit the Save Changes button to submit any updates to
+          your profile.{' '}
         </Typography>
       ) : (
         <Typography variant="body2" marginBottom={2}>
@@ -107,7 +143,7 @@ const Hero = () => {
                     ) : (
                       <Avatar
                         marginBottom={2}
-                        src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
                         sx={{
                           width: '20px',
                           height: '20px',
@@ -139,7 +175,7 @@ const Hero = () => {
                   ) : (
                     <Avatar
                       marginBottom={2}
-                      src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png"
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
                       sx={{
                         width: '20px',
                         height: '20px',
