@@ -31,6 +31,7 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
   } else {
     mock = data.Items;
     // You can now use the 'items' variable to access the table data
+    console.log(data.Items);
   }
 });
 
@@ -46,16 +47,19 @@ const Jobs = () => {
           Host Listing
         </Typography>
         <Box>
-          <Typography variant={'h6'} color={'text.secondary'}>
-            Here are a list of hosts. Filter by school and reach out to them via
-            email, Instagram, Twitter, or LinkedIn!{' '}
+          <Typography variant={'body1'} color={'text.secondary'}>
+            Here are a list of active hosts. Hosts who toggle their availability
+            are shown here. Coming Soon: Filter by school and reach out to them
+            via email, Instagram, Twitter, or LinkedIn!{' '}
           </Typography>
         </Box>
       </Box>
       <Grid container spacing={4}>
         {mock.map((item) => (
           <>
-            {item.hosting ? (
+            {console.log(item.firstName.S)}
+            {/* {console.log(item.hosting.BOOL)} */}
+            {item.hosting.BOOL ? (
               <Grid
                 item
                 xs={12}
@@ -85,13 +89,6 @@ const Jobs = () => {
                     // data-aos-duration={600}
                     flexDirection={'column'}
                     display={'flex'}
-                    sx={
-                      {
-                        // '&:hover': {
-                        // borderRight: `${theme.spacing(1 / 2)} solid ${item.color}`,
-                        // },
-                      }
-                    }
                   >
                     <CardContent
                       sx={{
@@ -100,20 +97,6 @@ const Jobs = () => {
                         alignItems: 'center',
                       }}
                     >
-                      {/* <Box
-                    padding={1 / 2}
-                    marginBottom={2}
-                    bgcolor={item.color}
-                    borderRadius={2}
-                  >
-                    <Typography
-                      variant={'caption'}
-                      align={'center'}
-                      sx={{ color: theme.palette.common.white }}
-                    >
-                      {item.title}
-                    </Typography>
-                  </Box> */}
                       <Avatar
                         marginBottom={4}
                         variant={'dot'}

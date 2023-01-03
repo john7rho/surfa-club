@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Switch from '@mui/material/Switch';
 
 // import shadows from '@mui/material/styles/shadows';
 // import * as yup from 'yup';
@@ -48,7 +49,7 @@ const Hero = () => {
   const [linkedin, setLinkedin] = useState(null);
   const [bio, setBio] = useState(null);
   const [image, setImage] = useState(null);
-  const [hosting, setHosting] = useState(false);
+  const [hosting, setHosting] = useState(null); // this is just a flag, find a better way to do this
 
   const handleChangeInstagram = (event) => {
     setInstagram(event.target.value);
@@ -64,6 +65,56 @@ const Hero = () => {
 
   const handleChangeBio = (event) => {
     setBio(event.target.value);
+  };
+
+  const handleChangeHosting = async () => {
+    if (hosting == null) {
+      const params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET hosting = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { BOOL: !user.hosting },
+        },
+      };
+
+      await ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+          setHosting(!user.hosting);
+          console.log('truth ' + !user.hosting);
+          console.log('flag ' + hosting);
+        }
+      });
+    } else {
+      const params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET hosting = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { BOOL: !hosting },
+        },
+      };
+
+      await ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+          setHosting(!hosting);
+          console.log('truth ' + user.hosting);
+          console.log('flag ' + hosting);
+        }
+      });
+    }
   };
 
   const handleSubmit = (event) => {
@@ -186,14 +237,25 @@ const Hero = () => {
         Account Details
       </Typography>
       {user.verified ? (
-        <Typography variant="body2" marginBottom={2}>
-          Welcome to the Surfa Circle! Please note some features are still in
-          development and may have bugs (email us at help@surfaclub.com if you
-          spot anything). Hit the Save Changes button to submit any updates to
-          your profile.{' '}
-        </Typography>
+        <>
+          <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
+            Welcome to the Surfa Circle! Please note some features are still in
+            development and may have bugs (email us at help@surfaclub.com if you
+            spot anything). Hit the Save Changes button to submit any updates to
+            your profile.{' '}
+          </Typography>
+          <Typography
+            variant="body1"
+            color={'text.secondary'}
+            marginBottom={2}
+            fontWeight={'bold'}
+          >
+            For link updates, please input the full URL with the HTTPS in the
+            beginning.{' '}
+          </Typography>
+        </>
       ) : (
-        <Typography variant="body2" marginBottom={2}>
+        <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
           Please verify your account to access the full features of the Surfa
           Circle. Upload a photo of your student ID and hit the Save Changes
           button to be verified.
@@ -258,7 +320,7 @@ const Hero = () => {
                   >
                     Hosting Status{' '}
                   </Typography>
-                  {user.hosting ? (
+                  {hosting == true ? (
                     <Avatar
                       marginLeft={2}
                       marginBottom={2}
@@ -268,7 +330,7 @@ const Hero = () => {
                         height: '20px',
                       }}
                     ></Avatar>
-                  ) : (
+                  ) : hosting == false ? (
                     <Avatar
                       marginBottom={2}
                       src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
@@ -278,7 +340,31 @@ const Hero = () => {
                         marginLeft: '2px',
                       }}
                     ></Avatar>
-                  )}
+                  ) : hosting == null ? (
+                    <>
+                      {user.hosting == true ? (
+                        <Avatar
+                          marginLeft={2}
+                          marginBottom={2}
+                          src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png"
+                          sx={{
+                            width: '20px',
+                            height: '20px',
+                          }}
+                        ></Avatar>
+                      ) : (
+                        <Avatar
+                          marginBottom={2}
+                          src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
+                          sx={{
+                            width: '20px',
+                            height: '20px',
+                            marginLeft: '2px',
+                          }}
+                        ></Avatar>
+                      )}
+                    </>
+                  ) : null}
                 </Grid>
                 <Grid item xs={4}>
                   <Typography
@@ -357,8 +443,9 @@ const Hero = () => {
                     justifyContent="flex-right"
                     variant="outlined"
                     style={{ color: 'grey', backgroundColor: 'white' }}
+                    onClick={handleChangeHosting}
                   >
-                    Toggle Availability
+                    Toggle Hosting
                   </Button>
                 </Grid>
                 <Grid
