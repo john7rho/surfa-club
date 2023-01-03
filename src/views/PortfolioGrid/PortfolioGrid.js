@@ -6,12 +6,16 @@ import { Hero, Jobs } from './components';
 import { getUser } from '../../utils/Utils.js';
 
 const PortfolioGrid = () => {
-  const email = localStorage.getItem('username');
+  const pastUser = localStorage.getItem('username');
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUser = async () => {
-      let currUser = await getUser({ username: email });
+      if (pastUser) {
+        const currUser = await getUser({ username: pastUser });
+      } else {
+        const currUser = await getUser({ username: user.username });
+      }
       setUser(currUser);
     };
     fetchUser;
