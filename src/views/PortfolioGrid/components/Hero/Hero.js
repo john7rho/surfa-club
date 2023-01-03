@@ -83,12 +83,12 @@ const Hero = () => {
 
       await ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
           setHosting(!user.hosting);
-          console.log('truth ' + !user.hosting);
-          console.log('flag ' + hosting);
+          // console.log('truth ' + !user.hosting);
+          // console.log('flag ' + hosting);
         }
       });
     } else {
@@ -106,12 +106,12 @@ const Hero = () => {
 
       await ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
           setHosting(!hosting);
-          console.log('truth ' + user.hosting);
-          console.log('flag ' + hosting);
+          // console.log('truth ' + user.hosting);
+          // console.log('flag ' + hosting);
         }
       });
     }
@@ -137,9 +137,9 @@ const Hero = () => {
 
       ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
         }
       });
     }
@@ -160,9 +160,9 @@ const Hero = () => {
 
       ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
         }
       });
     }
@@ -183,9 +183,9 @@ const Hero = () => {
 
       ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
         }
       });
     }
@@ -206,9 +206,9 @@ const Hero = () => {
 
       ddb.updateItem(params, function (err, data) {
         if (err) {
-          console.log('Error', err);
+          // console.log('Error', err);
         } else {
-          console.log('Success', data);
+          // console.log('Success', data);
         }
       });
     }

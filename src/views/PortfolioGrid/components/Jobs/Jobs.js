@@ -27,18 +27,18 @@ let mock = [];
 dynamoDb.scan({ TableName: 'users' }, (err, data) => {
   if (err) {
     console.error(err);
-    console.log('unable to scan table. Error JSON');
+    // console.log('unable to scan table. Error JSON');
   } else {
     mock = data.Items;
     // You can now use the 'items' variable to access the table data
-    console.log(data.Items);
+    // console.log(data.Items);
   }
 });
 
 const Jobs = () => {
   const theme = useTheme();
   const { user } = useContext(UserContext);
-  console.log(user.hosting);
+  // console.log(user.hosting);
 
   return (
     <Box>
@@ -57,7 +57,7 @@ const Jobs = () => {
       <Grid container spacing={4}>
         {mock.map((item) => (
           <>
-            {console.log(item.firstName.S)}
+            {/* {console.log(item.firstName.S)} */}
             {/* {console.log(item.hosting.BOOL)} */}
             {item.hosting.BOOL ? (
               <Grid
