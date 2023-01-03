@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { UserContext } from '../../../../contexts/UserContext';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,6 +36,8 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
 
 const Jobs = () => {
   const theme = useTheme();
+  const { user } = useContext(UserContext);
+  console.log(user.hosting);
 
   return (
     <Box>
@@ -51,51 +54,53 @@ const Jobs = () => {
       </Box>
       <Grid container spacing={4}>
         {mock.map((item) => (
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            md={3}
-            key={item.firstName.S + item.lastName.S}
-          >
-            <Box
-              display={'block'}
-              width={1}
-              height={1}
-              sx={{
-                textDecoration: 'none',
-                transition: 'all .2s ease-in-out',
-                '&:hover': {
-                  transform: `translateY(-${theme.spacing(1 / 2)})`,
-                },
-              }}
-            >
-              <Box
-                component={Card}
-                width={1}
-                height={1}
-                // data-aos={'fade-up'}
-                // data-aos-delay={i * 100}
-                // data-aos-offset={100}
-                // data-aos-duration={600}
-                flexDirection={'column'}
-                display={'flex'}
-                sx={
-                  {
-                    // '&:hover': {
-                    // borderRight: `${theme.spacing(1 / 2)} solid ${item.color}`,
-                    // },
-                  }
-                }
+          <>
+            {item.hosting ? (
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                md={3}
+                key={item.firstName.S + item.lastName.S}
               >
-                <CardContent
+                <Box
+                  display={'block'}
+                  width={1}
+                  height={1}
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    textDecoration: 'none',
+                    transition: 'all .2s ease-in-out',
+                    '&:hover': {
+                      transform: `translateY(-${theme.spacing(1 / 2)})`,
+                    },
                   }}
                 >
-                  {/* <Box
+                  <Box
+                    component={Card}
+                    width={1}
+                    height={1}
+                    // data-aos={'fade-up'}
+                    // data-aos-delay={i * 100}
+                    // data-aos-offset={100}
+                    // data-aos-duration={600}
+                    flexDirection={'column'}
+                    display={'flex'}
+                    sx={
+                      {
+                        // '&:hover': {
+                        // borderRight: `${theme.spacing(1 / 2)} solid ${item.color}`,
+                        // },
+                      }
+                    }
+                  >
+                    <CardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                      }}
+                    >
+                      {/* <Box
                     padding={1 / 2}
                     marginBottom={2}
                     bgcolor={item.color}
@@ -109,119 +114,108 @@ const Jobs = () => {
                       {item.title}
                     </Typography>
                   </Box> */}
-                  <Avatar
-                    marginBottom={4}
-                    variant={'dot'}
-                    sx={{
-                      borderRadius: '50%',
-                      width: 80,
-                      height: 80,
-                    }}
-                    src={item.image.S}
-                  />
-                  <Typography
-                    marginTop={2}
-                    variant={'h6'}
-                    gutterBottom
-                    sx={{ fontWeight: 500 }}
-                  >
-                    {item.firstName.S} {item.lastName.S}
-                  </Typography>
-                  <Box display={'flex'} alignItems={'center'}>
-                    <Box
-                      component={'svg'}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      width={16}
-                      height={16}
-                      marginRight={1}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      <Avatar
+                        marginBottom={4}
+                        variant={'dot'}
+                        sx={{
+                          borderRadius: '50%',
+                          width: 80,
+                          height: 80,
+                        }}
+                        src={item.image.S}
                       />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </Box>
-                    <Typography variant={'subtitle1'} color="text.secondary">
-                      {item.school.S}
-                    </Typography>
+                      <Typography
+                        marginTop={2}
+                        variant={'h6'}
+                        gutterBottom
+                        sx={{ fontWeight: 500 }}
+                      >
+                        {item.firstName.S} {item.lastName.S}
+                      </Typography>
+                      <Box display={'flex'} alignItems={'center'}>
+                        <Box
+                          component={'svg'}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          width={16}
+                          height={16}
+                          marginRight={1}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </Box>
+                        <Typography
+                          variant={'subtitle1'}
+                          color="text.secondary"
+                        >
+                          {item.school.S}
+                        </Typography>
+                      </Box>
+                      <Box marginTop={2}>
+                        <Typography
+                          variant={'subtitle2'}
+                          color="text.secondary"
+                        >
+                          {item.bio.S}
+                        </Typography>
+                      </Box>
+                      <br />
+                      <Stack direction="row" spacing={2}>
+                        <Button
+                          target="_blank"
+                          href={'mailto:' + item.username.S}
+                        >
+                          Email
+                        </Button>
+                        {item.linkedin.S ? (
+                          <a href={item.linkedin.S} target="_blank">
+                            <SocialIcon
+                              style={{ height: 40, width: 40 }}
+                              url={item.linkedin.S}
+                            />
+                          </a>
+                        ) : (
+                          ''
+                        )}
+                        {item.twitter.S ? (
+                          <a href={item.twitter.S} target="_blank">
+                            <SocialIcon
+                              style={{ height: 40, width: 40 }}
+                              url={item.twitter.S}
+                            />
+                          </a>
+                        ) : (
+                          ''
+                        )}
+                        {item.instagram.S ? (
+                          <a href={item.instagram.S} target="_blank">
+                            <SocialIcon
+                              style={{ height: 40, width: 40 }}
+                              url={item.instagram.S}
+                            />
+                          </a>
+                        ) : (
+                          ''
+                        )}
+                      </Stack>
+                    </CardContent>
                   </Box>
-                  <Box marginTop={2}>
-                    <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.bio.S}
-                    </Typography>
-                  </Box>
-                  {/* <Box display={'flex'} alignItems={'center'}>
-                    <Box
-                      component={'svg'}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      width={16}
-                      height={16}
-                      marginRight={1}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </Box> */}
-                  {/* <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.type}
-                    </Typography> */}
-                  {/* </Box> */}
-                  <br />
-                  <Stack direction="row" spacing={2}>
-                    <Button target="_blank" href={'mailto:' + item.username.S}>
-                      Email
-                    </Button>
-                    {item.linkedin.S ? (
-                      <a href={item.linkedin.S} target="_blank">
-                        <SocialIcon
-                          style={{ height: 40, width: 40 }}
-                          url={item.linkedin.S}
-                        />
-                      </a>
-                    ) : (
-                      ''
-                    )}
-                    {item.twitter.S ? (
-                      <a href={item.twitter.S} target="_blank">
-                        <SocialIcon
-                          style={{ height: 40, width: 40 }}
-                          url={item.twitter.S}
-                        />
-                      </a>
-                    ) : (
-                      ''
-                    )}
-                    {item.instagram.S ? (
-                      <a href={item.instagram.S} target="_blank">
-                        <SocialIcon
-                          style={{ height: 40, width: 40 }}
-                          url={item.instagram.S}
-                        />
-                      </a>
-                    ) : (
-                      ''
-                    )}
-                  </Stack>
-                </CardContent>
-              </Box>
-            </Box>
-          </Grid>
+                </Box>
+              </Grid>
+            ) : null}
+          </>
         ))}
         {/* <Grid item container justifyContent={'center'} xs={12}>
           <Button
