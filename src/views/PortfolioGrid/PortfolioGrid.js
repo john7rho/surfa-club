@@ -13,10 +13,11 @@ const PortfolioGrid = () => {
     const fetchUser = async () => {
       if (pastUser) {
         const currUser = await getUser({ username: pastUser });
+        setUser(currUser);
       } else {
         const currUser = await getUser({ username: user.username });
+        setUser(currUser);
       }
-      setUser(currUser);
     };
     fetchUser;
   }, []);
