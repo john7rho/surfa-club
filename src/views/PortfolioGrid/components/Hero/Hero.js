@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../../../contexts/UserContext';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -33,58 +34,8 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-// const dynamoDb = new AWS.DynamoDB();
-
-// let mock = [];
-
-// Call the scan method to retrieve all items from the table
-// dynamoDb.scan({ TableName: 'users' }, (err, data) => {
-//   if (err) {
-//     console.error(err);
-//     console.log('unable to scan table. Error JSON');
-//   } else {
-//     mock = data.Items;
-//     // You can now use the 'items' variable to access the table data
-//     console.log(mock);
-//     console.log('successfully scanned table for hero.js.');
-//   }
-// });
-
-// const [value, setValue] = useState('');
-
-// useEffect(() => {
-//   const storedValue = localStorage.getItem('username');
-//   if (storedValue) {
-//     setValue(storedValue);
-//   }
-// }, []);
-
-// Set up the parameters for the query
-
 const Hero = () => {
-  // const [value, setValue] = useState('');
-  const [user, setUser] = useState('');
-
-  const email = localStorage.getItem('username');
-  // console.log(email);
-  // console.log(getUser(localStorage.getItem('username')));
-
-  const returnUser = async () => {
-    let temp = await getUser({ username: email });
-    //console.log(temp);
-    //console.log(temp.image);
-    setUser(temp);
-  };
-
-  returnUser();
-
-  // useEffect(() => {
-  //   const storedValue = localStorage.getItem('username');
-  //   if (storedValue) {
-  //     setValue(storedValue);
-  //   }
-  //   console.log(value);
-  // }, []);
+  const { user } = useContext(UserContext);
 
   return (
     <div>

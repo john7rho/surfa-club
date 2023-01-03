@@ -32,8 +32,6 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
   } else {
     mock = data.Items;
     // You can now use the 'items' variable to access the table data
-    console.log(mock);
-    console.log('successfully scanned table.');
   }
 });
 
