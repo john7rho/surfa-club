@@ -50,49 +50,29 @@ const Hero = () => {
   const [image, setImage] = useState(null);
   const [hosting, setHosting] = useState(false);
 
-  // const params = {
-  //   TableName: 'users',
-  //   Key: {
-  //     username: { S: user.username },
-  //     school: { S: user.school },
-  //   },
-  //   UpdateExpression: 'SET linkedin = :val1',
-  //   ExpressionAttributeValues: {
-  //     ':val1': { S: 'www.linkedin.com' },
-  //   },
-  // };
-
-  // ddb.updateItem(params, function (err, data) {
-  //   if (err) {
-  //     console.log('Error', err);
-  //   } else {
-  //     console.log('Success', data);
-  //   }
-  // });
-
-  // const initialValues = {
-  //   instagram: null,
-  //   // twitter: null,
-  //   // linkedin: null,
-  //   // bio: null,
-  //   // image: null,
-  //   // hosting: false,
-  // };
-
-  const handleChange = (event) => {
+  const handleChangeInstagram = (event) => {
     setInstagram(event.target.value);
-    console.log(instagram);
+  };
+
+  const handleChangeTwitter = (event) => {
+    setTwitter(event.target.value);
+  };
+
+  const handleChangeLinkedin = (event) => {
+    setLinkedin(event.target.value);
+  };
+
+  const handleChangeBio = (event) => {
+    setBio(event.target.value);
   };
 
   const handleSubmit = (event) => {
     // event.preventDefault();
-    // const keys = Object.keys(initialValues);
-    // for (let i = 0; i < keys.length; i++) {
-    //   console.log(keys[i]);
-    // }
+    let params = [];
 
+    // instagram
     if (instagram) {
-      const params = {
+      params = {
         TableName: 'users',
         Key: {
           username: { S: user.username },
@@ -112,6 +92,79 @@ const Hero = () => {
         }
       });
     }
+
+    // twitter
+    if (twitter) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET twitter = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: twitter },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+        }
+      });
+    }
+
+    // linkedin
+    if (linkedin) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET linkedin = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: linkedin },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+        }
+      });
+    }
+
+    // bio
+    if (bio) {
+      params = {
+        TableName: 'users',
+        Key: {
+          username: { S: user.username },
+          school: { S: user.school },
+        },
+        UpdateExpression: 'SET bio = :val1',
+        ExpressionAttributeValues: {
+          ':val1': { S: bio },
+        },
+      };
+
+      ddb.updateItem(params, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+        }
+      });
+    }
+
+    // image
+
+    // hosting
   };
 
   return (
@@ -256,17 +309,32 @@ const Hero = () => {
                     fullWidth
                     label="Change Instagram URL"
                     value={instagram}
-                    onChange={handleChange}
+                    onChange={handleChangeInstagram}
                   ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change Twitter URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change Twitter URL"
+                    value={twitter}
+                    onChange={handleChangeTwitter}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField fullWidth label="Change LinkedIn URL"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change LinkedIn URL"
+                    value={linkedin}
+                    onChange={handleChangeLinkedin}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField fullWidth label="Change bio"></TextField>
+                  <TextField
+                    fullWidth
+                    label="Change bio"
+                    value={bio}
+                    onChange={handleChangeBio}
+                  ></TextField>
                 </Grid>
                 <Grid item xs={4}>
                   <Button
