@@ -145,7 +145,7 @@ const Hero = () => {
                       <Avatar
                         marginBottom={2}
                         marginLeft={2}
-                        src="https://www.freeiconspng.com/thumbs/checkmark-png/checkmark-png-5.png"
+                        src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png"
                         sx={{
                           width: '20px',
                           height: '20px',
@@ -177,8 +177,9 @@ const Hero = () => {
                   </Typography>
                   {user.hosting ? (
                     <Avatar
+                      marginLeft={2}
                       marginBottom={2}
-                      src="https://www.freeiconspng.com/thumbs/checkmark-png/checkmark-png-5.png"
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png"
                       sx={{
                         width: '20px',
                         height: '20px',
