@@ -53,7 +53,13 @@ const Jobs = () => {
       </Box>
       <Grid container spacing={4}>
         {mock.map((item) => (
-          <Grid item xs={12} sm={4} md={3} key={item.firstName.S}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={3}
+            key={item.firstName.S + item.lastName.S}
+          >
             <Box
               display={'block'}
               width={1}
