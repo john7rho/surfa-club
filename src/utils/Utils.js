@@ -4,8 +4,8 @@ import axios from 'axios';
 const AWS = require('aws-sdk');
 
 const s3 = new AWS.S3({
-  accessKeyId: process.env.REACT_APP_S3_ACCESS_KEY,
-  secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
+  accessKeyId: 'AKIASYSAF2CEXV7QGMAW',
+  secretAccessKey: '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',
 });
 
 /**
@@ -40,9 +40,9 @@ export const fileUpload = async (file) => {
     },
     (err, data) => {
       if (err) {
-        // console.log(err);
+        console.log(err);
       } else {
-        // console.log(data);
+        console.log(data);
       }
     },
   );

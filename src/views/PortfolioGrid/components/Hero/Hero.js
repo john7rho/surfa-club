@@ -50,9 +50,11 @@ const Hero = () => {
   const [bio, setBio] = useState(null);
   const [image, setImage] = useState(null);
   const [hosting, setHosting] = useState(null); // this is just a flag, find a better way to do this
+  const [file, setFile] = useState(null); // student id
 
-  const handleFileChange = (event) => {};
-  const handleFileUpload = () => {};
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   const handleChangeInstagram = (event) => {
     setInstagram(event.target.value);
@@ -120,7 +122,7 @@ const Hero = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // event.preventDefault();
     let params = [];
 
@@ -217,7 +219,11 @@ const Hero = () => {
     }
 
     // image
-
+    if (file) {
+      console.log('uploading file', file);
+      await fileUpload(file);
+      console.log('complete');
+    }
     // hosting
   };
 
@@ -375,8 +381,9 @@ const Hero = () => {
                     marginBottom={1}
                     sx={{ fontWeight: 'bold', color: 'grey', float: 'left' }}
                   >
-                    Student ID
+                    Student ID <br /> {file ? file.name : ''}
                   </Typography>
+
                   <IconButton
                     color="primary"
                     aria-label="upload picture"
@@ -388,7 +395,6 @@ const Hero = () => {
                       height: '20px',
                       marginLeft: '2px',
                     }}
-                    onClick={handleFileUpload}
                   >
                     <input
                       hidden
