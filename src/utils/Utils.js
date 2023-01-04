@@ -159,38 +159,3 @@ export const send_email = async (email) => {
 
   return success;
 };
-
-export const createSocket = (wss) => {
-  const socket = new WebSocket(wss);
-
-  socket.onopen = () => {
-    console.log('open connection');
-  };
-
-  socket.onclose = () => {
-    console.log('close connection');
-  };
-
-  socket.onmessage = (event) => {
-    console.log(event);
-  };
-
-  socket.onerror = (error) => {
-    console.log(error);
-  };
-
-  return socket;
-};
-
-/**
- * broadcast message to all users in connections table.
- */
-export const sendMsg = (socket, message, receiver) => {
-  const payload = JSON.stringify({
-    action: 'sendmessage',
-    message: message,
-    receiver: receiver,
-  });
-
-  socket.send(payload);
-};
