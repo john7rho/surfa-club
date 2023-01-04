@@ -47,7 +47,6 @@ AWS.config.update({
 
 const Hero = () => {
   const { user } = useContext(UserContext);
-
   const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
   const [instagram, setInstagram] = useState(null);
