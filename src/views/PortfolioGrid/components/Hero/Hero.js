@@ -42,8 +42,8 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-console.log(process.env.REACT_APP_AWS_ACCESS_KEY);
-console.log(process.env.REACT_APP_AWS_SECRET_KEY);
+// console.log(process.env.REACT_APP_AWS_ACCESS_KEY);
+// console.log(process.env.REACT_APP_AWS_SECRET_KEY);
 
 const Hero = () => {
   const { user } = useContext(UserContext);
