@@ -31,8 +31,37 @@ const Pricing = () => {
 
       socket.send(payload);
 
-      setConvo((prev) => ({ ...prev, sent: [...prev.sent, message] }));
+      setConvo((prev) => ({
+        ...prev,
+        sent: [...prev.sent, [message, Date.now()]],
+      }));
     }
+  };
+
+  const sortConvo = ({ sent, received }) => {
+    let convo = [];
+    while (sent.length > 0 && received.length > 0) {
+      const sentLast = sent[sent.length - 1];
+      const receivedLast = received[received.length - 1];
+
+      if (sentLast[1] > receivedLast[1]) {
+        const message = sent.pop();
+        convo.push(message[0]);
+      } else {
+        const message = received.pop();
+        convo.push(message[0]);
+      }
+    }
+
+    if (sent.length > 0) {
+      convo.push(...sent);
+    }
+
+    if (received.length > 0) {
+      convo.push(...received);
+    }
+
+    return convo;
   };
 
   useEffect(() => {
@@ -41,6 +70,7 @@ const Pricing = () => {
     );
     ws.onopen = () => {
       console.log('connection opened');
+      console.log(user);
     };
 
     ws.onclose = () => {
@@ -48,10 +78,13 @@ const Pricing = () => {
     };
 
     ws.onmessage = (event) => {
-      if (event.data.receiver == user) {
+      const receiver = JSON.parse(event.data).receiver;
+      const message = JSON.parse(event.data).message;
+
+      if (receiver == user.username) {
         setConvo((prev) => ({
           ...prev,
-          received: [...prev.received, event.data.message],
+          received: [...prev.received, [message, Date.now()]],
         }));
       }
     };
@@ -67,7 +100,6 @@ const Pricing = () => {
     };
   }, []);
 
-  console.log(user, convo);
   return (
     <Main>
       <Box>
@@ -85,6 +117,11 @@ const Pricing = () => {
           onChange={(event) => handleMessageChange(event)}
         />
         <Button onClick={handleMessageSend}>Send</Button>
+      </Box>
+      <Box>
+        {sortConvo(convo).map((msg, i) => (
+          <li key={i}>{msg}</li>
+        ))}
       </Box>
     </Main>
   );

@@ -15,7 +15,6 @@ const App = () => {
   });
 
   const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-
   return (
     <Page>
       <UserContext.Provider value={providerValue}>

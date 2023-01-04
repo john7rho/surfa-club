@@ -45,11 +45,7 @@ const Form = () => {
     if (authorized === true) {
       setAuth(true);
       const user = await getUser({ username: email });
-      const curr_user = {
-        username: user.username,
-        credits: user.credis,
-      };
-      setUser(curr_user);
+      setUser(user);
       localStorage.setItem('username', user.username);
       navigate('/portfolio-grid');
     } else {
