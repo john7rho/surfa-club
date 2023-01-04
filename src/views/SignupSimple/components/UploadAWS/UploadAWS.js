@@ -37,8 +37,8 @@ const UploadAWS = () => {
     const fileType = file.type;
 
     const s3 = new S3({
-      accessKeyId: process.env.ACCESS_KEY_ID,
-      secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
       region: 'us-east-1',
       //   TODO: hide these later
     });
