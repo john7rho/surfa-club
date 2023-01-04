@@ -13,7 +13,6 @@ import {
   getObjectUrl,
   updateUser,
 } from '../../../../utils/Utils.js';
-import Switch from '@mui/material/Switch';
 
 // import shadows from '@mui/material/styles/shadows';
 // import * as yup from 'yup';
@@ -38,8 +37,8 @@ const re =
 // });
 
 AWS.config.update({
-  accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
-  secretAccessKey: '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',
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
   region: 'us-east-1',
 });
 

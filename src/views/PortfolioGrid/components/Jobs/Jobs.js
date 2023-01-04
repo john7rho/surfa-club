@@ -14,8 +14,8 @@ import Avatar from '@mui/material/Avatar';
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-  accessKeyId: 'AKIASYSAF2CE6ZODFN6N',
-  secretAccessKey: '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',
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
   region: 'us-east-1',
 });
 

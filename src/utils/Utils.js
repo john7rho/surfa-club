@@ -4,8 +4,9 @@ import axios from 'axios';
 const AWS = require('aws-sdk');
 
 const s3 = new AWS.S3({
-  accessKeyId: 'AKIASYSAF2CEXV7QGMAW',
-  secretAccessKey: '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',
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
+  region: 'us-east-1',
 });
 
 /**
