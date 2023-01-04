@@ -37,3 +37,4 @@ yarn-error.log*
 .eslintcache
 .vscode
 .env
+.env
