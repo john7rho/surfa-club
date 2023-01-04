@@ -8,7 +8,11 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { fileUpload } from '../../../../utils/Utils.js';
+import {
+  fileUpload,
+  getObjectUrl,
+  updateUser,
+} from '../../../../utils/Utils.js';
 import Switch from '@mui/material/Switch';
 
 // import shadows from '@mui/material/styles/shadows';
@@ -220,9 +224,13 @@ const Hero = () => {
 
     // image
     if (file) {
-      console.log('uploading file', file);
       await fileUpload(file);
-      console.log('complete');
+      const imageUrl = await getObjectUrl(file.name);
+      updateUser({
+        username: user.username,
+        attribute: 'studentId',
+        value: imageUrl,
+      });
     }
     // hosting
   };

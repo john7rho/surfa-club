@@ -12,20 +12,21 @@ const s3 = new AWS.S3({
  * gets object from s3 bucket at specified path
  */
 export const getObjectUrl = async (path) => {
-  s3.getSignedUrl(
-    'getObject',
-    {
-      Bucket: 'surfaclub',
-      Key: path,
-    },
-    (err, url) => {
-      if (err) {
-        throw Error;
-      } else {
-        return url;
-      }
-    },
-  );
+  return new Promise((resolve, reject) => {
+    s3.getSignedUrl(
+      'getObject',
+      {
+        Bucket: 'surfaclub',
+        Key: path,
+      },
+      (err, url) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(url);
+      },
+    );
+  });
 };
 
 /**
@@ -113,10 +114,15 @@ export const getUser = async ({ username }) => {
   return user;
 };
 
-export const updateProfile = async ({ username }) => {
+export const updateUser = async ({ username, attribute, value }) => {
   const endpoint =
     'https://70tigy27h2.execute-api.us-east-1.amazonaws.com/prod/user';
   const searchParams = new URLSearchParams();
+  searchParams.set('username', username);
+  searchParams.set('attribute', attribute);
+  searchParams.set('value', value);
+
+  axios.post(`${endpoint}?${searchParams}`);
 };
 
 /**
