@@ -21,13 +21,13 @@ const PortfolioGrid = () => {
 
     fetchUser();
   }, []);
+
   return (
     <Main>
       <Container>
         <Hero />
       </Container>
       <Container>{user.verified ? <Jobs /> : null}</Container>
-      <button onClick={() => navigate('/pricing')}>message</button>
     </Main>
   );
 };
