@@ -123,7 +123,7 @@ const Hero = () => {
               }}
             >
               <Typography variant="h6" fontWeight={700}>
-                Sign up!
+                Browse hosts
               </Typography>
             </Box>
           </Box>

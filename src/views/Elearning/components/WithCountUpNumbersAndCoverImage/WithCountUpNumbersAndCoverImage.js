@@ -44,7 +44,8 @@ const WithCountUpNumbersAndCoverImage = () => {
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
               Become a focal point of a growing community of changemakers at
-              your school. Get access to our network of partners and mentors.
+              your school as one of the lead hosts. Plus, get access to our
+              growing network of partners and mentors.
             </Typography>
           </Box>
           <Grid container spacing={2}>
