@@ -50,7 +50,24 @@ const Pricing = () => {
     setReceiver(event.target.value);
   };
 
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
+    console.log(people);
+    if (!people.includes(receiver)) {
+      setPeople((prev) => [...prev, receiver]);
+    }
+
+    const currConvo = await getUser({
+      username: user.username
+        ? user.username
+        : window.localStorage.getItem('username'),
+    }).then((res) => JSON.parse(res['conversation']));
+
+    if (receiver in currConvo) {
+      setConvo(currConvo[receiver]);
+    } else {
+      setConvo({ sent: [], received: [] });
+    }
+
     if (socket !== null) {
       const sender = user.username
         ? user.username
