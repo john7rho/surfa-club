@@ -30,7 +30,7 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
     // console.log('unable to scan table. Error JSON');
   } else {
     mock = data.Items;
-    // You can now use the 'items' variable to access the table data
+    // You can now use the 'items' variable to access the table data.
     // console.log(data.Items);
   }
 });
