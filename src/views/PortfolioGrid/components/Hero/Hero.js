@@ -17,6 +17,8 @@ import {
 // import shadows from '@mui/material/styles/shadows';
 // import * as yup from 'yup';
 import AWS from 'aws-sdk';
+import { S3 } from 'aws-sdk';
+
 // import { useFormik } from 'formik';
 
 // import { getUser } from '../../../../utils/Utils.js';
@@ -53,9 +55,13 @@ const Hero = () => {
   const [twitter, setTwitter] = useState(null);
   const [linkedin, setLinkedin] = useState(null);
   const [bio, setBio] = useState(null);
-  const [image, setImage] = useState(null);
   const [hosting, setHosting] = useState(null); // this is just a flag, find a better way to do this
   const [file, setFile] = useState(null); // student id
+
+  // temporary code TODO: fix this and the other profile picture code
+  const [image, setImage] = useState(null); // profile picture link
+  const [profile, setProfile] = useState(null); // profile picture file
+  const [error, setError] = useState('Please upload a valid file');
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -127,7 +133,7 @@ const Hero = () => {
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     // event.preventDefault();
     let params = [];
 
@@ -234,6 +240,76 @@ const Hero = () => {
       });
     }
     // hosting
+  };
+
+  // handle profile picture upload --> TODO: refactor this and split the backend and frontend -- temporary solution
+  const handleProfileChange = (e) => {
+    console.log('EEEEEEE');
+    setProfile(e.target.files[0]);
+    console.log('profile: ' + profile);
+    // handleSubmit(e);
+  };
+
+  const handleProfileSubmit = (e) => {
+    e.preventDefault();
+    if (!profile) setError('Please select a file');
+
+    const fileName = profile.name.replace(' ', '_');
+    const fileType = profile.type;
+
+    const s3 = new S3({
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+      region: 'us-east-1',
+    });
+
+    const params = {
+      Bucket: 'surfaprofilepicture',
+      Key: fileName,
+      ContentType: fileType,
+      ACL: 'public-read',
+      Body: profile,
+    };
+
+    s3.upload(params, (err, data) => {
+      if (err) {
+        console.log(err);
+        setError(err.message);
+      } else {
+        console.log(data);
+      }
+    });
+
+    setError('Uploaded!');
+
+    let params2 = []; // TODO: this is bad practice, reafactor later
+
+    setImage(
+      'https://surfaprofilepicture.s3.amazonaws.com/' +
+        profile?.name.replace(' ', '_'),
+    );
+
+    params2 = {
+      TableName: 'users',
+      Key: {
+        username: { S: user.username },
+        school: { S: user.school },
+      },
+      UpdateExpression: 'SET image = :val1',
+      ExpressionAttributeValues: {
+        ':val1': { S: image },
+      },
+    };
+
+    ddb.updateItem(params2, function (err, data) {
+      if (err) {
+        console.log('Error', err);
+      } else {
+        console.log('Success', data);
+      }
+    });
+
+    return;
   };
 
   return (
@@ -447,14 +523,44 @@ const Hero = () => {
                   ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button
+                  {/* <Button
                     fullWidth
                     justifyContent="flex-right"
                     variant="outlined"
                     style={{ color: 'grey', backgroundColor: 'white' }}
+                    onClick={handleChangePicture}
                   >
                     Change Profile Picture
-                  </Button>
+                    <input
+                      accept="image/*"
+                      type="file"
+                      hidden
+                      onChange={handleProfileChange}
+                    />
+                    {error ? <p>{error}</p> : null}
+                  </Button> */}
+                  <div label={file?.name}>
+                    <Button variant="contained" component="label">
+                      Pick Photo
+                      <input
+                        accept="image/*"
+                        type="file"
+                        hidden
+                        onChange={handleProfileChange}
+                      />
+                    </Button>
+                    {/* <Typography>{file?.name}</Typography> */}
+                    {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
+                    <Button
+                      onClick={handleProfileSubmit}
+                      style={{ marginLeft: '4px', backgroundColor: 'black' }}
+                    >
+                      Click to upload
+                    </Button>
+                    <Typography variant={'body2'}>
+                      {error ? <p style={{ color: 'blue' }}>{error}</p> : null}
+                    </Typography>
+                  </div>
                 </Grid>
                 <Grid
                   item
