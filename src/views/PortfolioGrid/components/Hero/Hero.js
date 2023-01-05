@@ -256,7 +256,10 @@ const Hero = () => {
 
   const handleProfileSubmit = (e) => {
     // e.preventDefault();
-    if (!profile) setError('Please select a file');
+    if (!profile) {
+      setError('Please select a file');
+      return;
+    }
 
     const fileName = profile.name.replace(' ', '_');
     const fileType = profile.type;
