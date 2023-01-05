@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
@@ -37,6 +37,7 @@ const Pricing = () => {
   const [receiver, setReceiver] = useState('');
   const [socket, setSocket] = useState(null);
   const [convo, setConvo] = useState({ received: [], sent: [] });
+  const [people, setPeople] = useState([]);
 
   const { user } = useContext(UserContext);
 
@@ -49,6 +50,12 @@ const Pricing = () => {
   };
 
   const handleMessageSend = () => {
+    if (!people.includes(receiver)) {
+      setPeople((prev) => [...prev, receiver]);
+      //TODO SAVE CONVO
+      setConvo({ received: [], sent: [] });
+    }
+
     if (socket !== null) {
       const payload = JSON.stringify({
         action: 'sendmessage',
@@ -136,8 +143,29 @@ const Pricing = () => {
     <Main>
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
         <Box style={{ flexGrow: 1 }}>
-          {user.username || window.localStorage.getItem('username')}{' '}
-          conversations
+          <Typography variant="h6" style={{ marginLeft: '10px' }}>
+            {user.username || window.localStorage.getItem('username')}{' '}
+            conversations
+          </Typography>
+          {people.map((person) => {
+            return (
+              <Box style={{ border: '1px solid gray', height: '8vh' }}>
+                <Typography
+                  style={{ marginLeft: '10px' }}
+                  variant="h6"
+                  onClick={() => {
+                    if (person !== receiver) {
+                      setReceiver(person);
+                      // TODO save convo
+                      setConvo({ received: [], sent: [] });
+                    }
+                  }}
+                >
+                  {person}
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
 
         <Box style={{ flexGrow: 3 }}>
@@ -147,6 +175,7 @@ const Pricing = () => {
             }}
             style={{ width: '100%' }}
             placeholder="Message User"
+            value={receiver}
             onChange={(event) => handleReceiverChange(event)}
           />
 
