@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
@@ -51,17 +51,17 @@ const Pricing = () => {
   };
 
   const handleMessageSend = () => {
-    if (!people.includes(receiver)) {
-      setPeople((prev) => [...prev, receiver]);
-      //TODO SAVE CONVO
-      setConvo({ received: [], sent: [] });
-    }
-
     if (socket !== null) {
+      const sender = user.username
+        ? user.username
+        : window.localStorage.getItem('username');
+
       const payload = JSON.stringify({
         action: 'sendmessage',
         message: message,
+        sender: sender,
         receiver: receiver,
+        timestamp: Date.now(),
       });
 
       socket.send(payload);
@@ -140,33 +140,27 @@ const Pricing = () => {
     };
   }, []);
 
-  const handleStoreMessage = async () => {
-    let userConvo = await getUser({
-      username: user.username
+  useEffect(() => {
+    const initalizeState = async () => {
+      const username = user.username
         ? user.username
-        : window.localStorage.getItem('username'),
-    }).then((res) => JSON.parse(res['conversation']));
+        : window.localStorage.getItem('username');
 
-    if (userConvo === undefined) {
-      userConvo = {};
-    }
+      const userConvo = await getUser({ username: username }).then((res) =>
+        JSON.parse(res['conversation']),
+      );
 
-    userConvo[receiver] = convo;
-
-    const payload = {
-      username: user.username
-        ? user.username
-        : window.localStorage.getItem('username'),
-      attribute: 'conversation',
-      value: JSON.stringify(userConvo),
+      if (userConvo) {
+        setPeople(Object.keys(userConvo));
+      }
     };
-    updateUser(payload);
-  };
+
+    initalizeState();
+  }, []);
 
   const handlePersonChange = async (person) => {
     if (person !== receiver) {
       setReceiver(person);
-      await handleStoreMessage();
 
       const currConvo = await getUser({
         username: user.username
@@ -177,6 +171,7 @@ const Pricing = () => {
       setConvo(currConvo);
     }
   };
+
   return (
     <Main>
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
