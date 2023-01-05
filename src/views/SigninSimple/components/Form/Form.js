@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
+import { validate, getUser } from '../../../../utils/Utils.js';
+import { UserContext } from '../../../../contexts/UserContext';
 
 const validationSchema = yup.object({
   email: yup
@@ -27,8 +30,27 @@ const Form = () => {
     password: '',
   };
 
-  const onSubmit = (values) => {
-    return values;
+  const [auth, setAuth] = useState(true);
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    const { email, password } = values;
+    const body = {
+      username: email,
+      password: password,
+    };
+    const authorized = await validate(body);
+
+    if (authorized === true) {
+      setAuth(true);
+      const user = await getUser({ username: email });
+      setUser(user);
+      localStorage.setItem('username', user.username);
+      navigate('/portfolio-grid');
+    } else {
+      setAuth(false);
+    }
   };
 
   const formik = useFormik({
@@ -143,6 +165,16 @@ const Form = () => {
                 Login
               </Button>
             </Box>
+            {!auth ? (
+              <Typography
+                variant={'subtitle2'}
+                sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}
+              >
+                Incorrect username or password
+              </Typography>
+            ) : (
+              ''
+            )}
           </Grid>
         </Grid>
       </form>

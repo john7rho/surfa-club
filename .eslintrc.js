@@ -1,45 +1,28 @@
 /* eslint-disable no-undef */
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true,
+  env: {
+    browser: true,
+    es2021: true,
   },
-  'extends': [
-    'eslint:recommended',
-  ],
-  'settings': {
-    'react': {
-      'version': 'detect',
+  extends: ['eslint:recommended'],
+  settings: {
+    react: {
+      version: 'detect',
     },
   },
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true,
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    'ecmaVersion': 12,
-    'sourceType': 'module',
+    ecmaVersion: 12,
+    sourceType: 'module',
   },
-  'rules': {
-    'indent': [
-      'error',
-      2,
-      { 'SwitchCase': 1 },
-    ],
-    'linebreak-style': [
-      'error',
-      'unix',
-    ],
-    'quotes': [
-      'error',
-      'single',
-    ],
-    'semi': [
-      'error',
-      'always',
-    ],
-    'comma-dangle': [
-      'error',
-      'only-multiline',
-    ],
+  rules: {
+    'no-unused-vars': 'off',
+    indent: 'off',
+    'linebreak-style': ['warn', 'unix'],
+    quotes: ['warn', 'single'],
+    semi: ['warn', 'always'],
+    'comma-dangle': ['error', 'only-multiline'],
   },
 };

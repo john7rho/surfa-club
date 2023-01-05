@@ -3,13 +3,9 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import {
-  Courses,
-  Hero,
-  Reviews,
-  Subscription
-} from './components';
+import { Courses, Hero, Reviews, Subscription } from './components';
 import Benefits from './components/Benefits/Benefits.js';
+import WithCountUpNumbersAndCoverImage from './components/WithCountUpNumbersAndCoverImage';
 
 const Elearning = () => {
   const theme = useTheme();
@@ -20,6 +16,11 @@ const Elearning = () => {
       <Box>
         <Container>
           <Benefits />
+        </Container>
+      </Box>
+      <Box>
+        <Container>
+          <WithCountUpNumbersAndCoverImage />
         </Container>
       </Box>
       <Box
@@ -53,9 +54,9 @@ const Elearning = () => {
           ></path>
         </Box>
       </Box>
-      <Container>
+      {/* <Container> // re-add this when ppl reply
         <Reviews />
-      </Container>
+      </Container> */}
       <Box
         sx={{
           background: 'transparent',

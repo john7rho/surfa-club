@@ -9,8 +9,11 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
 import Container from 'components/Container';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPasswordSimpleForm = () => {
+  const navigate = useNavigate();
+
   return (
     <Box bgcolor={'alternate.main'}>
       <Container maxWidth={600}>
@@ -34,7 +37,9 @@ const ResetPasswordSimpleForm = () => {
             Forgot your password?
           </Typography>
           <Typography color="text.secondary">
-            Enter your email address below and we'll get you back on track.
+            Enter your email address below and we'll get you back on track. For
+            any help, please contact help@surfaclub.com!
+            {/* TIP: This is the working one */}
           </Typography>
         </Box>
         <Card sx={{ p: { xs: 4, md: 6 } }}>
@@ -72,7 +77,15 @@ const ResetPasswordSimpleForm = () => {
                       Back to login
                     </Button>
                   </Box>
-                  <Button size={'large'} variant={'contained'} type={'submit'}>
+                  <Button
+                    size={'large'}
+                    variant={'contained'}
+                    type={'submit'}
+                    onClick={() => {
+                      console.log('test');
+                      navigate('/reset-password-simple');
+                    }}
+                  >
                     Send reset link
                   </Button>
                 </Box>

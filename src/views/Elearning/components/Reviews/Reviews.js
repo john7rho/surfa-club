@@ -1,7 +1,7 @@
 import React from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,26 +12,26 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 
-const mock = [
+const mock = [ // TODO: Replace with real data
   {
     feedback:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    name: 'Clara Bertoletti',
-    title: 'MUI lover',
+    name: 'Henry Weng',
+    title: 'Student @Stanford',
     avatar: 'https://assets.maccarianagency.com/avatars/img1.jpg',
   },
   {
     feedback:
       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    name: 'Jhon Anderson',
-    title: 'Senior Frontend Developer',
+    name: 'Vedant Khanna',
+    title: 'Student @Stanford',
     avatar: 'https://assets.maccarianagency.com/avatars/img2.jpg',
   },
   {
     feedback:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    name: 'Chary Smith',
-    title: 'SEO at Comoti',
+    name: 'Rohan Aerrabolu',
+    title: 'Student @NYU',
     avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
   },
 ];
@@ -77,7 +77,7 @@ const Reviews = () => {
         >
         </Typography>
         <Box marginTop={2} display={'flex'} justifyContent={'center'}>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             size="large"
@@ -101,7 +101,7 @@ const Reviews = () => {
             }
           >
             View all
-          </Button>
+          </Button> */}
         </Box>
       </Box>
       <Grid container spacing={2}>
