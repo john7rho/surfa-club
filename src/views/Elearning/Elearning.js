@@ -30,10 +30,6 @@ const Elearning = () => {
         }}
       >
         <Container>
-          {/* <Categories /> */}
-          {/* <Container>
-            <Divider />
-          </Container> */}
           <Courses />
         </Container>
         <Box
