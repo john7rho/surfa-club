@@ -197,19 +197,29 @@ const Pricing = () => {
             {user.username || window.localStorage.getItem('username')}{' '}
             conversations
           </Typography>
-          {people.map((person) => {
-            return (
-              <Box style={{ border: '1px solid gray', height: '8vh' }}>
-                <Typography
-                  style={{ marginLeft: '10px' }}
-                  variant="h6"
-                  onClick={() => handlePersonChange(person)}
-                >
-                  {person}
-                </Typography>
-              </Box>
-            );
-          })}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '40vw',
+              width: '100%',
+              overflow: 'auto',
+            }}
+          >
+            {people.map((person) => {
+              return (
+                <Box style={{ border: '1px solid gray', height: '80px' }}>
+                  <Typography
+                    style={{ marginLeft: '10px' }}
+                    variant="h6"
+                    onClick={() => handlePersonChange(person)}
+                  >
+                    {person}
+                  </Typography>
+                </Box>
+              );
+            })}
+          </div>
         </Box>
 
         <Box style={{ flexGrow: 3 }}>
@@ -227,7 +237,7 @@ const Pricing = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              height: '20vw',
+              height: '35vw',
               width: '100%',
               overflow: 'auto',
             }}
