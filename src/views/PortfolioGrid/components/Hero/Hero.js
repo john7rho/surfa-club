@@ -362,12 +362,21 @@ const Hero = () => {
             marginBottom={2}
             sx={{ color: 'grey' }}
           ></Typography>
-          <Avatar
-            marginTop={8}
-            marginBottom={2}
-            src={user.image}
-            sx={{ width: '300px', height: '300px' }}
-          ></Avatar>
+          <Box component="span" sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Avatar
+              marginTop={8}
+              marginBottom={2}
+              src={user.image}
+              sx={{
+                width: '300px',
+                height: '300px',
+                display: 'inline-flex',
+                gridAutoFlow: 'row',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}
+            ></Avatar>
+          </Box>
         </Grid>
         <Grid item xs={8}>
           <Box>
