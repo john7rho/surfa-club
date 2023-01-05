@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { S3 } from 'aws-sdk';
 import Button from '@material-ui/core/Button';
 // import axios from 'axios';
@@ -26,8 +26,12 @@ const UploadAWS = () => {
     setFile(e.target.files[0]);
   };
 
+  useEffect(() => {
+    handleSubmit();
+  }, [file]);
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!file) {
       setError('Please select a file');
       return;
@@ -69,7 +73,7 @@ const UploadAWS = () => {
         {error ? <p>{error}</p> : null}
       </Button>
       <Typography>{file?.name}</Typography>
-      <Button onClick={handleSubmit}>Click to Upload</Button>
+      {/* <Button onClick={handleSubmit}>Click to Upload</Button> */}
     </div>
   );
 };

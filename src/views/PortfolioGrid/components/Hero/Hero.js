@@ -250,8 +250,12 @@ const Hero = () => {
     // handleSubmit(e);
   };
 
+  useEffect(() => {
+    handleProfileChange();
+  }, [profile]);
+
   const handleProfileSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!profile) setError('Please select a file');
 
     const fileName = profile.name.replace(' ', '_');
@@ -559,14 +563,14 @@ const Hero = () => {
                     </Button>
                     {/* <Typography>{file?.name}</Typography> */}
                     {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
-                    <Button
+                    {/* <Button
                       marginLeft={2}
                       variant="outlined"
                       onClick={handleProfileSubmit}
                       style={{ color: 'grey', backgroundColor: 'white' }}
                     >
                       Click to upload
-                    </Button>
+                    </Button> */}
                     <Typography variant={'body2'}>
                       {error ? <p style={{ color: 'blue' }}>{error}</p> : null}
                     </Typography>
