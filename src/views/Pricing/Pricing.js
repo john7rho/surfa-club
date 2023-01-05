@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
+import { updateUser, getUser } from '../../utils/Utils.js';
 
 const RMessage = (message) => {
   return (
@@ -139,6 +140,43 @@ const Pricing = () => {
     };
   }, []);
 
+  const handleStoreMessage = async () => {
+    let userConvo = await getUser({
+      username: user.username
+        ? user.username
+        : window.localStorage.getItem('username'),
+    }).then((res) => JSON.parse(res['conversation']));
+
+    if (userConvo === undefined) {
+      userConvo = {};
+    }
+
+    userConvo[receiver] = convo;
+
+    const payload = {
+      username: user.username
+        ? user.username
+        : window.localStorage.getItem('username'),
+      attribute: 'conversation',
+      value: JSON.stringify(userConvo),
+    };
+    updateUser(payload);
+  };
+
+  const handlePersonChange = async (person) => {
+    if (person !== receiver) {
+      setReceiver(person);
+      await handleStoreMessage();
+
+      const currConvo = await getUser({
+        username: user.username
+          ? user.username
+          : window.localStorage.getItem('username'),
+      }).then((res) => JSON.parse(res['conversation'])[person]);
+
+      setConvo(currConvo);
+    }
+  };
   return (
     <Main>
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
@@ -153,13 +191,7 @@ const Pricing = () => {
                 <Typography
                   style={{ marginLeft: '10px' }}
                   variant="h6"
-                  onClick={() => {
-                    if (person !== receiver) {
-                      setReceiver(person);
-                      // TODO save convo
-                      setConvo({ received: [], sent: [] });
-                    }
-                  }}
+                  onClick={() => handlePersonChange(person)}
                 >
                   {person}
                 </Typography>
