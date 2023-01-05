@@ -251,7 +251,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    handleProfileChange();
+    handleProfileSubmit();
   }, [profile]);
 
   const handleProfileSubmit = (e) => {
