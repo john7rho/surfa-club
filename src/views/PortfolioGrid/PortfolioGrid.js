@@ -22,15 +22,12 @@ const PortfolioGrid = () => {
     fetchUser();
   }, []);
 
-  console.log(process.env.AWS_ACCESS_KEY_ID);
-
   return (
     <Main>
       <Container>
         <Hero />
       </Container>
       <Container>{user.verified ? <Jobs /> : null}</Container>
-      <button onClick={() => navigate('/pricing')}>message</button>
     </Main>
   );
 };

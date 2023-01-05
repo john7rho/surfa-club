@@ -1,17 +1,47 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { useTheme } from '@mui/material/styles';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
+
+const RMessage = (message) => {
+  return (
+    <div>
+      <Typography
+        style={{ textAlign: 'left', marginLeft: '30px' }}
+        variant="h6"
+      >
+        {message}
+      </Typography>
+    </div>
+  );
+};
+
+const SMessage = (message) => {
+  return (
+    <div>
+      <Typography
+        style={{
+          textAlign: 'right',
+          marginRight: '30px',
+        }}
+        variant="h6"
+      >
+        {message}
+      </Typography>
+    </div>
+  );
+};
 
 const Pricing = () => {
   const [message, setMessage] = useState('');
   const [receiver, setReceiver] = useState('');
   const [socket, setSocket] = useState(null);
   const [convo, setConvo] = useState({ received: [], sent: [] });
+
   const theme = useTheme();
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -38,30 +68,33 @@ const Pricing = () => {
     }
   };
 
-  const sortConvo = ({ sent, received }) => {
-    let convo = [];
+  const sortConvo = () => {
+    const sent = convo.sent;
+    const received = convo.received;
+
+    let ans = [];
+
     while (sent.length > 0 && received.length > 0) {
       const sentLast = sent[sent.length - 1];
       const receivedLast = received[received.length - 1];
 
       if (sentLast[1] > receivedLast[1]) {
-        const message = sent.pop();
-        convo.push(message[0]);
+        ans.push(['s', sent.pop()[0]]);
       } else {
-        const message = received.pop();
-        convo.push(message[0]);
+        ans.push(['r', received.pop()[0]]);
       }
     }
 
     if (sent.length > 0) {
-      convo.push(...sent);
+      ans.push(...sent.map((msg) => ['s', msg[0]]));
     }
 
     if (received.length > 0) {
-      convo.push(...received);
+      ans.push(...received.map((msg) => ['r', msg[0]]));
     }
 
-    return convo;
+    ans.reverse();
+    return ans;
   };
 
   useEffect(() => {
@@ -70,7 +103,6 @@ const Pricing = () => {
     );
     ws.onopen = () => {
       console.log('connection opened');
-      console.log(user);
     };
 
     ws.onclose = () => {
@@ -80,7 +112,6 @@ const Pricing = () => {
     ws.onmessage = (event) => {
       const receiver = JSON.parse(event.data).receiver;
       const message = JSON.parse(event.data).message;
-
       if (receiver == user.username) {
         setConvo((prev) => ({
           ...prev,
@@ -102,26 +133,54 @@ const Pricing = () => {
 
   return (
     <Main>
-      <Box>
-        <p>user lookup component</p>
-        <TextField
-          placeholder="Message User"
-          onChange={(event) => handleReceiverChange(event)}
-        />
-      </Box>
+      <Box style={{ display: 'flex', flexDirection: 'row' }}>
+        <Box style={{ flexGrow: 1 }}>Your conversations</Box>
 
-      <Box>
-        <p>send message component</p>
-        <TextField
-          placeholder="Message..."
-          onChange={(event) => handleMessageChange(event)}
-        />
-        <Button onClick={handleMessageSend}>Send</Button>
-      </Box>
-      <Box>
-        {sortConvo(convo).map((msg, i) => (
-          <li key={i}>{msg}</li>
-        ))}
+        <Box style={{ flexGrow: 3 }}>
+          <TextField
+            InputProps={{
+              style: { borderRadius: '30px' },
+            }}
+            style={{ width: '100%' }}
+            placeholder="Message User"
+            onChange={(event) => handleReceiverChange(event)}
+          />
+
+          <Box
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '20vw',
+              width: '100%',
+            }}
+          >
+            {sortConvo().map((msg) => {
+              const flag = msg[0];
+              const message = msg[1];
+
+              if (flag === 'r') {
+                return RMessage(message);
+              } else if (flag === 's') {
+                return SMessage(message);
+              }
+            })}
+          </Box>
+
+          <Box style={{ display: 'flex', flexDirection: 'row' }}>
+            <TextField
+              InputProps={{
+                style: { borderRadius: '30px' },
+              }}
+              style={{ flexGrow: 12 }}
+              placeholder="Message..."
+              onChange={(event) => handleMessageChange(event)}
+            />
+
+            <Button onClick={handleMessageSend} style={{ flexGrow: 1 }}>
+              Send
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Main>
   );
