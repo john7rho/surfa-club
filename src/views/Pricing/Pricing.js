@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { useTheme } from '@mui/material/styles';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
 
@@ -39,9 +38,7 @@ const Pricing = () => {
   const [socket, setSocket] = useState(null);
   const [convo, setConvo] = useState({ received: [], sent: [] });
 
-  const theme = useTheme();
-
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -112,7 +109,11 @@ const Pricing = () => {
     ws.onmessage = (event) => {
       const receiver = JSON.parse(event.data).receiver;
       const message = JSON.parse(event.data).message;
-      if (receiver == user.username) {
+
+      if (
+        receiver == user.username ||
+        receiver == window.localStorage.getItem('username')
+      ) {
         setConvo((prev) => ({
           ...prev,
           received: [...prev.received, [message, Date.now()]],
@@ -134,7 +135,10 @@ const Pricing = () => {
   return (
     <Main>
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
-        <Box style={{ flexGrow: 1 }}>Your conversations</Box>
+        <Box style={{ flexGrow: 1 }}>
+          {user.username || window.localStorage.getItem('username')}{' '}
+          conversations
+        </Box>
 
         <Box style={{ flexGrow: 3 }}>
           <TextField
@@ -146,12 +150,13 @@ const Pricing = () => {
             onChange={(event) => handleReceiverChange(event)}
           />
 
-          <Box
+          <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              minHeight: '20vw',
+              height: '20vw',
               width: '100%',
+              overflow: 'auto',
             }}
           >
             {sortConvo().map((msg) => {
@@ -164,7 +169,7 @@ const Pricing = () => {
                 return SMessage(message);
               }
             })}
-          </Box>
+          </div>
 
           <Box style={{ display: 'flex', flexDirection: 'row' }}>
             <TextField
