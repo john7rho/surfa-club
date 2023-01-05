@@ -27,6 +27,8 @@ const getTheme = (mode, themeToggler) =>
               borderRadius: 5,
               paddingTop: 10,
               paddingBottom: 10,
+              color: 'white',
+              backgroundColor: 'maroon',
               '&:hover': {
                 backgroundColor: 'black',
                 transition: '0.2s',

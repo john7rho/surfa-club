@@ -4,20 +4,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { NavItem } from './components';
 
-const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
+const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
-  const {
-    landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
-  } = pages;
 
   return (
     <Box
@@ -36,9 +26,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
         <Box
           component={'img'}
           src={
-            mode === 'light' && !colorInvert
-              ? 'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
-              : 'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
+            'https://drive.google.com/uc?export=view&id=1UmlHWiaUh9i07xEY57jASQCXmbL7ntzH'
           }
           height={1}
           width={1}
@@ -46,62 +34,36 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }) => {
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
-          <NavItem
-            title={'Landings'}
-            id={'landing-pages'}
-            items={landingPages}
-            colorInvert={colorInvert}
-          />
+          <NavItem title={'Home'} colorInvert={colorInvert} />
         </Box>
+
         <Box marginLeft={4}>
           <NavItem
-            title={'Company'}
-            id={'company-pages'}
-            items={companyPages}
+            title={'Sign In'}
             colorInvert={colorInvert}
+            route="/signin-simple"
           />
         </Box>
+
         <Box marginLeft={4}>
-          <NavItem
-            title={'Account'}
-            id={'account-pages'}
-            items={accountPages}
-            colorInvert={colorInvert}
-          />
+          <NavItem title={'FAQ'} colorInvert={colorInvert} route="/faq" />
         </Box>
-        <Box marginLeft={4}>
-          <NavItem
-            title={'Pages'}
-            id={'secondary-pages'}
-            items={secondaryPages}
-            colorInvert={colorInvert}
-          />
-        </Box>
-        <Box marginLeft={4}>
-          <NavItem
-            title={'Blog'}
-            id={'blog-pages'}
-            items={blogPages}
-            colorInvert={colorInvert}
-          />
-        </Box>
-        <Box marginLeft={4}>
-          <NavItem
-            title={'Portfolio'}
-            id={'portfolio-pages'}
-            items={portfolioPages}
-            colorInvert={colorInvert}
-          />
-        </Box>
+
         <Box marginLeft={4}>
           <Button
             bgcolor="maroon"
             component="a"
             target="blank"
-            href="https://mui.com/store/items/the-front-landing-page/"
+            href="https://airtable.com/shrCDEmF6M6gDh7sk"
             size="large"
+            style={{
+              background:
+                'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+              opacity: 0.9,
+              fontWeight: 'bold',
+            }}
           >
-            Apply now
+            Be a Partner
           </Button>
         </Box>
       </Box>

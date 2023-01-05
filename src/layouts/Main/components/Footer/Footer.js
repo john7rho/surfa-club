@@ -52,9 +52,9 @@ const Footer = () => {
             </Box> */}
             <Box marginTop={1} marginRight={2}>
               <Link
-                underline="none"
                 component="a"
-                href="/docs/introduction" // TODO: Update this link, make ToS page
+                href="/company-terms"
+                //href="/docs/introduction" // TODO: Update this link, make ToS page
                 color="text.primary"
                 variant={'subtitle2'}
               >
@@ -67,8 +67,13 @@ const Footer = () => {
                 color="primary"
                 component="a"
                 target="blank"
-                href="https://mui.com/store/items/the-front-landing-page/" // TODO: Update this link
+                href="https://airtable.com/shrCDEmF6M6gDh7sk" // TODO: Update this link
                 size="small"
+                style={{
+                  background:
+                    'linear-gradient(45deg, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
+                  opacity: 0.9,
+                }}
               >
                 Apply now
               </Button>
@@ -83,7 +88,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; ListenIn Inc. 2022. All rights reserved
+          &copy; Surfa Club. 2022. All rights reserved
         </Typography>
         <Typography
           align={'center'}
@@ -91,7 +96,7 @@ const Footer = () => {
           color="text.secondary"
           component={'p'}
         >
-          Community is king.
+          Adventure & Venture.
         </Typography>
       </Grid>
     </Grid>
