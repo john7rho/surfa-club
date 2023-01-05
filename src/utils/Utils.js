@@ -5,7 +5,7 @@ const AWS = require('aws-sdk');
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-  secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
   region: 'us-east-1',
 });
 
@@ -34,6 +34,8 @@ export const getObjectUrl = async (path) => {
  * uploads file object to s3
  */
 export const fileUpload = async (file) => {
+  console.log(process.env.REACT_APP_AWS_SECRET_KEY);
+
   s3.putObject(
     {
       Body: file,

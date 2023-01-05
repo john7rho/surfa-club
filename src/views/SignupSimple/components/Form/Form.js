@@ -128,7 +128,7 @@ const Form = () => {
 
     const s3 = new S3({
       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
       region: 'us-east-1',
       //   TODO: hide these later
     });
