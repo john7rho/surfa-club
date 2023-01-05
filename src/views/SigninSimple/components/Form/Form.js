@@ -47,7 +47,7 @@ const Form = () => {
       const user = await getUser({ username: email });
       setUser(user);
       localStorage.setItem('username', user.username);
-      navigate('/portfolio-grid');
+      navigate('/dashboard');
     } else {
       setAuth(false);
     }
@@ -119,7 +119,7 @@ const Form = () => {
                 <Link
                   component={'a'}
                   color={'primary'}
-                  href={'/password-reset-simple'}
+                  href={'/password-reset'}
                   underline={'none'}
                 >
                   Forgot your password?
@@ -154,7 +154,7 @@ const Form = () => {
                   <Link
                     component={'a'}
                     color={'primary'}
-                    href={'/signup-simple'}
+                    href={'/signup'}
                     underline={'none'}
                   >
                     Sign up here.
