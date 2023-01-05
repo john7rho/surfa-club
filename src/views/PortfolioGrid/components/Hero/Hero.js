@@ -540,7 +540,15 @@ const Hero = () => {
                     {error ? <p>{error}</p> : null}
                   </Button> */}
                   <div label={file?.name}>
-                    <Button variant="contained" component="label">
+                    <Button
+                      variant="outlined"
+                      component="label"
+                      style={{
+                        color: 'grey',
+                        backgroundColor: 'white',
+                        marginRight: '5px',
+                      }}
+                    >
                       Pick Photo
                       <input
                         accept="image/*"
@@ -552,8 +560,10 @@ const Hero = () => {
                     {/* <Typography>{file?.name}</Typography> */}
                     {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
                     <Button
+                      marginLeft={2}
+                      variant="outlined"
                       onClick={handleProfileSubmit}
-                      style={{ marginLeft: '4px', backgroundColor: 'black' }}
+                      style={{ color: 'grey', backgroundColor: 'white' }}
                     >
                       Click to upload
                     </Button>
