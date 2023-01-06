@@ -257,6 +257,9 @@ const Hero = () => {
     const fileName = profile.name.replace(' ', '_');
     const fileType = profile.type;
 
+    console.log(fileName);
+    console.log(fileType);
+
     const s3 = new S3({
       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
@@ -289,25 +292,30 @@ const Hero = () => {
         profile?.name.replace(' ', '_'),
     );
 
+    console.log('wassup');
+    console.log(image);
+
     params2 = {
       TableName: 'users',
       Key: {
         username: { S: user.username },
         school: { S: user.school },
       },
-      UpdateExpression: 'SET image = :val1',
+      UpdateExpression: 'SET image = :val2',
       ExpressionAttributeValues: {
-        ':val1': { S: image },
+        ':val2': { S: image },
       },
     };
 
-    ddb.updateItem(params2, function (err, data) {
-      if (err) {
-        console.log('Error', err);
-      } else {
-        console.log('Success', data);
-      }
-    });
+    if (image != null) {
+      ddb.updateItem(params2, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Success', data);
+        }
+      });
+    }
 
     return;
   };
@@ -551,7 +559,7 @@ const Hero = () => {
                     >
                       Pick Photo
                       <input
-                        accept="image/*"
+                        // accept="image/*"
                         type="file"
                         hidden
                         onChange={handleProfileChange}
