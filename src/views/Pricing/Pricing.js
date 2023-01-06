@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
@@ -40,7 +40,7 @@ const Pricing = () => {
   const [convo, setConvo] = useState({ received: [], sent: [] });
   const [people, setPeople] = useState([]);
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleReceiverChange = (event) => {
     setReceiver(event.target.value);
@@ -200,15 +200,28 @@ const Pricing = () => {
     }
   };
 
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    container.scrollTop = container.scrollHeight;
+  }, [convo]);
+
   return (
     <Main>
-      <Box style={{ display: 'flex', flexDirection: 'row' }}>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
         <Box style={{ flexGrow: 1 }}>
           <Typography variant="h6" style={{ marginLeft: '10px' }}>
             {user.username || window.localStorage.getItem('username')}{' '}
             conversations
           </Typography>
           <div
+            ref={containerRef}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -245,6 +258,7 @@ const Pricing = () => {
           />
 
           <div
+            ref={containerRef}
             style={{
               display: 'flex',
               flexDirection: 'column',
