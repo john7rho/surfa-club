@@ -97,7 +97,7 @@ const Form = () => {
     if (success === true) {
       setError(false);
       localStorage.setItem('username', email);
-      navigate('/portfolio-grid');
+      navigate('/dashboard');
     } else {
       setError(true);
     }

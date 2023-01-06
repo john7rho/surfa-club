@@ -128,7 +128,7 @@ const routes = [
     renderer: (params = {}) => <PortfolioMasonryView {...params} />,
   },
   {
-    path: '/portfolio-grid',
+    path: '/dashboard',
     renderer: (params = {}) => <PortfolioGridView {...params} />,
   },
   {
@@ -152,7 +152,7 @@ const routes = [
     renderer: (params = {}) => <PasswordResetCoverView {...params} />,
   },
   {
-    path: '/password-reset-simple',
+    path: '/password-reset',
     renderer: (params = {}) => <PasswordResetSimpleView {...params} />,
   },
   {
@@ -160,7 +160,7 @@ const routes = [
     renderer: (params = {}) => <ResetPasswordConfirm {...params} />,
   },
   {
-    path: '/signin-simple',
+    path: '/signin',
     renderer: (params = {}) => <SigninSimpleView {...params} />,
   },
   {
@@ -168,7 +168,7 @@ const routes = [
     renderer: (params = {}) => <SigninCoverView {...params} />,
   },
   {
-    path: '/signup-simple',
+    path: '/signup',
     renderer: (params = {}) => <SignupSimpleView {...params} />,
   },
   {
