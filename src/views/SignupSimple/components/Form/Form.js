@@ -345,7 +345,9 @@ const Form = () => {
                 Sign up
               </Button>
             </Box>
-            {error != 'No photo uploaded' ? (
+            {error != 'No photo uploaded' &&
+            error != 'Uploaded!' &&
+            error != 'Please select a file' ? (
               <Typography
                 variant={'subtitle2'}
                 sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}
