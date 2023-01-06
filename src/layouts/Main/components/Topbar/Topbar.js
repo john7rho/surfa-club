@@ -41,7 +41,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
           <NavItem
             title={'Sign In'}
             colorInvert={colorInvert}
-            route="/signin-simple"
+            route="/signin"
           />
         </Box>
 
