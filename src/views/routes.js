@@ -80,24 +80,12 @@ const routes = [
     renderer: (params = {}) => <ExpoView {...params} />,
   },
   {
-    path: '/agency',
-    renderer: (params = {}) => <AgencyView {...params} />,
-  },
-  {
-    path: '/startup',
-    renderer: (params = {}) => <StartupView {...params} />,
-  },
-  {
     path: '/mobile-app',
     renderer: (params = {}) => <MobileAppView {...params} />,
   },
   {
     path: '/job-listing',
     renderer: (params = {}) => <JobListingView {...params} />,
-  },
-  {
-    path: '/cloud-hosting',
-    renderer: (params = {}) => <CloudHostingView {...params} />,
   },
   {
     path: '/logistics',
@@ -138,10 +126,6 @@ const routes = [
   {
     path: '/pricing',
     renderer: (params = {}) => <PricingView {...params} />,
-  },
-  {
-    path: '/password-reset-cover',
-    renderer: (params = {}) => <PasswordResetCoverView {...params} />,
   },
   {
     path: '/password-reset',
