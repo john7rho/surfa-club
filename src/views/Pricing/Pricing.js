@@ -42,16 +42,27 @@ const Pricing = () => {
 
   const { user } = useContext(UserContext);
 
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
-  };
-
   const handleReceiverChange = (event) => {
     setReceiver(event.target.value);
   };
 
+  const handleMessageChange = async (event) => {
+    const currConvo = await getUser({
+      username: user.username
+        ? user.username
+        : window.localStorage.getItem('username'),
+    }).then((res) => JSON.parse(res['conversation']));
+
+    if (receiver in currConvo) {
+      setConvo(currConvo[receiver]);
+    } else {
+      setConvo({ sent: [], received: [] });
+    }
+
+    setMessage(event.target.value);
+  };
+
   const handleMessageSend = async () => {
-    console.log(people);
     if (!people.includes(receiver)) {
       setPeople((prev) => [...prev, receiver]);
     }
