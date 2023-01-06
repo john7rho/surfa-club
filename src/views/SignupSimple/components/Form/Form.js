@@ -334,7 +334,7 @@ const Form = () => {
                   <Link
                     component={'a'}
                     color={'primary'}
-                    href={'/signin-simple'}
+                    href={'/signin'}
                     underline={'none'}
                   >
                     Login.

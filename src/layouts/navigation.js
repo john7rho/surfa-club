@@ -146,7 +146,7 @@ const pages = {
     },
     {
       title: 'Sign in: Simple',
-      href: '/signin-simple',
+      href: '/signin',
     },
     {
       title: 'Sign in: Cover',

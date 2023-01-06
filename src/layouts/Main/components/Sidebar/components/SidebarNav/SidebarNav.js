@@ -39,7 +39,7 @@ const SidebarNav = ({ pages }) => {
         <Box>
           <Link
             style={{ color: 'maroon', textDecoration: 'none' }}
-            href="/signin-simple"
+            href="/signin"
           >
             Sign In
           </Link>
