@@ -4,11 +4,11 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
-console.log = () => {};
-console.debug = () => {};
-console.info = () => {};
-console.warn = () => {};
-console.error = () => {};
+// console.log = () => {};
+// console.debug = () => {};
+// console.info = () => {};
+// console.warn = () => {};
+// console.error = () => {};
 
 root.render(<App />);
 
