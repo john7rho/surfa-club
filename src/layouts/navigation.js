@@ -154,7 +154,7 @@ const pages = {
     },
     {
       title: 'Password: Simple',
-      href: '/password-reset-simple',
+      href: '/password-reset',
     },
     {
       title: 'Password: Cover',
