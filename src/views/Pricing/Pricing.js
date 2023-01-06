@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { useTheme } from '@mui/material/styles';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import Main from 'layouts/Main';
+import { updateUser, getUser } from '../../utils/Utils.js';
 
 const RMessage = (message) => {
   return (
@@ -38,10 +38,9 @@ const Pricing = () => {
   const [receiver, setReceiver] = useState('');
   const [socket, setSocket] = useState(null);
   const [convo, setConvo] = useState({ received: [], sent: [] });
+  const [people, setPeople] = useState([]);
 
-  const theme = useTheme();
-
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -51,12 +50,35 @@ const Pricing = () => {
     setReceiver(event.target.value);
   };
 
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
+    console.log(people);
+    if (!people.includes(receiver)) {
+      setPeople((prev) => [...prev, receiver]);
+    }
+
+    const currConvo = await getUser({
+      username: user.username
+        ? user.username
+        : window.localStorage.getItem('username'),
+    }).then((res) => JSON.parse(res['conversation']));
+
+    if (receiver in currConvo) {
+      setConvo(currConvo[receiver]);
+    } else {
+      setConvo({ sent: [], received: [] });
+    }
+
     if (socket !== null) {
+      const sender = user.username
+        ? user.username
+        : window.localStorage.getItem('username');
+
       const payload = JSON.stringify({
         action: 'sendmessage',
         message: message,
+        sender: sender,
         receiver: receiver,
+        timestamp: Date.now(),
       });
 
       socket.send(payload);
@@ -112,7 +134,11 @@ const Pricing = () => {
     ws.onmessage = (event) => {
       const receiver = JSON.parse(event.data).receiver;
       const message = JSON.parse(event.data).message;
-      if (receiver == user.username) {
+
+      if (
+        receiver == user.username ||
+        receiver == window.localStorage.getItem('username')
+      ) {
         setConvo((prev) => ({
           ...prev,
           received: [...prev.received, [message, Date.now()]],
@@ -131,10 +157,70 @@ const Pricing = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const initalizeState = async () => {
+      const username = user.username
+        ? user.username
+        : window.localStorage.getItem('username');
+
+      const userConvo = await getUser({ username: username }).then((res) =>
+        JSON.parse(res['conversation']),
+      );
+
+      if (userConvo) {
+        setPeople(Object.keys(userConvo));
+      }
+    };
+
+    initalizeState();
+  }, []);
+
+  const handlePersonChange = async (person) => {
+    if (person !== receiver) {
+      setReceiver(person);
+
+      const currConvo = await getUser({
+        username: user.username
+          ? user.username
+          : window.localStorage.getItem('username'),
+      }).then((res) => JSON.parse(res['conversation'])[person]);
+
+      setConvo(currConvo);
+    }
+  };
+
   return (
     <Main>
       <Box style={{ display: 'flex', flexDirection: 'row' }}>
-        <Box style={{ flexGrow: 1 }}>Your conversations</Box>
+        <Box style={{ flexGrow: 1 }}>
+          <Typography variant="h6" style={{ marginLeft: '10px' }}>
+            {user.username || window.localStorage.getItem('username')}{' '}
+            conversations
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '40vw',
+              width: '100%',
+              overflow: 'auto',
+            }}
+          >
+            {people.map((person) => {
+              return (
+                <Box style={{ border: '1px solid gray', height: '80px' }}>
+                  <Typography
+                    style={{ marginLeft: '10px' }}
+                    variant="h6"
+                    onClick={() => handlePersonChange(person)}
+                  >
+                    {person}
+                  </Typography>
+                </Box>
+              );
+            })}
+          </div>
+        </Box>
 
         <Box style={{ flexGrow: 3 }}>
           <TextField
@@ -143,15 +229,17 @@ const Pricing = () => {
             }}
             style={{ width: '100%' }}
             placeholder="Message User"
+            value={receiver}
             onChange={(event) => handleReceiverChange(event)}
           />
 
-          <Box
+          <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              minHeight: '20vw',
+              height: '35vw',
               width: '100%',
+              overflow: 'auto',
             }}
           >
             {sortConvo().map((msg) => {
@@ -164,7 +252,7 @@ const Pricing = () => {
                 return SMessage(message);
               }
             })}
-          </Box>
+          </div>
 
           <Box style={{ display: 'flex', flexDirection: 'row' }}>
             <TextField
