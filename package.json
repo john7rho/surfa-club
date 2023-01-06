@@ -44,6 +44,8 @@
     "axios": "^1.2.1",
     "card-validator": "^8.1.1",
     "dotenv": "^16.0.3",
+    "expo-asset": "^8.7.0",
+    "expo-av": "^13.0.2",
     "formik": "^2.2.9",
     "fs": "^0.0.1-security",
     "jarallax": "^2.0.4",

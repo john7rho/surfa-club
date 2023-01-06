@@ -18,6 +18,7 @@ import {
 // import * as yup from 'yup';
 import AWS from 'aws-sdk';
 import { S3 } from 'aws-sdk';
+import { RECORDING_OPTION_IOS_BIT_RATE_STRATEGY_VARIABLE_CONSTRAINED } from 'expo-av/build/Audio';
 
 // import { useFormik } from 'formik';
 
@@ -315,6 +316,8 @@ const Hero = () => {
           console.log('Success', data);
         }
       });
+    } else {
+      setError('Hit submit again -- something went wrong');
     }
 
     return;
