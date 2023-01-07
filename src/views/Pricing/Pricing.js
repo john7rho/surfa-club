@@ -1,34 +1,53 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+} from '@mui/material';
 import Main from 'layouts/Main';
-import { updateUser, getUser } from '../../utils/Utils.js';
+import { getUser } from '../../utils/Utils.js';
 
 const RMessage = (message) => {
   return (
-    <div>
-      <Typography
-        style={{ textAlign: 'left', marginLeft: '30px' }}
-        variant="h6"
+    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <div
+        style={{
+          backgroundColor: '#e6e6e6',
+          borderRadius: '10px',
+          padding: '10px',
+          marginRight: '30px',
+          marginBottom: '10px',
+          maxWidth: '60%',
+        }}
       >
-        {message}
-      </Typography>
+        <Typography variant="h6">{message}</Typography>
+      </div>
     </div>
   );
 };
 
 const SMessage = (message) => {
   return (
-    <div>
-      <Typography
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div
         style={{
-          textAlign: 'right',
-          marginRight: '30px',
+          backgroundColor: '#e6e6e6',
+          borderRadius: '10px',
+          padding: '10px',
+          marginLeft: '30px',
+          marginBottom: '10px',
+          maxWidth: '60%',
         }}
-        variant="h6"
       >
-        {message}
-      </Typography>
+        <Typography variant="h6">{message}</Typography>
+      </div>
     </div>
   );
 };
@@ -40,7 +59,7 @@ const Pricing = () => {
   const [convo, setConvo] = useState({ received: [], sent: [] });
   const [people, setPeople] = useState([]);
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handleReceiverChange = (event) => {
     setReceiver(event.target.value);
@@ -217,33 +236,26 @@ const Pricing = () => {
       >
         <Box style={{ flexGrow: 1 }}>
           <Typography variant="h6" style={{ marginLeft: '10px' }}>
-            {user.username || window.localStorage.getItem('username')}{' '}
-            conversations
+            Your conversations
           </Typography>
-          <div
-            ref={containerRef}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              height: '40vw',
-              width: '100%',
-              overflow: 'auto',
-            }}
-          >
+          <List style={{ height: '40vw', width: '100%', overflow: 'auto' }}>
             {people.map((person) => {
               return (
-                <Box style={{ border: '1px solid gray', height: '80px' }}>
-                  <Typography
-                    style={{ marginLeft: '10px' }}
-                    variant="h6"
-                    onClick={() => handlePersonChange(person)}
-                  >
-                    {person}
-                  </Typography>
-                </Box>
+                <ListItem
+                  style={{
+                    borderTop: '1px solid gray',
+                    borderBottom: '1px solid gray',
+                  }}
+                  onClick={() => handlePersonChange(person)}
+                >
+                  <ListItemAvatar>
+                    <Avatar></Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={person} />
+                </ListItem>
               );
             })}
-          </div>
+          </List>
         </Box>
 
         <Box style={{ flexGrow: 3 }}>
@@ -252,7 +264,7 @@ const Pricing = () => {
               style: { borderRadius: '30px' },
             }}
             style={{ width: '100%' }}
-            placeholder="Message User"
+            placeholder="Recipient username... (make sure you type this correctly)"
             value={receiver}
             onChange={(event) => handleReceiverChange(event)}
           />
