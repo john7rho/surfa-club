@@ -149,7 +149,7 @@ const Spaces = () => {
             color="primary"
             size="large"
             fullWidth={isMd ? false : true}
-            href="/signin-simple"
+            href="/signin"
             endIcon={
               <Box
                 component={'svg'}

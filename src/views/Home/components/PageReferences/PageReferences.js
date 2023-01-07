@@ -378,7 +378,7 @@ const data = [
       },
       {
         title: 'Signin Simple',
-        href: '/signin-simple',
+        href: '/signin',
         cover:
           'https://assets.maccarianagency.com/screenshots/the-front/img39.png',
         coverDark:

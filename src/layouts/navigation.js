@@ -146,7 +146,7 @@ const pages = {
     },
     {
       title: 'Sign in: Simple',
-      href: '/signin-simple',
+      href: '/signin',
     },
     {
       title: 'Sign in: Cover',
@@ -154,7 +154,7 @@ const pages = {
     },
     {
       title: 'Password: Simple',
-      href: '/password-reset-simple',
+      href: '/password-reset',
     },
     {
       title: 'Password: Cover',

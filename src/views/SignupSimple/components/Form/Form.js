@@ -97,7 +97,7 @@ const Form = () => {
     if (success === true) {
       setError(false);
       localStorage.setItem('username', email);
-      navigate('/portfolio-grid');
+      navigate('/dashboard');
     } else {
       setError(true);
     }
@@ -111,11 +111,15 @@ const Form = () => {
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
-    // handleSubmit(e);
+    handleSubmit(e);
   };
 
+  useEffect(() => {
+    handleSubmit();
+  }, [file]);
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!file) {
       setError('Please select a file');
       return;
@@ -302,12 +306,12 @@ const Form = () => {
               </Button>
               {/* <Typography>{file?.name}</Typography> */}
               {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
-              <Button
+              {/* <Button
                 onClick={handleSubmit}
                 style={{ marginLeft: '4px', backgroundColor: 'black' }}
               >
                 Click to upload
-              </Button>
+              </Button> */}
               <Typography variant={'body2'}>
                 {error ? <p style={{ color: 'blue' }}>{error}</p> : null}
               </Typography>
@@ -330,7 +334,7 @@ const Form = () => {
                   <Link
                     component={'a'}
                     color={'primary'}
-                    href={'/signin-simple'}
+                    href={'/signin'}
                     underline={'none'}
                   >
                     Login.
@@ -341,7 +345,9 @@ const Form = () => {
                 Sign up
               </Button>
             </Box>
-            {error != 'No photo uploaded' ? (
+            {error != 'No photo uploaded' &&
+            error != 'Uploaded!' &&
+            error != 'Please select a file' ? (
               <Typography
                 variant={'subtitle2'}
                 sx={{ color: 'red', margin: 'auto', marginBottom: 2 }}

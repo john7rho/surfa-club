@@ -4,6 +4,12 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
+// console.log = () => {};
+// console.debug = () => {};
+// console.info = () => {};
+// console.warn = () => {};
+// console.error = () => {};
+
 root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function

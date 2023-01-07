@@ -5,17 +5,14 @@ import {
   Customers as CustomersView,
   HireUs as HireUsView,
   Faq as FaqView,
-  Agency as AgencyView,
   Elearning as ElearningView,
   Enterprise as EnterpriseView,
   Service as ServiceView,
   WebBasic as WebBasicView,
   DesktopApp as DesktopAppView,
   Expo as ExpoView,
-  Startup as StartupView,
   MobileApp as MobileAppView,
   JobListing as JobListingView,
-  CloudHosting as CloudHostingView,
   Logistics as LogisticsView,
   Pricing as PricingView,
   About as AboutView,
@@ -26,7 +23,6 @@ import {
   PortfolioGrid as PortfolioGridView,
   CompanyTerms as CompanyTermsView,
   AboutSideCover as AboutSideCoverView,
-  PasswordResetCover as PasswordResetCoverView,
   PasswordResetSimple as PasswordResetSimpleView,
   SigninSimple as SigninSimpleView,
   SigninCover as SigninCoverView,
@@ -50,10 +46,6 @@ const routes = [
   {
     path: '/home',
     renderer: (params = {}) => <HomeView {...params} />,
-  },
-  {
-    path: '/customers',
-    renderer: (params = {}) => <CustomersView {...params} />,
   },
   {
     path: '/hire-us',
@@ -88,24 +80,12 @@ const routes = [
     renderer: (params = {}) => <ExpoView {...params} />,
   },
   {
-    path: '/agency',
-    renderer: (params = {}) => <AgencyView {...params} />,
-  },
-  {
-    path: '/startup',
-    renderer: (params = {}) => <StartupView {...params} />,
-  },
-  {
     path: '/mobile-app',
     renderer: (params = {}) => <MobileAppView {...params} />,
   },
   {
     path: '/job-listing',
     renderer: (params = {}) => <JobListingView {...params} />,
-  },
-  {
-    path: '/cloud-hosting',
-    renderer: (params = {}) => <CloudHostingView {...params} />,
   },
   {
     path: '/logistics',
@@ -128,7 +108,7 @@ const routes = [
     renderer: (params = {}) => <PortfolioMasonryView {...params} />,
   },
   {
-    path: '/portfolio-grid',
+    path: '/dashboard',
     renderer: (params = {}) => <PortfolioGridView {...params} />,
   },
   {
@@ -148,11 +128,7 @@ const routes = [
     renderer: (params = {}) => <PricingView {...params} />,
   },
   {
-    path: '/password-reset-cover',
-    renderer: (params = {}) => <PasswordResetCoverView {...params} />,
-  },
-  {
-    path: '/password-reset-simple',
+    path: '/password-reset',
     renderer: (params = {}) => <PasswordResetSimpleView {...params} />,
   },
   {
@@ -160,7 +136,7 @@ const routes = [
     renderer: (params = {}) => <ResetPasswordConfirm {...params} />,
   },
   {
-    path: '/signin-simple',
+    path: '/signin',
     renderer: (params = {}) => <SigninSimpleView {...params} />,
   },
   {
@@ -168,7 +144,7 @@ const routes = [
     renderer: (params = {}) => <SigninCoverView {...params} />,
   },
   {
-    path: '/signup-simple',
+    path: '/signup',
     renderer: (params = {}) => <SignupSimpleView {...params} />,
   },
   {
