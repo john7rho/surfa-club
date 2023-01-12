@@ -2,4 +2,6 @@ surfatravel.com
 
 Couchsurfing
 
-Created using Material UI React JS + AWS backend
+A couch surfing platform that builds communities and provides housing solutions for hackathons, conferences, and other university related events.
+
+Built with React.js and AWS services
