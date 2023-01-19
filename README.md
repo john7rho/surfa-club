@@ -1,4 +1,4 @@
-# Welcome to the surfatravel.com repo
+# Welcome to the surfatravel.com repo :surfing_man:
 
 ## A couch surfing platform that builds communities and provides housing solutions for hackathons, conferences, and other university related events.
 
