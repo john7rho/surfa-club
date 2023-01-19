@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../../contexts/UserContext.js';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavItem } from './components';
+import { useNavigate } from 'react-router-dom';
 
 const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
+  const [signin, setSignin] = useState(true);
+
   const theme = useTheme();
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user.username !== '' || window.localStorage.getItem('user') !== null) {
+      setSignin(false);
+    }
+  }, []);
+  const handleSignOut = () => {
+    if (!signin) {
+      setUser({ username: '' });
+      window.localStorage.clear();
+      setSignin(true);
+    }
+  };
 
   return (
     <Box
@@ -37,11 +55,11 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
           <NavItem title={'Home'} colorInvert={colorInvert} />
         </Box>
 
-        <Box marginLeft={4}>
+        <Box marginLeft={4} onClick={() => handleSignOut()}>
           <NavItem
-            title={'Sign In'}
+            title={signin ? 'Sign In' : 'Sign Out'}
             colorInvert={colorInvert}
-            route="/signin"
+            route={signin ? '/signin' : '/'}
           />
         </Box>
 
