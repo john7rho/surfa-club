@@ -198,9 +198,6 @@ const Spaces = () => {
                       </Box>
                     </CardContent>
                     <Box flexGrow={1} />
-                    {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button>Learn more</Button>
-                  </CardActions> */}
                   </Box>
                 </Box>
               </Box>

@@ -13,39 +13,17 @@ import {
   getObjectUrl,
   updateUser,
 } from '../../../../utils/Utils.js';
-
-// import shadows from '@mui/material/styles/shadows';
-// import * as yup from 'yup';
 import AWS from 'aws-sdk';
 import { S3 } from 'aws-sdk';
 
-// import { useFormik } from 'formik';
-
-// import { getUser } from '../../../../utils/Utils.js';
-
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-
-// ONLY USE WITH FORMIK, REMOVED FOR NOW BC VALIDATIONS DONT CONSIDER EMPTY STRINGS
-// const validationSchema = yup.object({
-//   bio: yup
-//     .string()
-//     .trim()
-//     .min(10, 'Please enter a valid bio')
-//     .max(250, 'Please enter a valid bio'),
-//   instagram: yup.string().matches(re, 'Please enter a valid URL'),
-//   twitter: yup.string().matches(re, 'Please enter a valid URL'),
-//   linkedin: yup.string().matches(re, 'Please enter a valid URL'),
-// });
 
 AWS.config.update({
   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
   secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
   region: 'us-east-1',
 });
-
-// console.log(process.env.REACT_APP_AWS_ACCESS_KEY);
-// console.log(process.env.REACT_APP_AWS_SECRET_KEY);
 
 const Hero = () => {
   const { user } = useContext(UserContext);
@@ -325,7 +303,7 @@ const Hero = () => {
       <Typography
         variant="h3"
         color="text.primary"
-        align={'center'}
+        align="center"
         marginBottom={4}
       >
         Welcome to the Surfa Circle (Beta)
@@ -340,7 +318,7 @@ const Hero = () => {
       </Typography>
       {user.verified ? (
         <>
-          <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
+          <Typography variant="body1" color="text.secondary" marginBottom={2}>
             Welcome to the Surfa Circle! Please note some features are still in
             development and may have bugs (email us at help@surfaclub.com if you
             spot anything). Hit the Save Changes button to submit any updates to
@@ -348,16 +326,16 @@ const Hero = () => {
           </Typography>
           <Typography
             variant="body1"
-            color={'text.secondary'}
+            color="text.secondary"
             marginBottom={2}
-            fontWeight={'bold'}
+            fontWeight="bold"
           >
             For link updates, please input the full URL with the HTTPS in the
             beginning.{' '}
           </Typography>
         </>
       ) : (
-        <Typography variant="body1" color={'text.secondary'} marginBottom={2}>
+        <Typography variant="body1" color="text.secondary" marginBottom={2}>
           Please verify your account to access the full features of the Surfa
           Circle. Upload a photo of your student ID and hit the Save Changes
           button to be verified.
@@ -422,7 +400,7 @@ const Hero = () => {
                   >
                     Hosting Status{' '}
                   </Typography>
-                  {hosting == true ? (
+                  {hosting === true ? (
                     <Avatar
                       marginLeft={2}
                       marginBottom={2}
@@ -430,9 +408,10 @@ const Hero = () => {
                       sx={{
                         width: '20px',
                         height: '20px',
+                        marginLeft: '2px',
                       }}
                     ></Avatar>
-                  ) : hosting == false ? (
+                  ) : hosting === false ? (
                     <Avatar
                       marginBottom={2}
                       src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png"
@@ -442,9 +421,9 @@ const Hero = () => {
                         marginLeft: '2px',
                       }}
                     ></Avatar>
-                  ) : hosting == null ? (
+                  ) : hosting === null ? (
                     <>
-                      {user.hosting == true ? (
+                      {user.hosting === true ? (
                         <Avatar
                           marginLeft={2}
                           marginBottom={2}
@@ -476,28 +455,28 @@ const Hero = () => {
                   >
                     Student ID <br /> {file ? file.name : ''}
                   </Typography>
-
-                  <IconButton
+                  <Button
+                    variant="contained"
                     color="primary"
                     aria-label="upload picture"
                     component="label"
                     style={{
                       color: 'grey',
                       backgroundColor: 'white',
-                      width: '20px',
-                      height: '20px',
                       marginLeft: '2px',
                     }}
+                    startIcon={<PhotoCamera />}
                   >
+                    Upload Student ID Photo
                     <input
                       hidden
                       accept="image/*"
                       type="file"
                       onChange={(event) => handleFileChange(event)}
                     />
-                    <PhotoCamera />
-                  </IconButton>
+                  </Button>
                 </Grid>
+
                 <Grid item xs={4}>
                   <TextField
                     fullWidth
@@ -531,22 +510,6 @@ const Hero = () => {
                   ></TextField>
                 </Grid>
                 <Grid item xs={4}>
-                  {/* <Button
-                    fullWidth
-                    justifyContent="flex-right"
-                    variant="outlined"
-                    style={{ color: 'grey', backgroundColor: 'white' }}
-                    onClick={handleChangePicture}
-                  >
-                    Change Profile Picture
-                    <input
-                      accept="image/*"
-                      type="file"
-                      hidden
-                      onChange={handleProfileChange}
-                    />
-                    {error ? <p>{error}</p> : null}
-                  </Button> */}
                   <div label={file?.name}>
                     <Button
                       variant="outlined"
@@ -565,8 +528,6 @@ const Hero = () => {
                         onChange={handleProfileChange}
                       />
                     </Button>
-                    {/* <Typography>{file?.name}</Typography> */}
-                    {/* <TextField value={formik.values.image}>{file?.name}</TextField> */}
                     <Button
                       marginLeft={2}
                       variant="outlined"
@@ -580,15 +541,9 @@ const Hero = () => {
                     </Typography>
                   </div>
                 </Grid>
-                <Grid
-                  item
-                  justifyContent="flex-right"
-                  xs={4}
-                  style={{ flex: 1 }}
-                >
+                <Grid item xs={4} style={{ flex: 1 }}>
                   <Button
                     fullWidth
-                    justifyContent="flex-right"
                     variant="outlined"
                     style={{ color: 'grey', backgroundColor: 'white' }}
                     onClick={handleChangeHosting}
@@ -596,17 +551,8 @@ const Hero = () => {
                     Toggle Hosting
                   </Button>
                 </Grid>
-                <Grid
-                  item
-                  justifyContent="flex-right"
-                  xs={4}
-                  style={{ flex: 1 }}
-                >
-                  <Button
-                    fullWidth
-                    justifyContent="flex-right"
-                    onClick={handleSubmit}
-                  >
+                <Grid item xs={4} style={{ flex: 1 }}>
+                  <Button fullWidth onClick={handleSubmit}>
                     Save Changes
                   </Button>
                 </Grid>

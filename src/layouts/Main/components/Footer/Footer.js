@@ -88,7 +88,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; Surfa Club. 2022. All rights reserved
+          &copy; Surfa Club. 2023. All rights reserved
         </Typography>
         <Typography
           align={'center'}
