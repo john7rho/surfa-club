@@ -35,61 +35,6 @@ dynamoDb.scan({ TableName: 'users' }, (err, data) => {
   }
 });
 
-// const mock = [
-//   {
-//     school: '$59 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
-//     firstName: 'UX & web design',
-//     bio: 'Joshua Karamaki',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$69 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
-//     firstName: 'Software engineering',
-//     bio: 'Jhon Smith',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$49 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
-//     firstName: 'Graphic design for beginners',
-//     bio: 'Nicol Adams',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$59 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
-//     firstName: 'Marketing VS Sales',
-//     bio: 'Joshua Karamaki',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-// ];
-
 const Spaces = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -97,7 +42,7 @@ const Spaces = () => {
   });
 
   const sliderOpts = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     slidesToShow: isMd ? 3 : 1,
