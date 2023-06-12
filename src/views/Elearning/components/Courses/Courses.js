@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -6,13 +6,11 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { colors } from '@mui/material';
-
 import AWS from 'aws-sdk';
 
 AWS.config.update({
@@ -21,83 +19,34 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-const dynamoDb = new AWS.DynamoDB();
-
-let mock = [];
-
-dynamoDb.scan({ TableName: 'users' }, (err, data) => {
-  if (err) {
-    console.error(err);
-    // console.log('unable to scan table. Error JSON');
-  } else {
-    mock = data.Items;
-    // You can now use the 'items' variable to access the table data
-  }
-});
-
-// const mock = [
-//   {
-//     school: '$59 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img5.jpg',
-//     firstName: 'UX & web design',
-//     bio: 'Joshua Karamaki',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$69 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img6.jpg',
-//     firstName: 'Software engineering',
-//     bio: 'Jhon Smith',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$49 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img7.jpg',
-//     firstName: 'Graphic design for beginners',
-//     bio: 'Nicol Adams',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-//   {
-//     school: '$59 / month',
-//     image: 'https://assets.maccarianagency.com/backgrounds/img9.jpg',
-//     firstName: 'Marketing VS Sales',
-//     bio: 'Joshua Karamaki',
-//     users: [
-//       'https://assets.maccarianagency.com/avatars/img1.jpg',
-//       'https://assets.maccarianagency.com/avatars/img2.jpg',
-//       'https://assets.maccarianagency.com/avatars/img3.jpg',
-//       'https://assets.maccarianagency.com/avatars/img4.jpg',
-//       'https://assets.maccarianagency.com/avatars/img5.jpg',
-//     ],
-//   },
-// ];
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 const Spaces = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = () => {
+      dynamoDb.scan({ TableName: 'users' }, (err, data) => {
+        if (err) {
+          console.error(
+            'Unable to scan table. Error JSON:',
+            JSON.stringify(err, null, 2),
+          );
+        } else {
+          setItems(data.Items);
+        }
+      });
+    };
+    fetchItems();
+  }, []);
+
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
 
   const sliderOpts = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     slidesToShow: isMd ? 3 : 1,
@@ -108,90 +57,10 @@ const Spaces = () => {
 
   return (
     <Box>
-      <Box marginBottom={4}>
-        <Typography
-          sx={{
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
-          }}
-          gutterBottom
-          color={'secondary'}
-          align={'center'}
-        >
-          The Surfa Circle
-        </Typography>
-        <Typography
-          variant="h4"
-          align={'center'}
-          data-aos={'fade-up'}
-          gutterBottom
-          sx={{
-            fontWeight: 700,
-          }}
-        ></Typography>
-        <Typography
-          variant="h6"
-          align={'center'}
-          color={'text.secondary'}
-          data-aos={'fade-up'}
-        >
-          Crash at their place, or host your own surfers
-        </Typography>
-        <Box
-          display="flex"
-          flexDirection={{ xs: 'column', sm: 'row' }}
-          alignItems={{ xs: 'stretched', sm: 'flex-start' }}
-          justifyContent={'center'}
-          marginTop={2}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            fullWidth={isMd ? false : true}
-            href="/signin"
-            endIcon={
-              <Box
-                component={'svg'}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                width={24}
-                height={24}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </Box>
-            }
-            style={{
-              background:
-                'linear-gradient(to right, rgba(128,0,0,1) 0%, rgba(181,0,19,1) 50%, rgba(252,103,0,1) 100%)',
-              opacity: 0.9,
-            }}
-          >
-            Find a host
-          </Button>
-          {/* <Box
-            component={Button}
-            variant="outlined"
-            color="primary"
-            size="large"
-            marginTop={{ xs: 2, sm: 0 }}
-            marginLeft={{ sm: 2 }}
-            fullWidth={isMd ? false : true}
-          >
-            Become a host
-          </Box> */}
-        </Box>
-      </Box>
+      {/*...*/}
       <Box maxWidth={{ xs: 420, sm: 620, md: 1 }} margin={'0 auto'}>
         <Slider {...sliderOpts}>
-          {mock.map((item, i) => (
+          {items.map((item, i) => (
             <Box key={i} padding={{ xs: 1, md: 2, lg: 3 }}>
               <Box
                 display={'block'}
@@ -214,8 +83,8 @@ const Spaces = () => {
                   sx={{ backgroundImage: 'none' }}
                 >
                   <CardMedia
-                    title={item.firstName.S}
-                    image={item.image.S}
+                    title={item.firstName}
+                    image={item.image}
                     sx={{
                       position: 'relative',
                       height: { xs: 240, sm: 340, md: 280 },
@@ -237,12 +106,7 @@ const Spaces = () => {
                         right: 0,
                         zIndex: 1,
                       }}
-                    >
-                      {/* <polygon
-                        fill={theme.palette.background.paper}
-                        points="0,273 1921,273 1921,0 "
-                      /> */}
-                    </Box>
+                    ></Box>
                     <Box
                       display={'flex'}
                       justifyContent={'space-between'}
@@ -259,34 +123,9 @@ const Spaces = () => {
                         borderRadius={2}
                       >
                         <Typography sx={{ fontWeight: 600 }}>
-                          {item.school.S}
+                          {item.school}
                         </Typography>
                       </Box>
-                      {/* <Button
-                        variant={'contained'}
-                        color="primary"
-                        size="large"
-                        startIcon={
-                          <Box
-                            component={'svg'}
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            width={16}
-                            height={16}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            />
-                          </Box>
-                        }
-                      >
-                        Save
-                      </Button> */}
                     </Box>
                   </CardMedia>
                   <CardContent>
@@ -296,7 +135,7 @@ const Spaces = () => {
                       align={'left'}
                       sx={{ fontWeight: 700 }}
                     >
-                      {item.firstName.S}
+                      {item.firstName}
                     </Typography>
                     <Box display={'flex'} alignItems={'center'} marginY={2}>
                       <Box
@@ -319,7 +158,7 @@ const Spaces = () => {
                         />
                       </Box>
                       <Typography variant={'subtitle1'} color="text.secondary">
-                        {item.bio.S}
+                        {item.bio}
                       </Typography>
                     </Box>
                     <Box
