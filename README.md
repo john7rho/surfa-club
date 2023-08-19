@@ -7,3 +7,5 @@
 #### Side project some friends from Plano, TX built to help students find and meet hosts at other colleges, inspired by our own summer couchsurfing experiences
 
 ### If you'd like to contribute, email johnrho21@gmail!
+
+Link: surfatravel.com
